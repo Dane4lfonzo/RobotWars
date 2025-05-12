@@ -13,10 +13,12 @@ class Battlefield
 
     public:
         Battlefield(int row, int col);
+        Battlefield(){};
         void printGrid();
 };
 
-class Robot : public Battlefield
+
+ class Robot : public Battlefield
 {
     private:
         int posx;
@@ -25,7 +27,17 @@ class Robot : public Battlefield
 
     public:
         Robot(int x, int y);
-        void movement(int posx, int posy);
+        Robot(){};
+        //void movement(int posx, int posy);
+};
+
+class thinkingRobot : public Robot
+{
+    private:
+
+    public:
+        thinkingRobot(){};
+
 };
 
 

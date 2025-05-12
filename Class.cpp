@@ -1,14 +1,15 @@
 #include "Class.h"
 
-Battlefield::Battlefield(int row, int col)
+Battlefield::Battlefield(int row, int col) // ni constructor
 {
     MaxRow = row;
     MaxCol = col;
-    Grid.resize(MaxRow);
+    Grid.resize(MaxRow); //resize tu vector
 
     for (int i=0; i < MaxRow; i++)
     {
-        Grid[i].resize(MaxCol, "");
+        Grid[i].resize(MaxCol, "*"); //grid is vector // utk print the battlefield
+        //.resize(numItShouldContain,WhatItShouldBeFilled)
     }
 }
 
@@ -30,7 +31,7 @@ Robot::Robot(int x, int y)
     posy = y;
 }
 
-void Robot::movement(int posx, int posy)
+/* void Robot::movement(int posx, int posy)
 {
     
-}
+}  */
