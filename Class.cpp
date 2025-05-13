@@ -12,6 +12,14 @@ void Battlefield::GridMaker(int row, int col)
     }
 }
 
+void Battlefield::GridReset()
+{
+    for (int i=0; i < MaxRow; i++)
+    {
+        Grid[i].resize(MaxCol, ".");
+    }
+}
+
 void Battlefield::printGrid()
 {
     for (int i=0; i < MaxRow; i++)
@@ -96,14 +104,30 @@ Robot::Robot(int x, int y) //: Battlefield(x, y)
 
 void Robot::MovetoSquare()
 {
-    current_posx = current_posx + move_posx;
-    current_posy = current_posy + move_posy;
+    Grid[current_posx][current_posy] = ".";
+
+    int new_x = current_posx + move_posx;
+    int new_y = current_posy + move_posy;
+
+    if ((new_x) >= 0 && (new_x) < MaxRow)
+    {
+        current_posx = new_x;
+    }
+    
+    if ((new_y) >= 0 && (new_y) < MaxCol)
+    {
+        current_posy = new_y;
+    }
 
     Grid[current_posx][current_posy] = "R";
+
+    
     cout << "\n\n\ncurrent_posx = " << current_posx << endl;
     cout << "\n\n\ncurrent_posy = " << current_posy << endl;
+    /*
     cout << "\n\n\nmove_posx = " << move_posx << endl;
     cout << "\n\n\nmove_posy = " << move_posy << endl;
+    */
 
 }
 

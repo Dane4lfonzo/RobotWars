@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <cstdlib>
+#include <cstdlib> 
 #include <ctime>
 
 using namespace std;
@@ -15,6 +15,7 @@ class Battlefield
 
     public:
         void GridMaker(int row, int col);
+        void GridReset();
         void delay(int miliseconds);
         void printGrid(); //gonna use this in a looped iteration to update display
 };
