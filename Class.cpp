@@ -1,6 +1,6 @@
 #include "Class.h"
 
-Battlefield::Battlefield(int row, int col)
+void Battlefield::GridMaker(int row, int col)
 {
     MaxRow = row;
     MaxCol = col;
@@ -8,7 +8,7 @@ Battlefield::Battlefield(int row, int col)
 
     for (int i=0; i < MaxRow; i++)
     {
-        Grid[i].resize(MaxCol, "");
+        Grid[i].resize(MaxCol, ".");
     }
 }
 
@@ -24,13 +24,86 @@ void Battlefield::printGrid()
     }
 }
 
-Robot::Robot(int x, int y)
+void Battlefield::delay(int milliseconds) 
 {
-    posx = x;
-    posy = y;
+    // Simple delay using a loop 
+    clock_t start_time = clock();
+    while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
 }
 
-void Robot::movement(int posx, int posy)
+void MovingRobot::WheretoMove()
 {
-    
+    srand(time(0));
+    movingchoice = rand() % 9;
+    if (movingchoice == 0)
+    {
+        move_posx = -1;
+        move_posy = -1;
+    }
+
+    else if (movingchoice == 1)
+    {
+        move_posx = 0;
+        move_posy = -1;
+    }
+
+    else if (movingchoice == 2)
+    {
+        move_posx = 1;
+        move_posy = -1;
+    }
+
+    else if (movingchoice == 3)
+    {
+        move_posx = 1;
+        move_posy = 0;
+    }
+
+    else if (movingchoice == 4)
+    {
+        move_posx = 1;
+        move_posy = 1;
+    }
+
+    else if (movingchoice == 5)
+    {
+        move_posx = 0;
+        move_posy = 1;
+    }
+
+    else if (movingchoice == 6)
+    {
+        move_posx = -1;
+        move_posy = 1;
+    }
+
+    else if (movingchoice == 7)
+    {
+        move_posx = -1;
+        move_posy = 0;
+    }
+
+
 }
+
+Robot::Robot(int x, int y) //: Battlefield(x, y)
+{   
+    srand(time(0));
+
+    current_posx = rand() % x;
+    current_posy = rand() % y;
+}
+
+void Robot::MovetoSquare()
+{
+    current_posx = current_posx + move_posx;
+    current_posy = current_posy + move_posy;
+
+    Grid[current_posx][current_posy] = "R";
+    cout << "\n\n\ncurrent_posx = " << current_posx << endl;
+    cout << "\n\n\ncurrent_posy = " << current_posy << endl;
+    cout << "\n\n\nmove_posx = " << move_posx << endl;
+    cout << "\n\n\nmove_posy = " << move_posy << endl;
+
+}
+

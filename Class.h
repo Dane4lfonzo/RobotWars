@@ -1,31 +1,50 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 class Battlefield
 {
-    private:
-        vector<vector<string>> Grid;
+    protected:
         int MaxRow;
         int MaxCol;
+        vector<vector<string>> Grid;
 
 
     public:
-        Battlefield(int row, int col);
-        void printGrid();
+        void GridMaker(int row, int col);
+        void delay(int miliseconds);
+        void printGrid(); //gonna use this in a looped iteration to update display
 };
 
-class Robot : public Battlefield
+class MovingRobot
+{
+    protected:
+        int movingchoice;
+        int move_posx;
+        int move_posy;
+
+    public:
+        void WheretoMove();
+        //void MovetoSquare(int move_posx, int move_posy);
+
+};
+
+
+class Robot : public MovingRobot, public Battlefield
 {
     private:
-        int posx;
-        int posy;
+        int current_posx;
+        int current_posy;
         string signia;
+        int life;
 
     public:
         Robot(int x, int y);
-        void movement(int posx, int posy);
+        void MovetoSquare();
 };
+
 
 
