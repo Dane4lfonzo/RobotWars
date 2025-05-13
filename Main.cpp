@@ -26,7 +26,9 @@ int main()
 
         Robo.printGrid();
 
-        Robo.delay(100);
+        Robo.delay(500);
+
+        Robo.GridReset();
     }
 
 }
