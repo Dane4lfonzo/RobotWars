@@ -20,32 +20,32 @@ class Battlefield
         void printGrid(); //gonna use this in a looped iteration to update display
 };
 
-class MovingRobot
+
+class Robot
 {
     protected:
+        string signia;
+        int life;
+};
+
+
+class MovingRobot : public Robot, public Battlefield
+{
+    protected:
+        int current_row;
+        int current_col;
         int movingchoice;
-        int move_posx;
-        int move_posy;
+        int move_row;
+        int move_col;
 
     public:
+        MovingRobot(int x, int y);
         void WheretoMove();
+        void MovetoSquare();
         //void MovetoSquare(int move_posx, int move_posy);
 
 };
 
-
-class Robot : public MovingRobot, public Battlefield
-{
-    private:
-        int current_posx;
-        int current_posy;
-        string signia;
-        int life;
-
-    public:
-        Robot(int x, int y);
-        void MovetoSquare();
-};
 
 
 
