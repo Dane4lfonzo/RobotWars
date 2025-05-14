@@ -109,6 +109,7 @@ void Robot::MovetoSquare()
     int new_x = current_posx + move_posx;
     int new_y = current_posy + move_posy;
 
+    
     if ((new_x) >= 0 && (new_x) < MaxRow)
     {
         current_posx = new_x;

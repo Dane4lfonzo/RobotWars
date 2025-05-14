@@ -28,7 +28,7 @@ int main()
 
         Robo.delay(500);
 
-        Robo.GridReset();
+        //Robo.GridReset();
     }
 
 }
