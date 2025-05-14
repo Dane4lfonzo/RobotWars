@@ -45,89 +45,89 @@ void MovingRobot::WheretoMove()
     movingchoice = rand() % 9;
     if (movingchoice == 0)
     {
-        move_posx = -1;
-        move_posy = -1;
+        move_row = -1;
+        move_col = -1;
     }
 
     else if (movingchoice == 1)
     {
-        move_posx = 0;
-        move_posy = -1;
+        move_row = 0;
+        move_col = -1;
     }
 
     else if (movingchoice == 2)
     {
-        move_posx = 1;
-        move_posy = -1;
+        move_row = 1;
+        move_col = -1;
     }
 
     else if (movingchoice == 3)
     {
-        move_posx = 1;
-        move_posy = 0;
+        move_row = 1;
+        move_col = 0;
     }
 
     else if (movingchoice == 4)
     {
-        move_posx = 1;
-        move_posy = 1;
+        move_row = 1;
+        move_col = 1;
     }
 
     else if (movingchoice == 5)
     {
-        move_posx = 0;
-        move_posy = 1;
+        move_row = 0;
+        move_col = 1;
     }
 
     else if (movingchoice == 6)
     {
-        move_posx = -1;
-        move_posy = 1;
+        move_row = -1;
+        move_col = 1;
     }
 
     else if (movingchoice == 7)
     {
-        move_posx = -1;
-        move_posy = 0;
+        move_row = -1;
+        move_col = 0;
     }
 
 
 }
 
-Robot::Robot(int x, int y) //: Battlefield(x, y)
+MovingRobot::MovingRobot(int row, int col) //: Battlefield(x, y)
 {   
     srand(time(0));
 
-    current_posx = rand() % x;
-    current_posy = rand() % y;
+    current_row = rand() % row;
+    current_col = rand() % col;
 }
 
-void Robot::MovetoSquare()
+void MovingRobot::MovetoSquare()
 {
-    Grid[current_posx][current_posy] = ".";
+    Grid[current_row][current_col] = ".";
 
-    int new_x = current_posx + move_posx;
-    int new_y = current_posy + move_posy;
+    int new_row = current_row + move_row;
+    int new_col = current_col + move_col;
 
     
-    if ((new_x) >= 0 && (new_x) < MaxRow)
+    if ((new_row) >= 0 && (new_row) < MaxRow)
     {
-        current_posx = new_x;
+        current_row = new_row;
     }
     
-    if ((new_y) >= 0 && (new_y) < MaxCol)
+    if ((new_col) >= 0 && (new_col) < MaxCol)
     {
-        current_posy = new_y;
+        current_col = new_col;
     }
 
-    Grid[current_posx][current_posy] = "R";
+    Grid[current_row][current_col] = "R";
 
     
-    cout << "\n\n\ncurrent_posx = " << current_posx << endl;
-    cout << "\n\n\ncurrent_posy = " << current_posy << endl;
+    cout << "\n\n\ncurrent_row = " << current_row << endl;
+    cout << "\n\n\ncurrent_col = " << current_col << endl;
     /*
-    cout << "\n\n\nmove_posx = " << move_posx << endl;
-    cout << "\n\n\nmove_posy = " << move_posy << endl;
+    cout << "\n\n\nmove_row = " << move_row << endl;
+    cout << "\n\n\nmove_col = " << move_col << endl;
     */
 
 }

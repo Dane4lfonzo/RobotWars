@@ -8,7 +8,7 @@ int main()
     //Battlefield Grid(rows, cols);
 
     
-    Robot Robo(rows - 1, cols - 1);
+    MovingRobot RoboMove(rows - 1, cols - 1);
     /*
     Robo.WheretoMove();
     Robo.MovetoSquare();
@@ -19,14 +19,14 @@ int main()
     {
         system("CLS");
 
-        Robo.GridMaker(rows, cols);
+        RoboMove.GridMaker(rows, cols);
 
-        Robo.WheretoMove();
-        Robo.MovetoSquare();
+        RoboMove.WheretoMove();
+        RoboMove.MovetoSquare();
 
-        Robo.printGrid();
+        RoboMove.printGrid();
 
-        Robo.delay(500);
+        RoboMove.delay(500);
 
         //Robo.GridReset();
     }
