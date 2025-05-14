@@ -21,7 +21,7 @@ class Battlefield
 };
 
 
-class Robot
+class Robot : public Battlefield
 {
     protected:
         string signia;
@@ -29,7 +29,7 @@ class Robot
 };
 
 
-class MovingRobot : public Robot, public Battlefield
+class MovingRobot : public Robot
 {
     protected:
         int current_row;
