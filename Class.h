@@ -8,8 +8,8 @@ using namespace std;
 class Battlefield
 {
     protected:
-        int MaxRow;
-        int MaxCol;
+        int* MaxRow = new int(0);
+        int* MaxCol = new int(0);
         vector<vector<string>> Grid;
 
 
@@ -21,31 +21,29 @@ class Battlefield
 };
 
 
-class Robot : public Battlefield
+class Robot
 {
     protected:
-        string signia;
-        int life;
+        
+    
+    public:
+
 };
 
-
-class MovingRobot : public Robot
+class MovingRobot : public Robot, public Battlefield
 {
     protected:
-        int current_row;
-        int current_col;
-        int movingchoice;
-        int move_row;
-        int move_col;
+        int *current_row = new int(0);
+        int *current_col = new int(0);
+        int *movingchoice = new int(0);
+        int *move_row = new int(0);
+        int *move_col = new int(0);
 
     public:
         MovingRobot(int x, int y);
         void WheretoMove();
         void MovetoSquare();
-        //void MovetoSquare(int move_posx, int move_posy);
-
 };
-
 
 
 

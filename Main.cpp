@@ -2,13 +2,14 @@
 
 int main()
 {
-    int rows = 30;
-    int cols = 80;
+    int row = 30;
+    int col = 80;
 
     //Battlefield Grid(rows, cols);
 
     
-    MovingRobot RoboMove(rows - 1, cols - 1);
+    MovingRobot RoboMove(row - 1, col - 1);
+    MovingRobot Robomove2 = RoboMove;
     /*
     Robo.WheretoMove();
     Robo.MovetoSquare();
@@ -19,7 +20,7 @@ int main()
     {
         system("CLS");
 
-        RoboMove.GridMaker(rows, cols);
+        RoboMove.GridMaker(row, col);
 
         RoboMove.WheretoMove();
         RoboMove.MovetoSquare();
@@ -27,6 +28,7 @@ int main()
         RoboMove.printGrid();
 
         RoboMove.delay(500);
+
 
         //Robo.GridReset();
     }
