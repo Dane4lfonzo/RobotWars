@@ -1,16 +1,42 @@
 #include "Class.h"
 
 /*************************Battlefield***************************************/
-void Battlefield::GridMaker(int row, int col)
+Battlefield::Battlefield(int row, int col)
 {
     *MaxRow = row;
     *MaxCol = col;
+}
 
+Battlefield::Battlefield(const Battlefield& obj)
+{
+    MaxRow = obj.MaxRow;
+    MaxCol = obj.MaxCol;
+}
+
+Battlefield::~Battlefield()
+{
+    delete MaxRow;
+    delete MaxCol;
+}
+
+void Battlefield::GridMaker()
+{
     Grid.resize(*MaxRow);
 
     for (int i=0; i < *MaxRow; i++)
     {
         Grid[i].resize(*MaxCol, ".");
+    }
+}
+
+void Battlefield::GridReset()
+{
+    for (int i=0; i < *MaxRow; i++)
+    {
+        for (int j=0; j < *MaxCol; j++)
+        {
+            Grid[i][j] = ".";
+        }
     }
 }
 
@@ -35,18 +61,38 @@ void Battlefield::delay(int milliseconds)
 
 /**********************************MovingRobot**************************************/
 
-MovingRobot::MovingRobot(int row, int col) //: Battlefield(row, col)
+MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
 {   
-    srand(time(0));
+    current_row = rand() % row;
+    current_col = rand() % col;
+}
 
-    *current_row = rand() % row;
-    *current_col = rand() % col;
+MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj)
+{
+    current_row = obj.current_row;
+    current_col = obj.current_col;
+    movingchoice = obj.movingchoice;
+    move_row = obj.move_row;
+    move_col = obj.move_col;
+
+    current_row = rand() % *MaxRow;
+    current_col = rand() % *MaxCol;
+
+}
+
+
+MovingRobot::~MovingRobot()
+{
+    delete movingchoice;
+    delete move_row;
+    delete move_col;
 }
 
 void MovingRobot::WheretoMove()
 {
-    srand(time(0));
-    *movingchoice = rand() % 9;
+    
+    *movingchoice = rand() % 8;
+
     if (*movingchoice == 0)
     {
         *move_row = -1;
@@ -101,27 +147,27 @@ void MovingRobot::WheretoMove()
 
 void MovingRobot::MovetoSquare()
 {
-    Grid[*current_row][*current_col] = ".";
+    Grid[current_row][current_col] = ".";
 
-    int new_row = *current_row + *move_row;
-    int new_col = *current_col + *move_col;
+    int new_row = current_row + *move_row;
+    int new_col = current_col + *move_col;
 
     
     if ((new_row) >= 0 && (new_row) < *MaxRow)
     {
-        *current_row = new_row;
+        current_row = new_row;
     }
     
     if ((new_col) >= 0 && (new_col) < *MaxCol)
     {
-        *current_col = new_col;
+        current_col = new_col;
     }
 
-    Grid[*current_row][*current_col] = "R";
+    Grid[current_row][current_col] = "R";
 
     
-    cout << "\n\n\ncurrent_row = " << *current_row << endl;
-    cout << "\n\n\ncurrent_col = " << *current_col << endl;
+    cout << "\n\n\ncurrent_row = " << current_row << endl;
+    cout << "\n\n\ncurrent_col = " << current_col << endl;
     /*
     cout << "\n\n\n*move_row = " << *move_row << endl;
     cout << "\n\n\n*move_col = " << *move_col << endl;

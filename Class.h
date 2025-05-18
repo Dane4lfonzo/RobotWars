@@ -14,7 +14,10 @@ class Battlefield
 
 
     public:
-        void GridMaker(int row, int col);
+        Battlefield(int row, int col);
+        Battlefield(const Battlefield& obj);
+        ~Battlefield();
+        void GridMaker();
         void GridReset();
         void delay(int miliseconds);
         void printGrid(); //gonna use this in a looped iteration to update display
@@ -33,17 +36,18 @@ class Robot
 class MovingRobot : public Robot, public Battlefield
 {
     protected:
-        int *current_row = new int(0);
-        int *current_col = new int(0);
+        int current_row;
+        int current_col;
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
 
     public:
-        MovingRobot(int x, int y);
+        MovingRobot(int row, int col);
+        MovingRobot(const MovingRobot& obj);
+        ~MovingRobot();
         void WheretoMove();
         void MovetoSquare();
 };
-
 
 
