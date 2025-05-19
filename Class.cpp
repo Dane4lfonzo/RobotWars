@@ -53,6 +53,30 @@ void Battlefield::printGrid()
     }
 }
 
+void Battlefield::SetStep(int numofsteps)
+{
+    CountNumSteps = numofsteps;
+}
+
+bool Battlefield::StepCount()
+{
+    if (CountNumSteps != 0)
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
+
+void Battlefield::CountUpStep()
+{
+    CountNumSteps -= 1;
+    cout << "Remaining Steps: " << CountNumSteps << "\n\n";
+}
+
 void Battlefield::delay(int milliseconds) 
 {
     // Simple delay using a loop 
@@ -153,35 +177,6 @@ void MovingRobot::WheretoMove()
 
 }
 
-/*
-void MovingRobot::MovetoSquare()
-{
-    Grid[*current_row][*current_col] = ".";
-
-    int new_row = *current_row + *move_row;
-    int new_col = *current_col + *move_col;
-
-    
-    if (((new_row) >= 0) && ((new_row) < *MaxRow))
-    {
-        *current_row = new_row;
-    }
-    
-    if (((new_col) >= 0) && ((new_col) < *MaxCol))
-    {
-        *current_col = new_col;
-    }
-
-    Grid[*current_row][*current_col] = "R";
-
-    
-    cout << "\n\n\ncurrent_row = " << *current_row << endl;
-    cout << "\n\n\ncurrent_col = " << *current_col << endl;
-    /*
-    cout << "\n\n\n*move_row = " << *move_row << endl;
-    cout << "\n\n\n*move_col = " << *move_col << endl;
-    */
-
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
 {
     sharedGrid[*current_row][*current_col] = ".";
@@ -200,6 +195,6 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     }
 
     sharedGrid[*current_row][*current_col] = "R";
-    cout << "\n\n\ncurrent_row = " << *current_row << endl;
-    cout << "\n\n\ncurrent_col = " << *current_col << endl;
+    //cout << "\n\n\ncurrent_row = " << *current_row << endl;
+    //cout << "\n\n\ncurrent_col = " << *current_col << endl;
 }
