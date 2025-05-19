@@ -6,27 +6,29 @@ int main()
 
     int row = 30;
     int col = 80;
-
-    //Battlefield Grid(rows, cols);
+    int numofsteps = 10;
 
     MovingRobot RoboMove(row, col);
+
+    RoboMove.SetStep(numofsteps);
+    
     int newrow =  rand() % row;
     int newcol = rand() % col;
+    
     MovingRobot RoboMove2 = RoboMove;
-    *RoboMove2.current_row = newrow;
-    *RoboMove2.current_col = newcol;
-    /*
-    Robo.WheretoMove();
-    Robo.MovetoSquare();
-    Robo.printGrid(); 
-    */
-    RoboMove.GridMaker();
-    //RoboMove2.GridMaker();
+    MovingRobot RoboMove3 = RoboMove;
+    
+    //*RoboMove2.current_row = newrow;
+    //*RoboMove2.current_col = newcol;
 
-    while (true)
+    RoboMove.GridMaker();
+
+
+    while (RoboMove.StepCount())
     {
-        //cout << "Works" << endl;
         system("CLS");
+
+        RoboMove.CountUpStep();
 
         RoboMove.GridReset();
 
@@ -35,11 +37,16 @@ int main()
 
         RoboMove2.WheretoMove();
         RoboMove2.MovetoSquare(RoboMove.Grid);
+
+        RoboMove3.WheretoMove();
+        RoboMove3.MovetoSquare(RoboMove.Grid);
         
 
         RoboMove.printGrid();
 
-        RoboMove.delay(1000);
+        
+
+        RoboMove.delay(500);
 
 
         //Robo.GridReset();

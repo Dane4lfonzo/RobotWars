@@ -10,14 +10,16 @@ class Battlefield
     protected:
         int* MaxRow = new int(0);
         int* MaxCol = new int(0);
-        
-
+        int CountNumSteps = 0;
 
     public:
         vector<vector<string>> Grid;
         Battlefield(int row, int col);
         Battlefield(const Battlefield& obj);
         ~Battlefield();
+        void SetStep(int numofsteps);
+        bool StepCount();
+        void CountUpStep();
         void GridMaker();
         void GridReset();
         void delay(int miliseconds);
@@ -40,14 +42,13 @@ class Robot
 class MovingRobot : public Robot, public Battlefield
 {
     protected:
-        
-
-    public:
         int *current_row;
         int *current_col;
         int *movingchoice = new int(0);
         int *move_row = new int(0);
-        int *move_col = new int(0);
+        int *move_col = new int(0);    
+
+    public:
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
