@@ -124,56 +124,11 @@ void MovingRobot::WheretoMove()
     
     *movingchoice = rand() % 8;
 
-    if (*movingchoice == 0)
-    {
-        *move_row = -1;
-        *move_col = -1;
-    }
+    int array_rowchoice[8] = {-1, 0, 1, 1, 1, 0, -1, -1};
+    int array_colchoice[8] = {-1, -1, -1, 0, 1, 1, 1, 0};
 
-    else if (*movingchoice == 1)
-    {
-        *move_row = 0;
-        *move_col = -1;
-    }
-
-    else if (*movingchoice == 2)
-    {
-        *move_row = 1;
-        *move_col = -1;
-    }
-
-    else if (*movingchoice == 3)
-    {
-        *move_row = 1;
-        *move_col = 0;
-    }
-
-    else if (*movingchoice == 4)
-    {
-        *move_row = 1;
-        *move_col = 1;
-    }
-
-    else if (*movingchoice == 5)
-    {
-        *move_row = 0;
-        *move_col = 1;
-    }
-
-    else if (*movingchoice == 6)
-    {
-        *move_row = -1;
-        *move_col = 1;
-    }
-
-    else if (*movingchoice == 7)
-    {
-        *move_row = -1;
-        *move_col = 0;
-    }
-
-    //cout << "moving choice: "<< *movingchoice << endl;
-
+    *move_row = array_rowchoice[*movingchoice];
+    *move_col = array_colchoice[*movingchoice];
 
 }
 

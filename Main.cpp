@@ -46,7 +46,7 @@ int main()
 
         
 
-        RoboMove.delay(500);
+        RoboMove.delay(1000);
 
 
         //Robo.GridReset();
