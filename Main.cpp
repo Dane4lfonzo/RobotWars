@@ -2,31 +2,45 @@
 
 int main()
 {
-    int rows = 30;
-    int cols = 80;
+    srand(time(0));
+
+    int row = 30;
+    int col = 80;
 
     //Battlefield Grid(rows, cols);
 
-    
-    MovingRobot RoboMove(rows - 1, cols - 1);
+    MovingRobot RoboMove(row, col);
+    int newrow =  rand() % row;
+    int newcol = rand() % col;
+    MovingRobot RoboMove2 = RoboMove;
+    *RoboMove2.current_row = newrow;
+    *RoboMove2.current_col = newcol;
     /*
     Robo.WheretoMove();
     Robo.MovetoSquare();
     Robo.printGrid(); 
     */
+    RoboMove.GridMaker();
+    //RoboMove2.GridMaker();
 
     while (true)
     {
+        //cout << "Works" << endl;
         system("CLS");
 
-        RoboMove.GridMaker(rows, cols);
+        RoboMove.GridReset();
 
         RoboMove.WheretoMove();
-        RoboMove.MovetoSquare();
+        RoboMove.MovetoSquare(RoboMove.Grid);
+
+        RoboMove2.WheretoMove();
+        RoboMove2.MovetoSquare(RoboMove.Grid);
+        
 
         RoboMove.printGrid();
 
-        RoboMove.delay(500);
+        RoboMove.delay(1000);
+
 
         //Robo.GridReset();
     }

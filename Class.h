@@ -8,13 +8,17 @@ using namespace std;
 class Battlefield
 {
     protected:
-        int MaxRow;
-        int MaxCol;
-        vector<vector<string>> Grid;
+        int* MaxRow = new int(0);
+        int* MaxCol = new int(0);
+        
 
 
     public:
-        void GridMaker(int row, int col);
+        vector<vector<string>> Grid;
+        Battlefield(int row, int col);
+        Battlefield(const Battlefield& obj);
+        ~Battlefield();
+        void GridMaker();
         void GridReset();
         void delay(int miliseconds);
         void printGrid(); //gonna use this in a looped iteration to update display
@@ -24,28 +28,31 @@ class Battlefield
 class Robot
 {
     protected:
-        string signia;
-        int life;
-};
+        
+    
+    public:
+        Robot(){}
+        virtual void show() = 0;
+        virtual ~Robot() {}
 
+};
 
 class MovingRobot : public Robot, public Battlefield
 {
     protected:
-        int current_row;
-        int current_col;
-        int movingchoice;
-        int move_row;
-        int move_col;
+        
 
     public:
-        MovingRobot(int x, int y);
+        int *current_row;
+        int *current_col;
+        int *movingchoice = new int(0);
+        int *move_row = new int(0);
+        int *move_col = new int(0);
+        MovingRobot(int row, int col);
+        MovingRobot(const MovingRobot& obj);
+        ~MovingRobot();
+        void show() override{}
         void WheretoMove();
-        void MovetoSquare();
-        //void MovetoSquare(int move_posx, int move_posy);
-
+        void MovetoSquare(vector<vector<string>>& sharedGrid);
 };
-
-
-
 
