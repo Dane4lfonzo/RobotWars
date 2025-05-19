@@ -19,7 +19,7 @@ class Battlefield
         ~Battlefield();
         void SetStep(int numofsteps);
         bool StepCount();
-        void CountUpStep();
+        void CountDownStep();
         void GridMaker();
         void GridReset();
         void delay(int miliseconds);
@@ -48,12 +48,15 @@ class MovingRobot : public Robot, public Battlefield
         int *move_row = new int(0);
         int *move_col = new int(0);    
 
+        string* signia = new string();
+
     public:
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
         void show() override{}
         void WheretoMove();
+        void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
 };
 
