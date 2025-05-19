@@ -60,18 +60,13 @@ void Battlefield::SetStep(int numofsteps)
 
 bool Battlefield::StepCount()
 {
-    if (CountNumSteps != 0)
-    {
+    if (CountNumSteps > 0)
         return true;
-    }
-
     else
-    {
         return false;
-    }
 }
 
-void Battlefield::CountUpStep()
+void Battlefield::CountDownStep()
 {
     CountNumSteps -= 1;
     cout << "Remaining Steps: " << CountNumSteps << "\n\n";
@@ -117,6 +112,12 @@ MovingRobot::~MovingRobot()
     delete move_col;
     delete current_row;
     delete current_col;
+    delete signia;
+}
+
+void MovingRobot::SetSignia(char character)
+{
+    *signia = character;
 }
 
 void MovingRobot::WheretoMove()
@@ -149,7 +150,7 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
         *current_col = new_col;
     }
 
-    sharedGrid[*current_row][*current_col] = "R";
+    sharedGrid[*current_row][*current_col] = *signia;
     //cout << "\n\n\ncurrent_row = " << *current_row << endl;
     //cout << "\n\n\ncurrent_col = " << *current_col << endl;
 }
