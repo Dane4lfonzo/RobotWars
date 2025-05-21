@@ -50,8 +50,8 @@ class MovingRobot : public Robot, public Battlefield
         
         int *movingchoice = new int(0);
         int *move_row = new int(0);
-        int *move_col = new int(0);    
-
+        int *move_col = new int(0);
+            
         string* signia = new string();
 
     public:
@@ -73,7 +73,6 @@ class SeeingRobot: public MovingRobot
         int *checkrow;
         int *checkcol;
         bool *detection = new bool;
-        bool *robotLook = new bool;
 
     public:
         SeeingRobot(){}

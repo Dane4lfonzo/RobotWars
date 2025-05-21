@@ -4,8 +4,8 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 5;
-    int col = 10;
+    int row = 10;
+    int col = 15;
     int numofsteps = 100;
     int numberOfRobots = 4;
     string TestChars = "ABCD";
@@ -51,6 +51,12 @@ int main()
                 RoboMoveCopies[i].WheretoMove();
                 RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid);
 
+                
+
+                RoboMoveCopies[0].CountDownStep();
+                
+
+                RoboMoveCopies[0].printGrid();
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
                     if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
@@ -59,10 +65,6 @@ int main()
                     }
                 }
 
-                RoboMoveCopies[0].CountDownStep();
-
-                RoboMoveCopies[0].printGrid();
-
                 for (int i = 0; i < RoboMoveCopies.size(); i++)
                 {
                     cout << "Robot " << i << " row: " << *RoboMoveCopies[i].current_row;
@@ -70,7 +72,7 @@ int main()
                 }
                 
 
-                RoboMoveCopies[0].delay(1000);
+                RoboMoveCopies[0].delay(300);
             }
         }
 

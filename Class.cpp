@@ -164,20 +164,20 @@ SeeingRobot::SeeingRobot(int row, int col): MovingRobot(row, col)
     checkcol = new int;
 
     *detection = false;
-    *robotLook = false;
 }
 
 SeeingRobot::SeeingRobot(const SeeingRobot& obj): MovingRobot(obj)
 {
     checkrow = new int(*obj.checkrow);
     checkcol = new int(*obj.checkrow);
-
     detection = new bool(*obj.detection);
-    robotLook = new bool(*obj.robotLook);
 }
 
 SeeingRobot::~SeeingRobot()
 {
+    delete checkrow;
+    delete checkcol;
+    delete detection;
     
 }
 
@@ -190,10 +190,10 @@ void SeeingRobot::Look(int row, int col)
     {
         if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
         {
-            cout << "Detection true" << endl;
+            cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+            *detection = true;
         }
     }
-
 }
 
 bool SeeingRobot::RobotDetect()
