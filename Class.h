@@ -80,7 +80,7 @@ class SeeingRobot: public MovingRobot
         SeeingRobot(int row, int col);
         SeeingRobot(const SeeingRobot& obj);
         ~SeeingRobot();
-        void Look(int currentrow, int currentcol, int row, int col);
+        void Look(int row, int col);
         bool RobotDetect();
     
 };

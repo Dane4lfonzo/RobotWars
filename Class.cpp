@@ -181,14 +181,14 @@ SeeingRobot::~SeeingRobot()
     
 }
 
-void SeeingRobot::Look(int currentrow, int currentcol, int row, int col)
+void SeeingRobot::Look(int row, int col)
 {
     *checkrow = row;
     *checkcol = col;
     
     for (int i = 0; i < 8; i++)
     {
-        if ((row == *checkrow + arraychoice[0][i]) && (col == *checkcol + arraychoice[1][i]))
+        if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
         {
             cout << "Detection true" << endl;
         }

@@ -4,8 +4,8 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 10;
-    int col = 20;
+    int row = 5;
+    int col = 10;
     int numofsteps = 100;
     int numberOfRobots = 4;
     string TestChars = "ABCD";
@@ -53,11 +53,9 @@ int main()
 
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && 
-                        *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
+                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
                     {
-                        RoboMoveCopies[i].Look(*RoboMoveCopies[i].current_row, *RoboMoveCopies[i].current_col, 
-                            *RoboMoveCopies[j].current_row, *RoboMoveCopies[j].current_col);
+                        RoboMoveCopies[i].Look(*RoboMoveCopies[j].current_row, *RoboMoveCopies[j].current_col);
                     }
                 }
 
