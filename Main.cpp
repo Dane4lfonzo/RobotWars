@@ -9,12 +9,14 @@ int main()
     int numofsteps = 1000;
     int numberOfRobots = 50;
     string TestChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,./;'[]=+-_*!@#$%^&(){}|";
+
 /****************************************************************************************/
 
     bool SetSignia = true;
 
-    MovingRobot RoboMove(row, col);  //Original MovingRobot class instance
-    vector<MovingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
+    SeeingRobot RoboMove(row, col);  //Original MovingRobot class instance
+    vector<SeeingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
+
 
     for (int i = 0; i < numberOfRobots; i++) 
     {
@@ -50,11 +52,28 @@ int main()
                 RoboMoveCopies[i].WheretoMove();
                 RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid);
 
+                
+
                 RoboMoveCopies[0].CountDownStep();
+                
 
                 RoboMoveCopies[0].printGrid();
+                for (int j=0; j<RoboMoveCopies.size(); j++)
+                {
+                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
+                    {
+                        RoboMoveCopies[i].Look(*RoboMoveCopies[j].current_row, *RoboMoveCopies[j].current_col);
+                    }
+                }
 
-                RoboMoveCopies[0].delay(50);
+                for (int i = 0; i < RoboMoveCopies.size(); i++)
+                {
+                    cout << "Robot " << i << " row: " << *RoboMoveCopies[i].current_row;
+                    cout <<" col: " << *RoboMoveCopies[i].current_col << endl;
+                }
+                
+
+                RoboMoveCopies[0].delay(300);
             }
         }
 
