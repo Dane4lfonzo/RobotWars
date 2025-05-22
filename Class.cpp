@@ -169,7 +169,8 @@ SeeingRobot::SeeingRobot(int row, int col): MovingRobot(row, col)
 
 SeeingRobot::SeeingRobot(const SeeingRobot& obj): MovingRobot(obj)
 {
-    checkrow = new int(*obj.checkrow);
+    checkrow = new int(*obj.checkrow); //checkrow tkde asterisk sbb kita nk pass address of obj.checkrow
+    // letak content of obj.checkrow into the memory allocation(address) of checkrow
     checkcol = new int(*obj.checkrow);
     detection = new bool(*obj.detection);
 }
@@ -186,7 +187,6 @@ void SeeingRobot::Look(int row, int col)
 {
     *checkrow = row;
     *checkcol = col;
-    
     for (int i = 0; i < 8; i++)
     {
         if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
@@ -200,4 +200,29 @@ void SeeingRobot::Look(int row, int col)
 bool SeeingRobot::RobotDetect()
 {
     return *detection;
+}
+
+/**********************************ThinkingRobot**************************************/
+ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
+{
+    if(*detection = true)
+    {
+        *shootFlag = true;
+    }
+
+}
+
+ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
+{
+    if(*obj.detection = true)
+    {
+        shootFlag = new bool(*obj.shootFlag);
+    }
+
+}
+
+ThinkingRobot::~ThinkingRobot()
+{
+    delete shootFlag;
+
 }

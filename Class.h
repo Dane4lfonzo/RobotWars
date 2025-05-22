@@ -85,3 +85,19 @@ class SeeingRobot: public MovingRobot
     
 };
 
+class ThinkingRobot: public SeeingRobot
+{ 
+    protected:
+    bool *shootFlag = new bool(false);
+
+
+    public:
+    ThinkingRobot(){};
+    ThinkingRobot(int row, int col); // ni robot first
+    ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
+    ~ThinkingRobot();
+
+
+
+};
+
