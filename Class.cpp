@@ -125,6 +125,7 @@ void MovingRobot::WheretoMove()
     
     *movingchoice = rand() % 8;
 
+    
     int array_rowchoice[8] = {-1, 0, 1, 1, 1, 0, -1, -1};
     int array_colchoice[8] = {-1, -1, -1, 0, 1, 1, 1, 0};
 
@@ -153,4 +154,49 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     sharedGrid[*current_row][*current_col] = *signia;
     //cout << "\n\n\ncurrent_row = " << *current_row << endl;
     //cout << "\n\n\ncurrent_col = " << *current_col << endl;
+}
+
+/**********************************SeeingRobot**************************************/
+
+SeeingRobot::SeeingRobot(int row, int col): MovingRobot(row, col)
+{
+    checkrow = new int;
+    checkcol = new int;
+
+    *detection = false;
+}
+
+SeeingRobot::SeeingRobot(const SeeingRobot& obj): MovingRobot(obj)
+{
+    checkrow = new int(*obj.checkrow);
+    checkcol = new int(*obj.checkrow);
+    detection = new bool(*obj.detection);
+}
+
+SeeingRobot::~SeeingRobot()
+{
+    delete checkrow;
+    delete checkcol;
+    delete detection;
+    
+}
+
+void SeeingRobot::Look(int row, int col)
+{
+    *checkrow = row;
+    *checkcol = col;
+    
+    for (int i = 0; i < 8; i++)
+    {
+        if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
+        {
+            cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+            *detection = true;
+        }
+    }
+}
+
+bool SeeingRobot::RobotDetect()
+{
+    return *detection;
 }
