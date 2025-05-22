@@ -137,7 +137,7 @@ void MovingRobot::WheretoMove()
 
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
 {
-    sharedGrid[*current_row][*current_col] = ".";
+    sharedGrid[*current_row][*current_col] = "."; //utk replace afterimage // to replace the previous position to '.'
 
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
