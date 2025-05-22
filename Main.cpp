@@ -52,14 +52,14 @@ int main()
                 RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid);
 
                 
-
                 RoboMoveCopies[0].CountDownStep();
                 
 
                 RoboMoveCopies[0].printGrid();
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
+                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && 
+                        *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
                     {
                         RoboMoveCopies[i].Look(*RoboMoveCopies[j].current_row, *RoboMoveCopies[j].current_col);
                     }
@@ -72,7 +72,7 @@ int main()
                 }
                 
 
-                RoboMoveCopies[0].delay(300);
+                RoboMoveCopies[0].delay(1000);
             }
         }
 

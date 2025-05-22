@@ -35,6 +35,7 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
+        int ammo = 30;
         
     
     public:
@@ -82,5 +83,18 @@ class SeeingRobot: public MovingRobot
         void Look(int row, int col);
         bool RobotDetect();
     
+};
+
+class ShootingRobot: public SeeingRobot
+{
+    protected:
+        bool *shoot = new bool;
+
+
+    public:
+        ShootingRobot(int row, int col);
+        ShootingRobot(const ShootingRobot& obj){}
+
+
 };
 

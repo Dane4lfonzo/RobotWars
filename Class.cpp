@@ -200,3 +200,10 @@ bool SeeingRobot::RobotDetect()
 {
     return *detection;
 }
+
+/**********************************ShootingRobot**************************************/
+
+ShootingRobot::ShootingRobot(int row, int col): SeeingRobot(row, col)
+{
+    
+}
