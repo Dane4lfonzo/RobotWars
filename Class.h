@@ -45,6 +45,7 @@ class Robot
 
 };
 
+
 class MovingRobot : public Robot, public Battlefield
 {
     protected:
@@ -85,6 +86,7 @@ class SeeingRobot: public MovingRobot
     
 };
 
+
 class ShootingRobot: public SeeingRobot
 {
     protected:
@@ -94,6 +96,19 @@ class ShootingRobot: public SeeingRobot
     public:
         ShootingRobot(int row, int col);
         ShootingRobot(const ShootingRobot& obj){}
+};
+
+class ThinkingRobot: public SeeingRobot
+{ 
+    protected:
+    bool *shootFlag = new bool(false);
+
+
+    public:
+    ThinkingRobot(){};
+    ThinkingRobot(int row, int col); // ni robot first
+    ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
+    ~ThinkingRobot();
 
 
 };
