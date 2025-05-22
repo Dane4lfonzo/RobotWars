@@ -14,6 +14,7 @@ class Battlefield
 
     public:
         vector<vector<string>> Grid;
+        Battlefield(){};
         Battlefield(int row, int col);
         Battlefield(const Battlefield& obj);
         ~Battlefield();
@@ -30,6 +31,10 @@ class Battlefield
 class Robot
 {
     protected:
+        int arraychoice[2][8] = {
+            {-1, 0, 1, 1, 1, 0, -1, -1},
+            {-1, -1, -1, 0, 1, 1, 1, 0}
+        };
         
     
     public:
@@ -43,21 +48,40 @@ class Robot
 class MovingRobot : public Robot, public Battlefield
 {
     protected:
-        int *current_row;
-        int *current_col;
+        
         int *movingchoice = new int(0);
         int *move_row = new int(0);
-        int *move_col = new int(0);    
-
+        int *move_col = new int(0);
+            
         string* signia = new string();
 
     public:
+        int *current_row;
+        int *current_col;
+        void show() override{}
+        MovingRobot(){}
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
-        void show() override{}
         void WheretoMove();
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
+};
+
+class SeeingRobot: public MovingRobot
+{
+    protected:
+        int *checkrow;
+        int *checkcol;
+        bool *detection = new bool;
+
+    public:
+        SeeingRobot(){}
+        SeeingRobot(int row, int col);
+        SeeingRobot(const SeeingRobot& obj);
+        ~SeeingRobot();
+        void Look(int row, int col);
+        bool RobotDetect();
+    
 };
 
