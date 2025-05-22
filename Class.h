@@ -86,30 +86,33 @@ class SeeingRobot: public MovingRobot
     
 };
 
-
-class ShootingRobot: public SeeingRobot
-{
-    protected:
-        bool *shoot = new bool;
-
-
-    public:
-        ShootingRobot(int row, int col);
-        ShootingRobot(const ShootingRobot& obj){}
-};
-
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
-    bool *shootFlag = new bool(false);
+        bool *shootFlag = new bool(false);
 
 
     public:
-    ThinkingRobot(){};
-    ThinkingRobot(int row, int col); // ni robot first
-    ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
-    ~ThinkingRobot();
+        ThinkingRobot(){};
+        ThinkingRobot(int row, int col); // ni robot first
+        ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
+        ~ThinkingRobot();
 
 
 };
 
+class ShootingRobot: public ThinkingRobot
+{
+    protected:
+        int *shootChances;
+        bool *shooting;
+
+
+    public:
+        ShootingRobot(){}
+        ShootingRobot(int row, int col);
+        ShootingRobot(const ShootingRobot& obj);
+        ~ShootingRobot();
+        void CheckShot();
+        bool GetShooting();
+};
