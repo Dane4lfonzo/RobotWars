@@ -4,16 +4,17 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 10;
-    int col = 15;
-    int numofsteps = 100;
-    int numberOfRobots = 4;
-    string TestChars = "ABCD";
+    int row = 5;
+    int col = 10;
+    int numofsteps = 1000;
+    int numberOfRobots = 6;
+    string StringOfRoboName = "ABCDEF";
+
 /****************************************************************************************/
 
     bool SetSignia = true;
 
-    SeeingRobot RoboMove(row, col);  //Original MovingRobot class instance
+    SeeingRobot RoboMove(row-1, col-1);  //Original MovingRobot class instance
     vector<SeeingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
 
 
@@ -21,7 +22,7 @@ int main()
     {
         RoboMoveCopies.push_back(RoboMove);   //Similar to MovingRobot RoboMove2 = RoboMove; / MovingRobot RoboMove2(RoboMove); but enables multi-copy in a for loop
     }
-
+                                                                                                                                
     RoboMoveCopies[0].SetStep(numofsteps);
 
     RoboMoveCopies[0].GridMaker();
@@ -36,7 +37,7 @@ int main()
         {
             for (int i = 0; i < RoboMoveCopies.size(); i++)
             {
-                RoboMoveCopies[i].SetSignia(TestChars[i]);
+                RoboMoveCopies[i].SetSignia(StringOfRoboName[i]);
             }
 
             SetSignia = false;
@@ -57,6 +58,7 @@ int main()
                 
 
                 RoboMoveCopies[0].printGrid();
+
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
                     if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
@@ -72,7 +74,7 @@ int main()
                 }
                 
 
-                RoboMoveCopies[0].delay(300);
+                RoboMoveCopies[0].delay(100);
             }
         }
 
