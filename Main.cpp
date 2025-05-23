@@ -4,17 +4,17 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 40;
-    int col = 50;
+    int row = 5;
+    int col = 10;
     int numofsteps = 1000;
-    int numberOfRobots = 50;
-    string TestChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,./;'[]=+-_*!@#$%^&(){}|";
+    int numberOfRobots = 6;
+    string StringOfRoboName = "ABCDEF";
 
 /****************************************************************************************/
 
     bool SetSignia = true;
 
-    SeeingRobot RoboMove(row, col);  //Original MovingRobot class instance
+    SeeingRobot RoboMove(row-1, col-1);  //Original MovingRobot class instance
     vector<SeeingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
 
 
@@ -37,7 +37,7 @@ int main()
         {
             for (int i = 0; i < RoboMoveCopies.size(); i++)
             {
-                RoboMoveCopies[i].SetSignia(TestChars[i]);
+                RoboMoveCopies[i].SetSignia(StringOfRoboName[i]);
             }
 
             SetSignia = false;
@@ -50,7 +50,7 @@ int main()
                 system("CLS");
     
                 RoboMoveCopies[i].WheretoMove();
-                RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid);
+                RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid, StringOfRoboName, numberOfRobots);
 
                 
 
@@ -58,6 +58,7 @@ int main()
                 
 
                 RoboMoveCopies[0].printGrid();
+
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
                     if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
@@ -73,7 +74,7 @@ int main()
                 }
                 
 
-                RoboMoveCopies[0].delay(300);
+                RoboMoveCopies[0].delay(100);
             }
         }
 
