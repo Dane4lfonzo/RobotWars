@@ -205,24 +205,48 @@ bool SeeingRobot::RobotDetect()
 /**********************************ThinkingRobot**************************************/
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
+    *shootFlag = false;
+    /* cout << "Robot is thinking" << endl;
     if(*detection = true)
     {
         *shootFlag = true;
-    }
+    } */
 
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
+    shootFlag = new bool(*obj.shootFlag); // copy content of shootFlag into address of shootFlag
+    /* cout << "Robot is thinking" << endl;
     if(*obj.detection = true)
     {
         shootFlag = new bool(*obj.shootFlag);
-    }
+    } */
 
 }
 
 ThinkingRobot::~ThinkingRobot()
 {
     delete shootFlag;
+
+}
+
+void ThinkingRobot::Think()
+{
+    cout << "Robot "<< *signia <<" is thinking" << endl;
+    if(*detection == true)
+    {
+        *shootFlag = true;
+    }
+    else
+    {
+        *shootFlag = false;
+    }
+
+}
+/**********************************HideRobot**************************************/
+
+HideRobot::HideRobot(int row, int col) : ThinkingRobot(row, col)
+{
 
 }

@@ -13,8 +13,8 @@ int main()
 
     bool SetSignia = true;
 
-    SeeingRobot RoboMove(row, col);  //Original MovingRobot class instance
-    vector<SeeingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
+    ThinkingRobot RoboMove(row, col);  //Original MovingRobot class instance
+    vector<ThinkingRobot> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
 
 
     for (int i = 0; i < numberOfRobots; i++) 
@@ -36,7 +36,7 @@ int main()
         {
             for (int i = 0; i < RoboMoveCopies.size(); i++)
             {
-                RoboMoveCopies[i].SetSignia(TestChars[i]);
+                RoboMoveCopies[i].SetSignia(TestChars[i]);// ni set the symbol for each robot
             }
 
             SetSignia = false;
@@ -57,13 +57,18 @@ int main()
                 
 
                 RoboMoveCopies[0].printGrid();
+                
+                RoboMoveCopies[i].Think();
+
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row))
+                    if (!(*RoboMoveCopies[i].current_col == *RoboMoveCopies[j].current_col && *RoboMoveCopies[i].current_row == *RoboMoveCopies[j].current_row)) // prevents from "looking " at itself
                     {
                         RoboMoveCopies[i].Look(*RoboMoveCopies[j].current_row, *RoboMoveCopies[j].current_col);
                     }
                 }
+
+                //RoboMoveCopies[i].Think();
 
                 for (int i = 0; i < RoboMoveCopies.size(); i++)
                 {
@@ -71,6 +76,7 @@ int main()
                     cout <<" col: " << *RoboMoveCopies[i].current_col << endl;
                 }
                 
+
 
                 RoboMoveCopies[0].delay(300);
             }
