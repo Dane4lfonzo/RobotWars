@@ -50,7 +50,7 @@ int main()
                 system("CLS");
     
                 RoboMoveCopies[i].WheretoMove();
-                RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid, StringOfRoboName, numberOfRobots);
+                RoboMoveCopies[i].MovetoSquare(RoboMoveCopies[0].Grid);
 
                 
 

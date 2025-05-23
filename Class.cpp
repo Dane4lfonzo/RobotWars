@@ -134,7 +134,7 @@ void MovingRobot::WheretoMove()
 
 }
 
-void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid, string RoboNames, int NumofRobots) 
+void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
 {
     sharedGrid[*current_row][*current_col] = ".";
 
@@ -162,7 +162,7 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid, string RoboNa
             validpos = false;
         }
     }
-    
+
 }
 
 /**********************************SeeingRobot**************************************/

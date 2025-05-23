@@ -64,7 +64,7 @@ class MovingRobot : public Robot, public Battlefield
         ~MovingRobot();
         void WheretoMove();
         void SetSignia(char character);
-        void MovetoSquare(vector<vector<string>>& sharedGrid, string RoboNames, int NumofRobots);
+        void MovetoSquare(vector<vector<string>>& sharedGrid);
 };
 
 class SeeingRobot: public MovingRobot
