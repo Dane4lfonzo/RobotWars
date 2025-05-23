@@ -4,11 +4,12 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 10;
-    int col = 15;
-    int numofsteps = 100;
-    int numberOfRobots = 4;
-    string TestChars = "ABCD";
+    int row = 5;
+    int col = 10;
+    int numofsteps = 1000;
+    int numberOfRobots = 6;
+    string StringOfRoboName = "ABCDEF";
+
 /****************************************************************************************/
 
     bool SetSignia = true;
@@ -21,7 +22,7 @@ int main()
     {
         RoboMoveCopies.push_back(RoboMove);   //Similar to MovingRobot RoboMove2 = RoboMove; / MovingRobot RoboMove2(RoboMove); but enables multi-copy in a for loop
     }
-
+                                                                                                                                
     RoboMoveCopies[0].SetStep(numofsteps);
 
     RoboMoveCopies[0].GridMaker();
@@ -36,7 +37,7 @@ int main()
         {
             for (int i = 0; i < RoboMoveCopies.size(); i++)
             {
-                RoboMoveCopies[i].SetSignia(TestChars[i]);// ni set the symbol for each robot
+                RoboMoveCopies[i].SetSignia(StringOfRoboName[i]);// ni set the symbol for each robot
             }
 
             SetSignia = false;
@@ -77,8 +78,7 @@ int main()
                 }
                 
 
-
-                RoboMoveCopies[0].delay(300);
+                RoboMoveCopies[0].delay(100);
             }
         }
 
