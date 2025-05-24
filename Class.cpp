@@ -142,14 +142,13 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
 
-    if (new_row >= 0 && new_row < *MaxRow) //supaya tk keluar border
+    if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
     {
-        *current_row = new_row;
-    }
-
-    if (new_col >= 0 && new_col < *MaxCol)
-    {
-        *current_col = new_col;
+        // Check if the target cell is empty
+        if (sharedGrid[new_row][new_col] == ".") {
+            *current_row = new_row;
+            *current_col = new_col;
+        }
     }
 
     sharedGrid[*current_row][*current_col] = *signia;
@@ -185,6 +184,7 @@ SeeingRobot::~SeeingRobot()
 
 void SeeingRobot::Look(int row, int col)
 {
+    *detection = false;
     *checkrow = row;
     *checkcol = col;
     for (int i = 0; i < 8; i++)
@@ -193,6 +193,7 @@ void SeeingRobot::Look(int row, int col)
         {
             cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
             *detection = true;
+            break;
         }
     }
 }
@@ -206,16 +207,20 @@ bool SeeingRobot::RobotDetect()
 /**********************************ThinkingRobot**************************************/
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
-    if(*detection == true)
-    {
-        *shootFlag = true;
-    }
 
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
-    shootFlag = new bool(obj.shootFlag);
+    shootFlag = new bool(*obj.shootFlag);
+}
+
+void ThinkingRobot::ShootheRobot()
+{
+    if(*detection == true)
+    {
+        *shootFlag = true;
+    }
 }
 
 ThinkingRobot::~ThinkingRobot()
@@ -246,6 +251,8 @@ ShootingRobot::~ShootingRobot()
 
 void ShootingRobot::CheckShot()
 {
+    *shooting = false;
+
     if (*shootFlag)
     {
         *shootChances = (rand() % 10) + 1;
@@ -253,15 +260,15 @@ void ShootingRobot::CheckShot()
         if (*shootChances <= 7)
         {
             *shooting = true;
-            cout << "Shots fired successfully";
+            cout << "Shots fired successfully" << endl;
+            
         }
         else
         {
-            *shootFlag = false;
-            *detection = false;
-            *shooting = false;
-            cout << "Shots missed";
+            cout << "Shots missed" << endl;
         }
+    *detection = false;
+    *shootFlag = false;
     }
 }
 

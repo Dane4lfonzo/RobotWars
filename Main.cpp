@@ -4,8 +4,8 @@ int main()
 {
     srand(time(0));
 /*************** Variables for Yuven's readfile function later **************************/
-    int row = 10;
-    int col = 5;
+    int row = 5;
+    int col = 10;
     int numofsteps = 100;
     int numberOfRobots = 4;
     string TestChars = "ABCD";
@@ -13,9 +13,8 @@ int main()
 
     bool SetSignia = true;
 
-    ShootingRobot RoboMove(row, col);  //Original MovingRobot class instance
+    /*ShootingRobot RoboMove(row, col);  //Original MovingRobot class instance
     vector<ShootingRobot*> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
-
 
     for (int i = 0; i < numberOfRobots; i++) 
     {
@@ -24,74 +23,101 @@ int main()
 
     RoboMoveCopies[0]->SetStep(numofsteps);
 
-    RoboMoveCopies[0]->GridMaker();
+    RoboMoveCopies[0]->GridMaker(); */
 
-    //MovingRobot RoboMove(row, col);
-    //MovingRobot RoboMove2(RoboMove);
+    // Create standalone Battlefield object (not tied to any robot)
+    Battlefield battlefield(row, col);
+    battlefield.GridMaker();
+    battlefield.SetStep(numofsteps);
+    vector<ShootingRobot*> RoboMoveCopies;
 
-    while (RoboMoveCopies[0]->StepCount())
+    if (SetSignia)
     {
-
-        if (SetSignia)
+        for (int i = 0; i < numberOfRobots; i++)
         {
-            for (int i = 0; i < RoboMoveCopies.size(); i++)
-            {
-                if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
-
-                RoboMoveCopies[i]->SetSignia(TestChars[i]);
-            }
-
-            SetSignia = false;
+            ShootingRobot* newBot = new ShootingRobot(row, col);
+            newBot->SetSignia(TestChars[i]);
+            RoboMoveCopies.push_back(newBot);
         }
+        
+        SetSignia = false;
+    }
       
+
+    while (battlefield.StepCount())
+    {
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
-            if (RoboMoveCopies[0]->StepCount())
+            if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
+            
+            system("CLS");
+            
+            
+            // Robot movement
+            RoboMoveCopies[i]->WheretoMove();
+            RoboMoveCopies[i]->MovetoSquare(battlefield.Grid);
+
+            // Counts one step for robot
+            battlefield.CountDownStep();
+            
+
+            // Displays the Grid and Robots
+            battlefield.printGrid();
+
+            vector<int> Trashbin;
+            // Robot Actions (Looking & Shooting)
+            for (int j=0; j<RoboMoveCopies.size(); j++)
             {
-                system("CLS");
-                if (RoboMoveCopies[i] == nullptr) continue;
-                
-                RoboMoveCopies[i]->WheretoMove();
-                RoboMoveCopies[i]->MovetoSquare(RoboMoveCopies[0]->Grid);
+                if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) continue;
+                if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
+                !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) continue;
 
-                
-                RoboMoveCopies[0]->CountDownStep();
+                // Check if robots are not in the same cell
+                if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
+                    *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
+                    continue;
+                RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
-                RoboMoveCopies[0]->printGrid();
-                for (int j=0; j<RoboMoveCopies.size(); j++)
+                if (RoboMoveCopies[i]->RobotDetect())
                 {
-                    if (RoboMoveCopies[j] == nullptr || RoboMoveCopies[i] == nullptr) continue;
+                    RoboMoveCopies[i]->ShootheRobot();
+                    RoboMoveCopies[i]->CheckShot();
 
-                    if (!(*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col && 
-                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row))
+                    if (RoboMoveCopies[i]->GetShooting())
                     {
-                        RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
-                        RoboMoveCopies[i]->CheckShot();
-
-                        if (i != j && RoboMoveCopies[i]->GetShooting())
-                        {
-                            delete RoboMoveCopies[j];
-                            RoboMoveCopies[j] = nullptr;
-                        }
-
+                        Trashbin.push_back(j);
                     }
                 }
-
-                if (RoboMoveCopies[i] != nullptr && RoboMoveCopies[i]->current_row != nullptr && 
-                    RoboMoveCopies[i]->current_col != nullptr)
-                {
-                    for (int i = 0; i < RoboMoveCopies.size(); i++)
-                    {
-                        if (RoboMoveCopies[i] == nullptr) continue;
-                        cout << "Robot " << i << " row: " << *RoboMoveCopies[i]->current_row;
-                        cout <<" col: " << *RoboMoveCopies[i]->current_col << endl;
-                    }
-                }
-
-                RoboMoveCopies[0]->delay(1000);
             }
-        }
 
+            for (int x : Trashbin)
+            {
+                if (RoboMoveCopies[x] != nullptr)
+            {
+                // Clear grid symbol before deleting
+                if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                {
+                    battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                }
+                cout << "Robot " << x << " was shot and removed.\n";
+                delete RoboMoveCopies[x];
+                RoboMoveCopies[x] = nullptr;
+            }
+            }
+
+            // print logs
+            for (int k = 0; k < RoboMoveCopies.size(); k++)
+            {
+                if (RoboMoveCopies[k] == nullptr) continue;
+                cout << "Robot " << k 
+                        << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+            }
+
+        battlefield.delay(1000);
+        
+        }
     }
 
     return 0;
