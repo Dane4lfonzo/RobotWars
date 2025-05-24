@@ -216,28 +216,27 @@ bool SeeingRobot::RobotDetect()
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
     *shootFlag = false;
-    /* cout << "Robot is thinking" << endl;
-    if(*detection = true)
-    {
-        *shootFlag = true;
-    } */
-
+    *movingUpgrade = false;
+    *shootingUpgrade = false;
+    *seeingUpgrade = false;
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
     shootFlag = new bool(*obj.shootFlag); // copy content of shootFlag into address of shootFlag
-    /* cout << "Robot is thinking" << endl;
-    if(*obj.detection = true)
-    {
-        shootFlag = new bool(*obj.shootFlag);
-    } */
+    movingUpgrade = new bool(*obj.movingUpgrade);
+    shootingUpgrade = new bool(*obj.shootingUpgrade);
+    seeingUpgrade = new bool(*obj.seeingUpgrade);
+
 
 }
 
 ThinkingRobot::~ThinkingRobot()
 {
     delete shootFlag;
+    delete movingUpgrade;
+    delete shootingUpgrade;
+    delete seeingUpgrade;
 
 }
 
@@ -252,6 +251,58 @@ void ThinkingRobot::Think()
     {
         *shootFlag = false;
     }
+
+}
+
+void ThinkingRobot::Upgrade()
+{
+    vector<string> movingUpgradeChoice = {"HideBot", "JumpBot"};
+    vector<string> shootingUpgradeChoice = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
+    vector<string> seeingUpgradeChoice = {"ScoutBot", "TrackBot"};
+
+    vector<int> areasAvailable{};
+
+    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
+    if(*movingUpgrade == false)
+    {
+        areasAvailable.push_back(0);
+    }
+
+    if(*shootingUpgrade == false)
+    {
+        areasAvailable.push_back(1);
+    }
+
+    if(*seeingUpgrade == false)
+    {
+        areasAvailable.push_back(2);
+    }
+    // if robot tu tkde any upgrades vector tu camni
+    // areasAvailable{0,1,2}
+
+    int choice = areasAvailable[rand() % areasAvailable.size()]; // utk randomly choose
+
+    switch(choice)
+    {
+        case 0:
+            *movingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << movingUpgradeChoice[rand() % movingUpgradeChoice.size()] << endl;
+            areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
+            break;
+        case 1:
+            *shootingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << shootingUpgradeChoice[rand() % shootingUpgradeChoice.size()] << endl;
+            areasAvailable.clear();
+            break;
+        case 2:
+            *seeingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << seeingUpgradeChoice[rand() % seeingUpgradeChoice.size()] << endl;
+            areasAvailable.clear();
+            break;
+
+    }
+
+
 
 }
 /**********************************HideRobot**************************************/
