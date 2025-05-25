@@ -142,6 +142,18 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
 
+    //Yaro's code
+    /*if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
+    {
+        // Check if the target cell is empty
+        if (sharedGrid[new_row][new_col] == ".") {
+            *current_row = new_row;
+            *current_col = new_col;
+        }
+    }
+
+    sharedGrid[*current_row][*current_col] = *signia;*/
+
     bool validpos = false;
 
     while (!validpos)
@@ -163,6 +175,7 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
             validpos = false;
         }
     }
+
 
 }
 
@@ -194,15 +207,17 @@ SeeingRobot::~SeeingRobot()
 
 void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
 {
+    *detection = false;
     *checkrow = Robo_current_row;
     *checkcol = Robo_current_col;
-    
+
     for (int i = 0; i < 8; i++)
     {
         if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
         {
             cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
             *detection = true;
+            break;
         }
     }
 }
@@ -211,24 +226,25 @@ bool SeeingRobot::RobotDetect()
 {
     return *detection;
 }
+ 
 
 /**********************************ThinkingRobot**************************************/
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
-    if(*detection = true)
-    {
-        *shootFlag = true;
-    }
 
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
-    if(*obj.detection = true)
-    {
-        shootFlag = new bool(*obj.shootFlag);
-    }
+    shootFlag = new bool(*obj.shootFlag);
+}
 
+void ThinkingRobot::ShootheRobot()
+{
+    if(*detection == true)
+    {
+        *shootFlag = true;
+    }
 }
 
 ThinkingRobot::~ThinkingRobot()
@@ -236,3 +252,50 @@ ThinkingRobot::~ThinkingRobot()
     delete shootFlag;
 
 }
+
+/**********************************ShootingRobot**************************************/
+
+ShootingRobot::ShootingRobot(int row, int col): ThinkingRobot(row, col)
+{
+    shootChances = new int;
+    shooting = new bool(false);
+}
+
+ShootingRobot::ShootingRobot(const ShootingRobot& obj) : ThinkingRobot(obj)
+{
+    shootChances = new int(*obj.shootChances);
+    shooting = new bool(*obj.shooting);
+}
+
+ShootingRobot::~ShootingRobot()
+{
+    delete shootChances;
+    delete shooting;
+}
+
+void ShootingRobot::CheckShot()
+{
+    *shooting = false;
+
+    if (*shootFlag)
+    {
+        *shootChances = (rand() % 10) + 1;
+
+        if (*shootChances <= 7)
+        {
+            *shooting = true;
+            cout << "Shots fired successfully" << endl;
+            
+        }
+        else
+        {
+            cout << "Shots missed" << endl;
+        }
+    *detection = false;
+    *shootFlag = false;
+    }
+}
+
+bool ShootingRobot::GetShooting()
+{return *shooting;}
+   

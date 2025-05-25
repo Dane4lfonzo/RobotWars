@@ -35,6 +35,7 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
+        int ammo = 30;
         
     
     public:
@@ -88,16 +89,33 @@ class SeeingRobot: public MovingRobot
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
-    bool *shootFlag = new bool(false);
+        
 
 
     public:
-    ThinkingRobot(){};
-    ThinkingRobot(int row, int col); // ni robot first
-    ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
-    ~ThinkingRobot();
-
+        bool *shootFlag = new bool(false);
+        ThinkingRobot(){};
+        ThinkingRobot(int row, int col); // ni robot first
+        void ShootheRobot();
+        ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
+        ~ThinkingRobot();
 
 
 };
 
+class ShootingRobot: public ThinkingRobot
+{
+    protected:
+        int *shootChances;
+        bool *shooting;
+
+
+    public:
+        ShootingRobot(){}
+        ShootingRobot(int row, int col);
+        ShootingRobot(const ShootingRobot& obj);
+        ~ShootingRobot();
+        void CheckShot();
+        bool GetShooting();
+        
+};
