@@ -88,8 +88,10 @@ class SeeingRobot: public MovingRobot
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
-    //bool *shootFlag = new bool(false);
     bool *shootFlag;
+    bool *movingUpgrade;
+    bool *shootingUpgrade;
+    bool *seeingUpgrade;
 
 
     public:
@@ -99,6 +101,7 @@ class ThinkingRobot: public SeeingRobot
     ~ThinkingRobot();
 
     void Think();
+    void Upgrade();
 };
 
 class HideRobot : public ThinkingRobot
