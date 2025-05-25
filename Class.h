@@ -89,7 +89,9 @@ class SeeingRobot: public MovingRobot
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
-        
+        bool *movingUpgrade;
+        bool *shootingUpgrade;
+        bool *seeingUpgrade;
 
 
     public:
@@ -99,6 +101,8 @@ class ThinkingRobot: public SeeingRobot
         void ShootheRobot();
         ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
         ~ThinkingRobot();
+        void Think();
+        void Upgrade();
 
 
 };
@@ -118,4 +122,19 @@ class ShootingRobot: public ThinkingRobot
         void CheckShot();
         bool GetShooting();
         
+};
+
+
+class HideRobot : public ThinkingRobot
+{
+    protected:
+    bool *hidden = new bool(false);
+    int *hideUsage = new int(3);
+
+    public:
+    HideRobot(){};
+    HideRobot(int row, int col);
+    HideRobot(const HideRobot& obj);
+
+
 };

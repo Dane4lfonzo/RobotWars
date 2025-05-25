@@ -10,12 +10,10 @@ int main()
     int numberOfRobots = 4;
     bool Spawning = true;
     string TestChars = "ABCD";
+    bool SetSignia = true;
 /****************************************************************************************/
 
-    bool SetSignia = true;
-
     // Create standalone Battlefield object (not tied to any robot)
-
     Battlefield battlefield(row, col); // Original class instance
     battlefield.GridMaker();
     battlefield.SetStep(numofsteps);
@@ -32,20 +30,14 @@ int main()
         }
         SetSignia = false;
     }
-                                                                                                                                
       
     while (battlefield.StepCount())
     {
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
-            if (RoboMoveCopies[i] == nullptr) 
-            {
-                continue; // Checking for if the pointer for that specific element is null or not
-            }
-            
+            if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
             
             system("CLS");
-            
             
             // Robot movement
             RoboMoveCopies[i]->WheretoMove();
@@ -59,30 +51,26 @@ int main()
             battlefield.printGrid();
 
             vector<int> Trashbin;
+            RoboMoveCopies[i]->Think();
 
             if (!Spawning)
             {
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j)
-                    {
-                        continue;
-                    } 
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) continue;
+
+                    if (!(*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col && 
+                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)) continue; // prevents from "looking " at itself
+                    
 
                     if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
-                    !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) 
-                    {
-                        continue;
-                    }
+                    !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) continue;
 
                     // Check if robots are not in the same cell
                     if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
-                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
-                    {
-                        continue;
-                    }
-                        
+                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row) continue;
+                    
 
                     RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
@@ -97,38 +85,37 @@ int main()
                         }
                     }
                 }
-            }
 
-            // Cleans up the shot Robot
-            for (int x : Trashbin)
-            {
-                if (RoboMoveCopies[x] != nullptr)
+                // Cleans up the shot Robot
+                for (int x : Trashbin)
                 {
-                    // Clear grid symbol before deleting
-                    if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                    if (RoboMoveCopies[x] != nullptr)
                     {
-                        battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                        // Clear grid symbol before deleting
+                        if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                        {
+                            battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                        }
+                        cout << "Robot " << x << " was shot and removed.\n";
+                        delete RoboMoveCopies[x]; // Deletes the object of the shot robot
+                        RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
-                    cout << "Robot " << x << " was shot and removed.\n";
-                    delete RoboMoveCopies[x]; // Deletes the object of the shot robot
-                    RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                 }
-            }
 
-            // Print logs
-            for (int k = 0; k < RoboMoveCopies.size(); k++)
-            {
-                if (RoboMoveCopies[k] == nullptr) continue;
-                cout << "Robot " << k << " row: " << *RoboMoveCopies[k]->current_row
-                     << " col: " << *RoboMoveCopies[k]->current_col
-                     << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+                // Print logs
+                for (int k = 0; k < RoboMoveCopies.size(); k++)
+                {
+                    if (RoboMoveCopies[k] == nullptr) continue;
+                    cout << "Robot " << k << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+                }
+                
+                
+                battlefield.delay(500);
             }
-            
-            
-            battlefield.delay(500);
-        }
         Spawning = false;
+        }
     }
-
     return 0;
 }
