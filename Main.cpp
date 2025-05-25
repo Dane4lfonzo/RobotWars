@@ -13,31 +13,21 @@ int main()
 
     bool SetSignia = true;
 
-    /*ShootingRobot RoboMove(row, col);  //Original MovingRobot class instance
-    vector<ShootingRobot*> RoboMoveCopies;  //Copy Constructor class instance for MovingRobot but as an Array(Vector)
-
-    for (int i = 0; i < numberOfRobots; i++) 
-    {
-        RoboMoveCopies.push_back(new ShootingRobot(row, col));   //Similar to MovingRobot RoboMove2 = RoboMove; / MovingRobot RoboMove2(RoboMove); but enables multi-copy in a for loop
-    }
-
-    RoboMoveCopies[0]->SetStep(numofsteps);
-
-    RoboMoveCopies[0]->GridMaker(); */
-
     // Create standalone Battlefield object (not tied to any robot)
-    Battlefield battlefield(row, col);
+
+    Battlefield battlefield(row, col); // Original class instance
     battlefield.GridMaker();
     battlefield.SetStep(numofsteps);
-    vector<ShootingRobot*> RoboMoveCopies;
+    vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
 
     if (SetSignia)
     {
         for (int i = 0; i < numberOfRobots; i++)
         {
-            ShootingRobot* newBot = new ShootingRobot(row, col);
+            ShootingRobot* newBot = new ShootingRobot(row, col); // Creates new object during the runtime (
+                                                                //  dynamically) and store a new pointer
             newBot->SetSignia(TestChars[i]);
-            RoboMoveCopies.push_back(newBot);
+            RoboMoveCopies.push_back(newBot); // Each object is created anew and pushed into the vector
         }
         
         SetSignia = false;
@@ -76,6 +66,7 @@ int main()
                 if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
                     *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
                     continue;
+
                 RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
                 if (RoboMoveCopies[i]->RobotDetect())
@@ -85,11 +76,12 @@ int main()
 
                     if (RoboMoveCopies[i]->GetShooting())
                     {
-                        Trashbin.push_back(j);
+                        Trashbin.push_back(j); // Puts shot robot into an array
                     }
                 }
             }
 
+            // Cleans up the shot Robot
             for (int x : Trashbin)
             {
                 if (RoboMoveCopies[x] != nullptr)
@@ -100,19 +92,18 @@ int main()
                     battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                 }
                 cout << "Robot " << x << " was shot and removed.\n";
-                delete RoboMoveCopies[x];
-                RoboMoveCopies[x] = nullptr;
+                delete RoboMoveCopies[x]; // Deletes the object of the shot robot
+                RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
             }
             }
 
-            // print logs
+            // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
             {
                 if (RoboMoveCopies[k] == nullptr) continue;
-                cout << "Robot " << k 
-                        << " row: " << *RoboMoveCopies[k]->current_row
-                        << " col: " << *RoboMoveCopies[k]->current_col
-                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+                cout << "Robot " << k << " row: " << *RoboMoveCopies[k]->current_row
+                     << " col: " << *RoboMoveCopies[k]->current_col
+                     << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
             }
 
         battlefield.delay(1000);
