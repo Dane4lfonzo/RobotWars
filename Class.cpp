@@ -121,6 +121,11 @@ void MovingRobot::SetSignia(char character)
     *signia = character;
 }
 
+string MovingRobot::GetSignia()
+{
+    return (*signia);
+}
+
 void MovingRobot::WheretoMove()
 {
     
@@ -141,18 +146,6 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
-
-    //Yaro's code
-    /*if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
-    {
-        // Check if the target cell is empty
-        if (sharedGrid[new_row][new_col] == ".") {
-            *current_row = new_row;
-            *current_col = new_col;
-        }
-    }
-
-    sharedGrid[*current_row][*current_col] = *signia;*/
 
     bool validpos = false;
 
@@ -193,7 +186,7 @@ SeeingRobot::SeeingRobot(const SeeingRobot& obj): MovingRobot(obj)
 {
     checkrow = new int(*obj.checkrow); //checkrow tkde asterisk sbb kita nk pass address of obj.checkrow
     // letak content of obj.checkrow into the memory allocation(address) of checkrow
-    checkcol = new int(*obj.checkrow);
+    checkcol = new int(*obj.checkcol);
     detection = new bool(*obj.detection);
 }
 
@@ -231,12 +224,19 @@ bool SeeingRobot::RobotDetect()
 /**********************************ThinkingRobot**************************************/
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
+    shootFlag = new bool(false);
+    movingUpgrade = new bool(false);
+    shootingUpgrade = new bool(false);
+    seeingUpgrade = new bool(false);
 
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
-    shootFlag = new bool(*obj.shootFlag);
+    shootFlag = new bool(*obj.shootFlag); // copy content of shootFlag into address of shootFlag
+    movingUpgrade = new bool(*obj.movingUpgrade);
+    shootingUpgrade = new bool(*obj.shootingUpgrade);
+    seeingUpgrade = new bool(*obj.seeingUpgrade);
 }
 
 void ThinkingRobot::ShootheRobot()
@@ -250,9 +250,76 @@ void ThinkingRobot::ShootheRobot()
 ThinkingRobot::~ThinkingRobot()
 {
     delete shootFlag;
+    delete movingUpgrade;
+    delete shootingUpgrade;
+    delete seeingUpgrade;
 
 }
 
+void ThinkingRobot::Think()
+{
+    cout << "Robot "<< signia <<" is thinking" << endl;
+
+    if(*detection == true)
+    {
+        *shootFlag = true;
+    }
+    else
+    {
+        *shootFlag = false;
+    }
+
+}
+
+void ThinkingRobot::Upgrade()
+{
+    vector<string> movingUpgradeChoice = {"HideBot", "JumpBot"};
+    vector<string> shootingUpgradeChoice = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
+    vector<string> seeingUpgradeChoice = {"ScoutBot", "TrackBot"};
+
+    vector<int> areasAvailable{};
+
+    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
+    if(*movingUpgrade == false)
+    {
+        areasAvailable.push_back(0);
+    }
+
+    if(*shootingUpgrade == false)
+    {
+        areasAvailable.push_back(1);
+    }
+
+    if(*seeingUpgrade == false)
+    {
+        areasAvailable.push_back(2);
+    }
+    // if robot tu tkde any upgrades vector tu camni
+    // areasAvailable{0,1,2}
+
+    int choice = areasAvailable[rand() % areasAvailable.size()]; // utk randomly choose
+
+    switch(choice)
+    {
+        case 0:
+            *movingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << movingUpgradeChoice[rand() % movingUpgradeChoice.size()] << endl;
+            areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
+            break;
+        case 1:
+            *shootingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << shootingUpgradeChoice[rand() % shootingUpgradeChoice.size()] << endl;
+            areasAvailable.clear();
+            break;
+        case 2:
+            *seeingUpgrade = true;
+            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << seeingUpgradeChoice[rand() % seeingUpgradeChoice.size()] << endl;
+            areasAvailable.clear();
+            break;
+
+    }
+
+}
 /**********************************ShootingRobot**************************************/
 
 ShootingRobot::ShootingRobot(int row, int col): ThinkingRobot(row, col)
@@ -298,4 +365,12 @@ void ShootingRobot::CheckShot()
 
 bool ShootingRobot::GetShooting()
 {return *shooting;}
+
+/**********************************HideRobot**************************************/
+
+HideRobot::HideRobot(int row, int col) : ShootingRobot(row, col)
+{
+
+}
+
    
