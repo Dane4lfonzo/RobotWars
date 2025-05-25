@@ -121,6 +121,11 @@ void MovingRobot::SetSignia(char character)
     *signia = character;
 }
 
+string MovingRobot::GetSignia()
+{
+    return (*signia);
+}
+
 void MovingRobot::WheretoMove()
 {
     
@@ -141,18 +146,6 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
-
-    //Yaro's code
-    /*if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
-    {
-        // Check if the target cell is empty
-        if (sharedGrid[new_row][new_col] == ".") {
-            *current_row = new_row;
-            *current_col = new_col;
-        }
-    }
-
-    sharedGrid[*current_row][*current_col] = *signia;*/
 
     bool validpos = false;
 
@@ -193,7 +186,7 @@ SeeingRobot::SeeingRobot(const SeeingRobot& obj): MovingRobot(obj)
 {
     checkrow = new int(*obj.checkrow); //checkrow tkde asterisk sbb kita nk pass address of obj.checkrow
     // letak content of obj.checkrow into the memory allocation(address) of checkrow
-    checkcol = new int(*obj.checkrow);
+    checkcol = new int(*obj.checkcol);
     detection = new bool(*obj.detection);
 }
 
@@ -231,10 +224,10 @@ bool SeeingRobot::RobotDetect()
 /**********************************ThinkingRobot**************************************/
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
-    *shootFlag = false;
-    *movingUpgrade = false;
-    *shootingUpgrade = false;
-    *seeingUpgrade = false;
+    shootFlag = new bool(false);
+    movingUpgrade = new bool(false);
+    shootingUpgrade = new bool(false);
+    seeingUpgrade = new bool(false);
 
 }
 
@@ -265,7 +258,8 @@ ThinkingRobot::~ThinkingRobot()
 
 void ThinkingRobot::Think()
 {
-    cout << "Robot "<< *signia <<" is thinking" << endl;
+    cout << "Robot "<< signia <<" is thinking" << endl;
+
     if(*detection == true)
     {
         *shootFlag = true;
@@ -326,13 +320,6 @@ void ThinkingRobot::Upgrade()
     }
 
 }
-/**********************************HideRobot**************************************/
-
-HideRobot::HideRobot(int row, int col) : ThinkingRobot(row, col)
-{
-
-}
-
 /**********************************ShootingRobot**************************************/
 
 ShootingRobot::ShootingRobot(int row, int col): ThinkingRobot(row, col)
@@ -378,4 +365,12 @@ void ShootingRobot::CheckShot()
 
 bool ShootingRobot::GetShooting()
 {return *shooting;}
+
+/**********************************HideRobot**************************************/
+
+HideRobot::HideRobot(int row, int col) : ShootingRobot(row, col)
+{
+
+}
+
    
