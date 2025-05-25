@@ -8,6 +8,7 @@ int main()
     int col = 10;
     int numofsteps = 100;
     int numberOfRobots = 4;
+    bool Spawning = true;
     string TestChars = "ABCD";
 /****************************************************************************************/
 
@@ -15,7 +16,7 @@ int main()
 
     // Create standalone Battlefield object (not tied to any robot)
 
-    Battlefield battlefield(row-1, col-1); // Original class instance
+    Battlefield battlefield(row, col); // Original class instance
     battlefield.GridMaker();
     battlefield.SetStep(numofsteps);
     vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
@@ -54,28 +55,32 @@ int main()
             battlefield.printGrid();
 
             vector<int> Trashbin;
-            // Robot Actions (Looking & Shooting)
-            for (int j=0; j<RoboMoveCopies.size(); j++)
+
+            if (!Spawning)
             {
-                if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) continue;
-                if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
-                !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) continue;
-
-                // Check if robots are not in the same cell
-                if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
-                    *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
-                    continue;
-
-                RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
-
-                if (RoboMoveCopies[i]->RobotDetect())
+                // Robot Actions (Looking & Shooting)
+                for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    RoboMoveCopies[i]->ShootheRobot();
-                    RoboMoveCopies[i]->CheckShot();
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) continue;
+                    if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
+                    !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) continue;
 
-                    if (RoboMoveCopies[i]->GetShooting())
+                    // Check if robots are not in the same cell
+                    if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
+                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
+                        continue;
+
+                    RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
+
+                    if (RoboMoveCopies[i]->RobotDetect())
                     {
-                        Trashbin.push_back(j); // Puts shot robot into an array
+                        RoboMoveCopies[i]->ShootheRobot();
+                        RoboMoveCopies[i]->CheckShot();
+
+                        if (RoboMoveCopies[i]->GetShooting())
+                        {
+                            Trashbin.push_back(j); // Puts shot robot into an array
+                        }
                     }
                 }
             }
@@ -84,16 +89,16 @@ int main()
             for (int x : Trashbin)
             {
                 if (RoboMoveCopies[x] != nullptr)
-            {
-                // Clear grid symbol before deleting
-                if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
                 {
-                    battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                    // Clear grid symbol before deleting
+                    if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                    {
+                        battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                    }
+                    cout << "Robot " << x << " was shot and removed.\n";
+                    delete RoboMoveCopies[x]; // Deletes the object of the shot robot
+                    RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                 }
-                cout << "Robot " << x << " was shot and removed.\n";
-                delete RoboMoveCopies[x]; // Deletes the object of the shot robot
-                RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
-            }
             }
 
             // Print logs
@@ -104,10 +109,11 @@ int main()
                      << " col: " << *RoboMoveCopies[k]->current_col
                      << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
             }
-
-        battlefield.delay(500);
-        
+            
+            
+            battlefield.delay(1500);
         }
+        Spawning = false;
     }
 
     return 0;
