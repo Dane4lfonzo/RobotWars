@@ -38,7 +38,11 @@ int main()
     {
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
-            if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
+            if (RoboMoveCopies[i] == nullptr) 
+            {
+                continue; // Checking for if the pointer for that specific element is null or not
+            }
+            
             
             system("CLS");
             
@@ -61,14 +65,24 @@ int main()
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) continue;
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j)
+                    {
+                        continue;
+                    } 
+
                     if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
-                    !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) continue;
+                    !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col) 
+                    {
+                        continue;
+                    }
 
                     // Check if robots are not in the same cell
                     if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
                         *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)
+                    {
                         continue;
+                    }
+                        
 
                     RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
