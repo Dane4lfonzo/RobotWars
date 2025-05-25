@@ -111,7 +111,7 @@ int main()
             }
             
             
-            battlefield.delay(1500);
+            battlefield.delay(500);
         }
         Spawning = false;
     }
