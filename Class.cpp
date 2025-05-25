@@ -142,7 +142,8 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
 
-    if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
+    //Yaro's code
+    /*if (new_row >= 0 && new_row < *MaxRow && new_col >= 0 && new_col < *MaxCol) 
     {
         // Check if the target cell is empty
         if (sharedGrid[new_row][new_col] == ".") {
@@ -151,9 +152,31 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
         }
     }
 
-    sharedGrid[*current_row][*current_col] = *signia;
-    //cout << "\n\n\ncurrent_row = " << *current_row << endl;
-    //cout << "\n\n\ncurrent_col = " << *current_col << endl;
+    sharedGrid[*current_row][*current_col] = *signia;*/
+
+    bool validpos = false;
+
+    while (!validpos)
+    {
+        if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
+        {
+            *current_row = new_row;
+            *current_col = new_col;
+
+            sharedGrid[*current_row][*current_col] = *signia;
+            validpos = true;
+        }
+
+        else 
+        {
+            WheretoMove();
+            new_row = *current_row + *move_row;
+            new_col = *current_col + *move_col;        
+            validpos = false;
+        }
+    }
+
+
 }
 
 /**********************************SeeingRobot**************************************/
@@ -182,11 +205,12 @@ SeeingRobot::~SeeingRobot()
     
 }
 
-void SeeingRobot::Look(int row, int col)
+void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
 {
     *detection = false;
-    *checkrow = row;
-    *checkcol = col;
+    *checkrow = Robo_current_row;
+    *checkcol = Robo_current_col;
+
     for (int i = 0; i < 8; i++)
     {
         if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))

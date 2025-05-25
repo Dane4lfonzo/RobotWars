@@ -15,7 +15,7 @@ int main()
 
     // Create standalone Battlefield object (not tied to any robot)
 
-    Battlefield battlefield(row, col); // Original class instance
+    Battlefield battlefield(row-1, col-1); // Original class instance
     battlefield.GridMaker();
     battlefield.SetStep(numofsteps);
     vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
@@ -29,11 +29,10 @@ int main()
             newBot->SetSignia(TestChars[i]);
             RoboMoveCopies.push_back(newBot); // Each object is created anew and pushed into the vector
         }
-        
         SetSignia = false;
     }
+                                                                                                                                
       
-
     while (battlefield.StepCount())
     {
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
@@ -106,7 +105,7 @@ int main()
                      << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
             }
 
-        battlefield.delay(1000);
+        battlefield.delay(500);
         
         }
     }
