@@ -103,7 +103,7 @@ class ThinkingRobot: public SeeingRobot
 
 };
 
-class ShootingRobot: public ThinkingRobot
+class ShootingRobot : public ThinkingRobot
 {
     protected:
         int *shootChances;
@@ -118,4 +118,15 @@ class ShootingRobot: public ThinkingRobot
         void CheckShot();
         bool GetShooting();
         
+};
+
+class UpgradeRobot : public ShootingRobot
+{
+    protected:
+        bool* RobotHidden = new bool(false);
+        int* HideUsage = new int(3);
+
+
+    public:
+        bool HideBot(); 
 };
