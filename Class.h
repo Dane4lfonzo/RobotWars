@@ -54,7 +54,7 @@ class MovingRobot : public Robot, public Battlefield
         int *move_row = new int(0);
         int *move_col = new int(0);
             
-        string* signia = new string();
+        string* signia = new string();;
 
     public:
         int *current_row;
@@ -64,6 +64,7 @@ class MovingRobot : public Robot, public Battlefield
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
+        string GetSignia();
         void WheretoMove();
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
@@ -89,7 +90,9 @@ class SeeingRobot: public MovingRobot
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
-        
+        bool *movingUpgrade;
+        bool *shootingUpgrade;
+        bool *seeingUpgrade;
 
 
     public:
@@ -99,6 +102,8 @@ class ThinkingRobot: public SeeingRobot
         void ShootheRobot();
         ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
         ~ThinkingRobot();
+        void Think();
+        void Upgrade();
 
 
 };
@@ -120,13 +125,16 @@ class ShootingRobot : public ThinkingRobot
         
 };
 
-class UpgradeRobot : public ShootingRobot
+class HideRobot : public ShootingRobot
 {
     protected:
-        bool* RobotHidden = new bool(false);
-        int* HideUsage = new int(3);
-
+    bool *hidden = new bool(false);
+    int *hideUsage = new int(3);
 
     public:
-        bool HideBot(); 
+    HideRobot(){};
+    HideRobot(int row, int col);
+    HideRobot(const HideRobot& obj){};
+
+
 };
