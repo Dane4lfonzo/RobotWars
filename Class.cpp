@@ -91,7 +91,7 @@ MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
     *current_col = rand() % col;
 }
 
-MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj)//ni utk robot lain
+MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobot(obj) //ni utk robot lain
 {
     current_row = new int (*obj.current_row); // to create new memory for next loc
     current_col = new int (*obj.current_col);
@@ -366,11 +366,54 @@ void ShootingRobot::CheckShot()
 bool ShootingRobot::GetShooting()
 {return *shooting;}
 
-/**********************************HideRobot**************************************/
+/********************************** UpgradeRobot **************************************/
 
-HideRobot::HideRobot(int row, int col) : ShootingRobot(row, col)
+UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 {
 
+    RobotHidden = new bool(*obj.RobotHidden);
+    hideUsage = new int(*hideUsage);
+    RobotJump = new bool(*obj.RobotJump);
+    jumpUsage = new int(*obj.jumpUsage);
+
+}
+
+bool UpgradeRobot::HideBot()
+{
+
+    // if (*hideUsage == 0)
+    // {
+    //     *hideUsage = 3;
+    // }
+
+    if (*hideUsage != 0)
+    {
+        *hideUsage -= 1;
+        *RobotHidden = true;
+    }
+
+    else 
+    {
+        *RobotJump = false;
+    }
+
+    return RobotHidden;
+}
+
+bool UpgradeRobot::JumpBot()
+{
+    if (*jumpUsage != 0)
+    {
+        *jumpUsage -= 1;
+        *RobotJump = true;
+    }
+
+    else
+    {
+        *RobotJump = false;
+    }
+
+    return RobotJump;
 }
 
    

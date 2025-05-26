@@ -46,7 +46,7 @@ class Robot
 };
 
 
-class MovingRobot : public Robot, public Battlefield
+class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
         
@@ -125,16 +125,23 @@ class ShootingRobot : public ThinkingRobot
         
 };
 
-class HideRobot : public ShootingRobot
+class UpgradeRobot
 {
     protected:
-    bool *hidden = new bool(false);
+    bool *RobotHidden = new bool(false);
     int *hideUsage = new int(3);
+    bool *RobotJump = new bool(false);
+    int *jumpUsage = new int(3);
 
     public:
-    HideRobot(){};
-    HideRobot(int row, int col);
-    HideRobot(const HideRobot& obj){};
+    UpgradeRobot(){};
+    UpgradeRobot(const UpgradeRobot& obj){};
+    bool HideBot();
+    bool JumpBot();
+    void LongShotBot();
+    void SemiAutoBot();
+    void ThirtyShotBot();
+    void ScoutBot();
 
 
 };
