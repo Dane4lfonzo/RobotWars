@@ -81,9 +81,6 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
-        int *random_row = new int(0);
-        int *random_col = new int(0);
-
         string* signia = new string();;
 
     public:

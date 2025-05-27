@@ -126,18 +126,10 @@ MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobo
     current_row = new int (*obj.current_row); // to create new memory for next loc
     current_col = new int (*obj.current_col);
 
-    //random_row = new int (*obj.random_row);
-    //random_col = new int (*obj.random_col);
-
     movingchoice = new int (*obj.movingchoice);
     move_row = new int (*obj.move_row);
     move_col = new int (*obj.move_col);
 
-    // *random_row = rand() % *MaxRow;
-    // *random_col = rand() % *MaxCol;
-
-    // *current_row = *random_row;
-    // *current_col = *random_col;
 
 }
 
