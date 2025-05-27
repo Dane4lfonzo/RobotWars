@@ -378,6 +378,34 @@ void ShootingRobot::CheckShot()
 
     if (*shootFlag)
     {
+       
+       if(*RobotSemiAuto)
+       {
+           int *shotsFired = new int(0);
+
+           for(int i = 0 ; i <3; ++i)
+           {
+                *shootChances = (rand() % 10) + 1;
+                if (*shootChances <= 7)
+                {
+                    (*shotsFired)++; // kena buat mcm ni utk increase VALUE of the pointer
+                }
+           }
+
+           if (*shotsFired > 0)
+           {
+            *shooting = true;
+            cout << "SemiAutoBot " << *signia << " fired 3 shots, " << *shotsFired << " hits" << endl;
+           }
+           
+           else
+           {
+            cout << "SemiAutoBot " << *signia << " missed" << endl;
+           }
+           delete shotsFired;
+       }
+       
+       
         *shootChances = (rand() % 10) + 1;
 
         if (*shootChances <= 7)
@@ -407,6 +435,7 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
     hideUsage = new int(*hideUsage);
     RobotJump = new bool(*obj.RobotJump);
     jumpUsage = new int(*obj.jumpUsage);
+    RobotSemiAuto = new bool(*obj.RobotSemiAuto);
 
 }
 
@@ -455,6 +484,25 @@ void UpgradeRobot::ScoutBot(string signia)
         cout << "Robot " << signia << " is scouting the entire Battlefield" << endl;
         *scoutUsage -= 1;
     }
+}
+
+void UpgradeRobot::SemiAutoBot() // ni tunggu yaro buat ammo
+{
+    /*
+    if(*ammo >0)
+    {
+        *RobotSemiAuto = true;
+    }
+
+    else
+    {
+        *RobotSemiAuto = false;
+    }
+
+    return RobotSemiAuto;
+    
+    */
+
 }
 
 void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols, int& numofsteps, int& numberofRobots, string& RoboNames, vector<string>& check_spawn_condition)

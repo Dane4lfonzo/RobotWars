@@ -58,6 +58,8 @@ class UpgradeRobot
     bool *RobotJump = new bool(false);
     int *jumpUsage = new int(3);
 
+    bool *RobotSemiAuto = new bool(false);
+
     int *scoutUsage = new int(3);
 
     public:
