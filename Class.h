@@ -2,6 +2,8 @@
 #include <vector>
 #include <cstdlib> 
 #include <ctime>
+#include <queue>
+#include <set>
 
 using namespace std;
 
@@ -35,12 +37,15 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
-        int ammo = 30;
-        
+        int *shells;
+        bool *explosion;
+        int *lives;
+        bool *inQueue;
+
     
     public:
         Robot(){}
-        virtual void show() = 0;
+        virtual void stats() = 0;
         virtual ~Robot() {}
 
 };
@@ -53,13 +58,19 @@ class MovingRobot : public Robot, public Battlefield
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
-            
-        string* signia = new string();;
+        string* signia = new string();
 
     public:
         int *current_row;
         int *current_col;
-        void show() override{}
+        void stats() override
+        {
+            shells = new int (10);
+            lives = new int(3);
+            explosion = new bool(false);
+            inQueue = new bool(false);
+
+        }
         MovingRobot(){}
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
@@ -104,8 +115,12 @@ class ThinkingRobot: public SeeingRobot
         ~ThinkingRobot();
         void Think();
         void Upgrade();
-
-
+        bool CheckExplosion();
+        bool CheckQueue();
+        bool SetQueue();
+        bool NullifyQueue();
+        int CheckLives();
+        int DeductLives();
 };
 
 class ShootingRobot: public ThinkingRobot

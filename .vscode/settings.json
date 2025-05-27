@@ -4,7 +4,11 @@
         "ostream": "cpp",
         "new": "cpp",
         "cstdlib": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

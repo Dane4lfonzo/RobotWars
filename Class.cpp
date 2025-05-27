@@ -84,6 +84,7 @@ void Battlefield::delay(int milliseconds)
 
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
 {   
+    stats();
     current_row = new int;
     current_col = new int;
 
@@ -93,6 +94,10 @@ MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
 
 MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj)//ni utk robot lain
 {
+    lives = new int(*obj.lives);
+    shells = new int(*obj.shells);
+    inQueue = new bool(*obj.inQueue);
+    explosion = new bool(*obj.explosion);
     current_row = new int (*obj.current_row); // to create new memory for next loc
     current_col = new int (*obj.current_col);
 
@@ -114,6 +119,8 @@ MovingRobot::~MovingRobot()
     delete current_row;
     delete current_col;
     delete signia;
+    delete lives;
+    delete shells;
 }
 
 void MovingRobot::SetSignia(char character)
@@ -271,6 +278,46 @@ void ThinkingRobot::Think()
 
 }
 
+bool ThinkingRobot::CheckExplosion()
+{
+    if (*shells == 0)
+    {
+        *explosion = true;
+    }
+    else
+    {
+        *explosion = false;
+    }
+    return (*explosion);
+}
+
+int ThinkingRobot::CheckLives()
+{return (*lives);}
+
+int ThinkingRobot::DeductLives()
+{
+    if (*lives != 0)
+    {
+        *lives -= 1;
+    }
+    return (*lives);
+}
+
+bool ThinkingRobot::CheckQueue()
+{return (*inQueue);}
+
+bool ThinkingRobot::SetQueue()
+{
+    *inQueue = true;
+    return (*inQueue);
+}
+
+bool ThinkingRobot::NullifyQueue()
+{
+    *inQueue = false;
+    return (*inQueue);
+}
+
 void ThinkingRobot::Upgrade()
 {
     vector<string> movingUpgradeChoice = {"HideBot", "JumpBot"};
@@ -332,12 +379,14 @@ ShootingRobot::ShootingRobot(const ShootingRobot& obj) : ThinkingRobot(obj)
 {
     shootChances = new int(*obj.shootChances);
     shooting = new bool(*obj.shooting);
+    
 }
 
 ShootingRobot::~ShootingRobot()
 {
     delete shootChances;
     delete shooting;
+    delete shells;
 }
 
 void ShootingRobot::CheckShot()
@@ -346,22 +395,26 @@ void ShootingRobot::CheckShot()
 
     if (*shootFlag)
     {
-        *shootChances = (rand() % 10) + 1;
-
-        if (*shootChances <= 7)
+        if (shells != 0)
         {
-            *shooting = true;
-            cout << "Shots fired successfully" << endl;
-            
+            *shootChances = (rand() % 10) + 1;
+            if (*shootChances <= 7)
+            {
+                *shooting = true;
+                *shells -= 1;
+                cout << "Shots fired successfully" << endl;
+            }
+            else
+            {
+                cout << "Shots missed" << endl;
+            }
         }
-        else
-        {
-            cout << "Shots missed" << endl;
-        }
+        
     *detection = false;
     *shootFlag = false;
     }
 }
+
 
 bool ShootingRobot::GetShooting()
 {return *shooting;}
