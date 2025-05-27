@@ -4,4 +4,4 @@ numberofRobots: 4
 GenericRobot A 5 7 
 GenericRobot B 5 5
 GenericRobot C 6 1
-GenericRobot D 2 3
+GenericRobot D 2 9

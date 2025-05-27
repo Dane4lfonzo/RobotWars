@@ -12,9 +12,10 @@ class Battlefield
     protected:
         int* MaxRow = new int(0);
         int* MaxCol = new int(0);
-        int CountNumSteps = 0;
+        
 
     public:
+        int CountNumSteps = 0;
         vector<vector<string>> Grid;
         Battlefield(){};
         Battlefield(int row, int col);
@@ -58,6 +59,7 @@ class UpgradeRobot
     bool *RobotJump = new bool(false);
     int *jumpUsage = new int(3);
 
+    bool *RobotScout = new bool(false);
     int *scoutUsage = new int(3);
 
     public:
@@ -69,7 +71,7 @@ class UpgradeRobot
     void SemiAutoBot();
     void ThirtyShotBot();
     void ScoutBot(string signia);
-    void TrackBot();
+    void TrackBot(string signia, string seen_signia);
 
 
 };

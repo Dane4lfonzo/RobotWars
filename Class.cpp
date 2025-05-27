@@ -93,8 +93,6 @@ MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
 
 void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& iterationval)
 {
-    cout << "work" << endl;
-
     if (check_spawn_condition[iterationval] != "random")
     {
         *current_row = stoi(check_spawn_condition[iterationval]);
@@ -179,25 +177,50 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
 
+    int rand_row = rand() % *MaxRow;
+    int rand_col = rand() % *MaxCol;
+
     bool validpos = false;
 
     while (!validpos)
     {
-        if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
+        if (!JumpBot())
         {
-            *current_row = new_row;
-            *current_col = new_col;
+            if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
+            {
+                *current_row = new_row;
+                *current_col = new_col;
 
-            sharedGrid[*current_row][*current_col] = *signia;
-            validpos = true;
+                sharedGrid[*current_row][*current_col] = *signia;
+                validpos = true;
+            }
+
+            else 
+            {
+                WheretoMove();
+                new_row = *current_row + *move_row;
+                new_col = *current_col + *move_col;        
+                validpos = false;
+            }
         }
 
-        else 
+        if(JumpBot())
         {
-            WheretoMove();
-            new_row = *current_row + *move_row;
-            new_col = *current_col + *move_col;        
-            validpos = false;
+            if (sharedGrid[rand_row][rand_col] == ".")
+            {
+                *current_row = rand_row;
+                *current_col = rand_col;
+
+                sharedGrid[*current_row][*current_col] = *signia;
+                validpos = true;
+            }
+
+            else 
+            {
+                int rand_row = rand() % *MaxRow;
+                int rand_col = rand() % *MaxCol;      
+                validpos = false;
+            } 
         }
     }
 
@@ -412,12 +435,6 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 
 bool UpgradeRobot::HideBot()
 {
-
-    // if (*hideUsage == 0)
-    // {
-    //     *hideUsage = 3;
-    // }
-
     if (*hideUsage != 0)
     {
         *hideUsage -= 1;
@@ -429,7 +446,8 @@ bool UpgradeRobot::HideBot()
         *RobotJump = false;
     }
 
-    return RobotHidden;
+    //return RobotHidden;
+    return false;
 }
 
 bool UpgradeRobot::JumpBot()
@@ -445,16 +463,36 @@ bool UpgradeRobot::JumpBot()
         *RobotJump = false;
     }
 
-    return RobotJump;
+    //return RobotJump;
+    return false;
+}
+
+void UpgradeRobot::LongShotBot()
+{
+    if (*RobotScout)
+    {
+        
+    }
 }
 
 void UpgradeRobot::ScoutBot(string signia)
 {
     if (*scoutUsage != 0)
     {
+        *RobotScout = true;
         cout << "Robot " << signia << " is scouting the entire Battlefield" << endl;
         *scoutUsage -= 1;
     }
+
+    else 
+    {
+        *RobotScout = false;
+    }
+}
+
+void UpgradeRobot::TrackBot(string signia, string seen_signia)
+{
+
 }
 
 void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols, int& numofsteps, int& numberofRobots, string& RoboNames, vector<string>& check_spawn_condition)

@@ -37,6 +37,12 @@ int main()
     battlefield.SetStep(numofsteps);
     vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
 
+    if (numberOfRobots > RoboNames.size())
+    {
+        cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
+        return 1;
+    }
+
     if (SetSignia)
     {
         for (int i = 0; i < numberOfRobots; i++)
@@ -55,8 +61,23 @@ int main()
     {
         RoboMoveCopies[i]->SetCurrentPos(check_spawn_condition, TestVal);
     }
-      
 
+    //This for loop is to ensure that the robot positions given are confined within the Grid
+    for (int i=0; i < numberOfRobots; i++)
+    {
+        if ((*RoboMoveCopies[i]->current_row < 0) || (*RoboMoveCopies[i]->current_row >= row))
+        {
+            cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            return 1;
+        }
+
+        if ((*RoboMoveCopies[i]->current_col < 0) || (*RoboMoveCopies[i]->current_col >= col))
+        {
+            cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            return 1;            
+        }
+    }
+      
 
     while (battlefield.StepCount())
     {
@@ -65,6 +86,11 @@ int main()
             if (RoboMoveCopies[i] == nullptr) 
             {
                 continue; // Checking for if the pointer for that specific element is null or not
+            }
+
+            if (battlefield.CountNumSteps <= 0)
+            {
+                break;
             }
 
             system("CLS");
@@ -82,7 +108,7 @@ int main()
             {
                 RoboMoveCopies[i]->MovetoSquare(battlefield.Grid);
             }
-            
+
 
             // Counts one step for robot
             battlefield.CountDownStep();
@@ -98,7 +124,7 @@ int main()
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j) 
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j || RoboMoveCopies[j]->HideBot()) 
                     {
                         continue;
                     }
