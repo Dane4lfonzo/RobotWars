@@ -63,13 +63,27 @@ int main()
 
     while (battlefield.StepCount())
     {
+        int turn = 0;
+        if (!RobotQueue.empty() && turn == 0 )
+        {
+            ShootingRobot* WaitingBot = RobotQueue.front();
+            RobotQueue.pop();
+
+            if (WaitingBot != nullptr && WaitingBot->CheckLives() > 0)
+            {
+                WaitingBot->NullifyQueue();
+                WaitingBot->NewSpawn(battlefield.Grid);
+                RoboMoveCopies.push_back(WaitingBot);
+            }
+            turn += 1;
+        }        
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
             if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
             if (RoboMoveCopies[i]->CheckLives() <= 0) continue;
             
 
-            system("CLS");
+            //system("CLS");
 
             if (Spawning)
             {
@@ -189,23 +203,23 @@ int main()
                     
             }
 
-            battlefield.delay(2000);
+            battlefield.delay(1000);
         }
 
-        int turn = 0;
-        if (!RobotQueue.empty() && turn == 0 )
-        {
-            ShootingRobot* WaitingBot = RobotQueue.front();
-            RobotQueue.pop();
+        // int turn = 0;
+        // if (!RobotQueue.empty() && turn == 0 )
+        // {
+        //     ShootingRobot* WaitingBot = RobotQueue.front();
+        //     RobotQueue.pop();
 
-            if (WaitingBot != nullptr && WaitingBot->CheckLives() > 0)
-            {
-                WaitingBot->NullifyQueue();
-                WaitingBot->NewSpawn(battlefield.Grid);
-                RoboMoveCopies.push_back(WaitingBot);
-            }
-            turn += 1;
-        }
+        //     if (WaitingBot != nullptr && WaitingBot->CheckLives() > 0)
+        //     {
+        //         WaitingBot->NullifyQueue();
+        //         WaitingBot->NewSpawn(battlefield.Grid);
+        //         RoboMoveCopies.push_back(WaitingBot);
+        //     }
+        //     turn += 1;
+        // }
         Spawning = false;
         
     }

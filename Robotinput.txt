@@ -1,7 +1,7 @@
-numrows by numcols: 10 10
+numrows by numcols: 5 10
 numofsteps: 1000
 numberofRobots: 4
-GenericRobot A 5 7 
-GenericRobot B 5 5
-GenericRobot C 6 1
-GenericRobot D 2 3
+GenericRobot A random random
+GenericRobot B random random
+GenericRobot C random random
+GenericRobot D random random

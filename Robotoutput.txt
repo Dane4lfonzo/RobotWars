@@ -1,8 +1,8 @@
-Row: 10
+Row: 5
 Col: 10
 Number of Steps: 1000
 Number of Robots:4
-Robot Name: A Row: 5 Col: 7 
-Robot Name: B Row: 5 Col: 5
-Robot Name: C Row: 6 Col: 1
-Robot Name: D Row: 2 Col: 3
+Robot Name: A Row: random Col: random
+Robot Name: B Row: random Col: random
+Robot Name: C Row: random Col: random
+Robot Name: D Row: random Col: random
