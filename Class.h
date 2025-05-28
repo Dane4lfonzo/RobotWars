@@ -4,6 +4,8 @@
 #include <ctime>
 #include <queue>
 #include <set>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -50,8 +52,34 @@ class Robot
 
 };
 
+class UpgradeRobot
+{
+    protected:
+    bool *ReadyForUpgrade = new bool(false); // For shooting: when it kills a robot, it now allows the robot to choose an upgrade
 
-class MovingRobot : public Robot, public Battlefield
+    bool *RobotHidden = new bool(false);
+    int *hideUsage = new int(3);
+
+    bool *RobotJump = new bool(false);
+    int *jumpUsage = new int(3);
+
+    int *scoutUsage = new int(3);
+
+    public:
+    UpgradeRobot(){};
+    UpgradeRobot(const UpgradeRobot& obj);
+    bool HideBot();
+    bool JumpBot();
+    void LongShotBot();
+    void SemiAutoBot();
+    void ThirtyShotBot();
+    void ScoutBot(string signia);
+    void TrackBot();
+
+
+};
+
+class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
         
@@ -59,6 +87,7 @@ class MovingRobot : public Robot, public Battlefield
         int *move_row = new int(0);
         int *move_col = new int(0);
         string* signia = new string();
+
 
     public:
         int *current_row;
@@ -76,7 +105,9 @@ class MovingRobot : public Robot, public Battlefield
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
         string GetSignia();
+        void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
         void WheretoMove();
+        void PlaceRobot(vector<vector<string>>& sharedGrid);
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
         void NewSpawn(vector<vector<string>>& sharedGrid);
@@ -124,7 +155,7 @@ class ThinkingRobot: public SeeingRobot
         int DeductLives();
 };
 
-class ShootingRobot: public ThinkingRobot
+class ShootingRobot : public ThinkingRobot
 {
     protected:
         int *shootChances;
@@ -142,16 +173,4 @@ class ShootingRobot: public ThinkingRobot
 };
 
 
-class HideRobot : public ShootingRobot
-{
-    protected:
-    bool *hidden = new bool(false);
-    int *hideUsage = new int(3);
-
-    public:
-    HideRobot(){};
-    HideRobot(int row, int col);
-    HideRobot(const HideRobot& obj){};
-
-
-};
+void filereading(ifstream&, ofstream&, int&, int&, int&, int&, string&, vector<string>&);

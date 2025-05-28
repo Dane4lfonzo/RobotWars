@@ -81,18 +81,49 @@ void Battlefield::delay(int milliseconds)
 }
 
 /**********************************MovingRobot**************************************/
-
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
 {   
     stats();
     current_row = new int;
     current_col = new int;
 
-    *current_row = rand() % row; //spawn point furst object (robot first)
+
+    *current_row = rand() % row;
     *current_col = rand() % col;
+
 }
 
-MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj)//ni utk robot lain
+void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& iterationval)
+{
+    cout << "work" << endl;
+
+    if (check_spawn_condition[iterationval] != "random")
+    {
+        *current_row = stoi(check_spawn_condition[iterationval]);
+    }
+
+    else if (check_spawn_condition[iterationval] == "random")
+    {
+        *current_row = rand() % *MaxRow;
+    }
+
+    iterationval += 1;
+
+    if (check_spawn_condition[iterationval] != "random")
+    {
+        *current_col = stoi(check_spawn_condition[iterationval]);
+    }
+
+    else if (check_spawn_condition[iterationval] == "random")
+    {
+        *current_col = rand() % *MaxCol;
+    }
+
+    iterationval += 1;
+
+}
+
+MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobot(obj) //ni utk robot lain
 {
     lives = new int(*obj.lives);
     shells = new int(*obj.shells);
@@ -105,8 +136,6 @@ MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj)//ni utk robo
     move_row = new int (*obj.move_row);
     move_col = new int (*obj.move_col);
 
-    *current_row = rand() % *MaxRow; 
-    *current_col = rand() % *MaxCol;
 
 }
 
@@ -135,7 +164,6 @@ string MovingRobot::GetSignia()
 
 void MovingRobot::WheretoMove()
 {
-    
     *movingchoice = rand() % 8;
 
     
@@ -145,6 +173,11 @@ void MovingRobot::WheretoMove()
     *move_row = array_rowchoice[*movingchoice];
     *move_col = array_colchoice[*movingchoice];
 
+}
+
+void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
+{
+    sharedGrid[*current_row][*current_col] = *signia;
 }
 
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
@@ -347,9 +380,9 @@ bool ThinkingRobot::NullifyQueue()
 
 void ThinkingRobot::Upgrade()
 {
-    vector<string> movingUpgradeChoice = {"HideBot", "JumpBot"};
-    vector<string> shootingUpgradeChoice = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
-    vector<string> seeingUpgradeChoice = {"ScoutBot", "TrackBot"};
+    string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
+    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
+    string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
     vector<int> areasAvailable{};
 
@@ -377,17 +410,17 @@ void ThinkingRobot::Upgrade()
     {
         case 0:
             *movingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << movingUpgradeChoice[rand() % movingUpgradeChoice.size()] << endl;
+            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << movingUpgradeChoice[rand() % sizeof(movingUpgradeChoice)/4] << endl;
             areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
             break;
         case 1:
             *shootingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << shootingUpgradeChoice[rand() % shootingUpgradeChoice.size()] << endl;
+            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << shootingUpgradeChoice[rand() % sizeof(shootingUpgradeChoice)/4] << endl;
             areasAvailable.clear();
             break;
         case 2:
             *seeingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << seeingUpgradeChoice[rand() % seeingUpgradeChoice.size()] << endl;
+            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << seeingUpgradeChoice[rand() % sizeof(seeingUpgradeChoice)/4] << endl;
             areasAvailable.clear();
             break;
 
@@ -445,11 +478,179 @@ void ShootingRobot::CheckShot()
 bool ShootingRobot::GetShooting()
 {return *shooting;}
 
-/**********************************HideRobot**************************************/
+/********************************** UpgradeRobot **************************************/
 
-HideRobot::HideRobot(int row, int col) : ShootingRobot(row, col)
+UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 {
+
+    RobotHidden = new bool(*obj.RobotHidden);
+    hideUsage = new int(*hideUsage);
+    RobotJump = new bool(*obj.RobotJump);
+    jumpUsage = new int(*obj.jumpUsage);
 
 }
 
-   
+bool UpgradeRobot::HideBot()
+{
+
+    // if (*hideUsage == 0)
+    // {
+    //     *hideUsage = 3;
+    // }
+
+    if (*hideUsage != 0)
+    {
+        *hideUsage -= 1;
+        *RobotHidden = true;
+    }
+
+    else 
+    {
+        *RobotJump = false;
+    }
+
+    return RobotHidden;
+}
+
+bool UpgradeRobot::JumpBot()
+{
+    if (*jumpUsage != 0)
+    {
+        *jumpUsage -= 1;
+        *RobotJump = true;
+    }
+
+    else
+    {
+        *RobotJump = false;
+    }
+
+    return RobotJump;
+}
+
+void UpgradeRobot::ScoutBot(string signia)
+{
+    if (*scoutUsage != 0)
+    {
+        cout << "Robot " << signia << " is scouting the entire Battlefield" << endl;
+        *scoutUsage -= 1;
+    }
+}
+
+void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols, int& numofsteps, int& numberofRobots, string& RoboNames, vector<string>& check_spawn_condition)
+{
+    string line;
+    int iterationval = 0;
+    
+    // int numrows, numcols, numofsteps, numberofRobots;
+    // string RoboNames;
+
+    while (getline(infile,line))
+    {
+
+    // to find numrows by numcols
+
+      if(line.find("numrows by numcols") != string::npos && line.find(":") != string::npos) // check if the line contains "numrows by numcols" and ":"
+        {
+            //outfile << ">numrows by numcols fileOutput.txt;" << endl;
+            //cout << ">numrows by numcols fileOutput.txt;" << endl;
+
+            int start = line.find(":"); // find the position of the colon - remove everything till ":"
+            string numrowsCol = line.substr(start + 2); // takes " row by col" // "5 by 10"
+        
+            int spacePos = numrowsCol.find(" "); // finding position of the space
+
+            string rowStr = numrowsCol.substr(0, spacePos); // ambil the row part
+            string colStr = numrowsCol.substr(spacePos + 1); // ambil the col part
+
+            if (rowStr != "random")
+            {
+                numrows = stoi(rowStr); // change string to integer
+            }
+            
+            if (colStr != "random")
+            {
+                numcols = stoi(colStr); // change string to integer
+            }
+            
+            if (rowStr == "random")
+            {
+
+            }
+            outfile << "Row: " << numrows << endl;
+            outfile << "Col: " << numcols << endl;
+
+            //cout << "Row: " << numrows << endl;
+            //cout << "Col: " << numcols << endl;
+
+        }
+
+        // to find numofsteps
+
+        if (line.find("numofsteps") != string::npos && line.find(":") != string::npos) // check if the line contains "numofsteps" and ":"
+        {
+            //outfile << ">numofsteps fileOutput.txt;" << endl;
+            //cout << ">numofsteps fileOutput.txt;" << endl;
+
+            int start = line.find(":"); // find the position of the colon - remove everything till ":"
+            string numofStepsStr = line.substr(start + 2); // takes "1000" steps 
+
+            numofsteps = stoi(numofStepsStr); // changes string to integer
+
+            outfile << "Number of Steps: " << numofsteps << endl;
+            //cout << "Number of Steps: " << numofsteps << endl;
+        }
+
+        // to find number of robots
+
+        if (line.find("numberofRobots") != string::npos && line.find(":")!= string::npos) // check if the line contains "numberofRobots" and ":"
+        {
+            //outfile << ">numofRobots fileOutput.txt;" << endl;
+            //cout << ">numofRobots fileOutput.txt;" << endl;
+
+            int start = line.find(":"); // find the position of the colon - remove everything till ":"
+            string numofRobotsStr = line.substr(start + 2); // takes "6" / total robots stated
+
+            numberofRobots = stoi(numofRobotsStr); // changes string to integer
+
+            outfile << "Number of Robots:" << numberofRobots << endl;
+            //cout << "Number of Robots: " << numberofRobots << endl;
+        }
+
+        // to find robots and positions
+
+        if (line.find("GenericRobot") != string::npos) // check if the line contains "GenericRobot"
+        {
+            //outfile << ">GenericRobot fileOutput.txt;" << endl;
+            //cout << ">GenericRobot fileOutput.txt;" << endl;
+
+            int spaceone = line.find(" "); // find the position of the first space
+            int spacetwo = line.find(" ", spaceone + 1); // find the position of the second space // after the first space
+            int spacethree = line.find(" ", spacetwo + 1); // find the position of the third space // after the second space
+            
+            string robotName = line.substr(spaceone + 1, spacetwo - spaceone - 1); // remove robot name
+            string rowStr = line.substr(spacetwo + 1, spacethree - spacetwo - 1); // remove row number
+            string colStr = line.substr(spacethree + 1); // remove column number
+
+            outfile << "Robot Name: " << robotName;
+            //cout << "Robot Name: " << robotName;
+
+            check_spawn_condition.push_back(rowStr);
+    
+            check_spawn_condition.push_back(colStr);
+
+            outfile << " Row: " << check_spawn_condition[iterationval*2];
+            outfile << " Col: " << check_spawn_condition[iterationval*2 +1] << endl;
+            // cout << " Row: " << check_spawn_condition[iterationval*2];
+            // cout << " Col: " << check_spawn_condition[iterationval*2 +1] << endl;
+            
+            RoboNames += robotName;
+            iterationval += 1;
+                       
+        }
+    }
+
+
+infile.close();
+outfile.close();
+}
