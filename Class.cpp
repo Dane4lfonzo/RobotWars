@@ -176,7 +176,34 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
         }
     }
 
+}
 
+void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
+{
+    sharedGrid[*current_row][*current_col] = ".";
+    int rand_row = rand() % *MaxRow;
+    int rand_col = rand() % *MaxCol;
+    *current_row = rand_row;
+    *current_col = rand_col;
+    sharedGrid[*current_row][*current_col] = *signia;
+    // bool validpos = false;
+
+    // while (!validpos)
+    // if (sharedGrid[rand_row][rand_col] == ".")
+    // {
+    //     *current_row = rand_row;
+    //     *current_col = rand_col;
+
+    //     sharedGrid[*current_row][*current_col] = *signia;
+    //     validpos = true;
+    // }
+
+    // else 
+    // {
+    //     rand_row = rand() % *MaxRow;
+    //     rand_col = rand() % *MaxCol;      
+    //     validpos = false;
+    // }
 }
 
 /**********************************SeeingRobot**************************************/

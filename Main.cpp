@@ -11,6 +11,7 @@ int main()
     bool Spawning = true;
     string TestChars = "ABCD";
     bool SetSignia = true;
+    int Round = 0;
 /****************************************************************************************/
 
     // Create standalone Battlefield object (not tied to any robot)
@@ -126,20 +127,28 @@ int main()
                 }
             }
 
+            Round += 1;
+            cout << endl << "ROUND " << Round << endl;
+
             // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
             {
                 if (!RoboMoveCopies[k]) continue;
                 if (!RoboMoveCopies[k]->current_row || !RoboMoveCopies[k]->current_col || !RoboMoveCopies[k]->CheckLives()) continue;
 
+                
+
                 cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
                     << "," << *RoboMoveCopies[k]->current_col << ")"
                     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Object in Queue: "<< RoboMoveCopies[k]->CheckQueue() << endl;
                     
             }
-            battlefield.delay(1500);
+
+            battlefield.delay(2000);
         }
-        if (!RobotQueue.empty())
+
+        int turn = 0;
+        if (!RobotQueue.empty() && turn == 0 )
         {
             ShootingRobot* WaitingBot = RobotQueue.front();
             RobotQueue.pop();
@@ -147,10 +156,13 @@ int main()
             if (WaitingBot != nullptr && WaitingBot->CheckLives() > 0)
             {
                 WaitingBot->NullifyQueue();
+                WaitingBot->NewSpawn(battlefield.Grid);
                 RoboMoveCopies.push_back(WaitingBot);
             }
+            turn += 1;
         }
         Spawning = false;
+        
     }
 
     return 0;

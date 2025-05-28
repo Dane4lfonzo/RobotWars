@@ -79,6 +79,7 @@ class MovingRobot : public Robot, public Battlefield
         void WheretoMove();
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
+        void NewSpawn(vector<vector<string>>& sharedGrid);
 };
 
 class SeeingRobot: public MovingRobot
