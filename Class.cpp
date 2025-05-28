@@ -215,7 +215,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
     {
         if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
         {
-            cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+            //cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
             *detection = true;
             break;
         }
@@ -386,7 +386,6 @@ ShootingRobot::~ShootingRobot()
 {
     delete shootChances;
     delete shooting;
-    delete shells;
 }
 
 void ShootingRobot::CheckShot()

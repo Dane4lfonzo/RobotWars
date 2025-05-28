@@ -58,8 +58,9 @@ int main()
             battlefield.printGrid();
 
             vector<int> Trashbin;
+
             
-            if (Spawning == false)
+            if (!Spawning)
             {
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
@@ -83,8 +84,9 @@ int main()
                         
                     RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
-                    if (RoboMoveCopies[i]->RobotDetect())
+                    if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue())
                     {
+                        cout << "Detection true for robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot();
 
@@ -92,7 +94,8 @@ int main()
                         {
                             RoboMoveCopies[j]->DeductLives();
                             RoboMoveCopies[j]->SetQueue();
-                            Trashbin.push_back(j); // Puts shot robot into an array
+                            Trashbin.push_back(j);
+                            
                         }
                     }
                 }
@@ -108,9 +111,9 @@ int main()
                     {
                         battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                     }
-                    cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
 
-                    if (RoboMoveCopies[x]->CheckLives() == 0)
+                    cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
+                    if (RoboMoveCopies[x]->CheckLives() <= 0)
                     {
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr;
@@ -131,11 +134,10 @@ int main()
 
                 cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
                     << "," << *RoboMoveCopies[k]->current_col << ")"
-                    << " Lives: " << RoboMoveCopies[k]->CheckLives() << endl;
+                    << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Object in Queue: "<< RoboMoveCopies[k]->CheckQueue() << endl;
                     
             }
-            
-            battlefield.delay(600);
+            battlefield.delay(1500);
         }
         if (!RobotQueue.empty())
         {
