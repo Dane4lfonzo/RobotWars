@@ -93,7 +93,7 @@ int main()
                 break;
             }
 
-            system("CLS");
+            //system("CLS");
 
             if (Spawning)
             {
@@ -109,13 +109,14 @@ int main()
                 RoboMoveCopies[i]->MovetoSquare(battlefield.Grid);
             }
 
+            //Updates the number of uses of each upgrades if the robot has one
+            RoboMoveCopies[i]->UpdateUsage();
 
             // Counts one step for robot
             battlefield.CountDownStep();
             
             // Displays the Grid and Robots
             battlefield.printGrid();
-            
 
             vector<int> Trashbin;
 
@@ -124,7 +125,7 @@ int main()
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j || RoboMoveCopies[j]->HideBot()) 
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j || RoboMoveCopies[j]->HideBot()) //|| RoboMoveCopies[j]->HideBot()
                     {
                         continue;
                     }
@@ -161,7 +162,13 @@ int main()
                         if (RoboMoveCopies[i]->GetShooting())
                         {
                             Trashbin.push_back(j); // Puts shot robot into an array
+                            if (!*RoboMoveCopies[i]->RobotUpgraded)
+                            {
+                                RoboMoveCopies[i]->Upgrade();
+                                *RoboMoveCopies[i]->RobotUpgraded = true;
+                            }
                         }
+
                     }
                 }
             }
@@ -176,7 +183,7 @@ int main()
                         {
                             battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                         }
-                        cout << "Robot " << x << " was shot and removed.\n";
+                        cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
@@ -196,6 +203,24 @@ int main()
                         << " col: " << *RoboMoveCopies[k]->current_col
                         << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
                         
+                    if (RoboMoveCopies[k]->ScoutBot())
+                    {
+                        if (RoboMoveCopies[k] == nullptr)
+                        {
+                            continue;
+                        }
+                        cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees";
+
+                        for (int x = 0; x < RoboMoveCopies.size(); x++)
+                        {
+                            if (RoboMoveCopies[x] == nullptr || RoboMoveCopies[x]->current_row == nullptr 
+                                || RoboMoveCopies[x]->current_col == nullptr || x == k) continue;
+                            cout << ",";
+                                                                                                                               
+                            cout << " Robot " <<RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                        }
+            
+                    }
                 }
                 
                 battlefield.delay(500);

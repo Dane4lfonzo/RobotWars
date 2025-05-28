@@ -4,6 +4,7 @@
 #include <ctime>
 #include <fstream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -38,6 +39,11 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
+
+        int upgraded_arraychoice[2][24] = {
+            {-1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 2, 2, 2, 1, 0, -1, -2, -2, -2, 0, 3, 0, -3},
+            {-1, -1, -1, 0, 1, 1, 1, 0, -2, -2, -2, -1, 0, 1, 2, 2, 2, 1, 0, -1, -3, 0, 3, 0}
+        };
         int ammo = 30;
         
     
@@ -51,27 +57,39 @@ class Robot
 class UpgradeRobot
 {
     protected:
-    bool *ReadyForUpgrade = new bool(false); // For shooting: when it kills a robot, it now allows the robot to choose an upgrade
 
-    bool *RobotHidden = new bool(false);
-    int *hideUsage = new int(3);
+        bool *movingUpgradeUse_Jump;
+        bool *movingUpgradeUse_Hide;
 
-    bool *RobotJump = new bool(false);
-    int *jumpUsage = new int(3);
+        bool *shootingUpgradeUse_LongShot;
+        bool *shootingUpgradeUse_SemiAuto;
+        bool *shootingUpgradeUse_ThirtyShot;
 
-    bool *RobotScout = new bool(false);
-    int *scoutUsage = new int(3);
+        bool *seeingUpgradeUse_Scout;
+        bool *seeingUpgradeUse_Track;
+
+        string *movingUpgradeChosen;
+        string *shootingUpgradeChosen;
+        string *seeingUpgradeChosen;
+
+        int *hideUsage;
+
+        int *jumpUsage;
+
+        int *scoutUsage;
 
     public:
-    UpgradeRobot(){};
-    UpgradeRobot(const UpgradeRobot& obj);
-    bool HideBot();
-    bool JumpBot();
-    void LongShotBot();
-    void SemiAutoBot();
-    void ThirtyShotBot();
-    void ScoutBot(string signia);
-    void TrackBot(string signia, string seen_signia);
+        bool *RobotUpgraded = new bool(false); // For shooting: when it upgrades, it cant upgrade anymore until respawn
+        UpgradeRobot();
+        UpgradeRobot(const UpgradeRobot& obj);
+        ~UpgradeRobot();
+        bool HideBot();
+        bool JumpBot();
+        bool LongShotBot();
+        void SemiAutoBot();
+        void ThirtyShotBot();
+        bool ScoutBot();
+        void TrackBot(string signia, string seen_signia);
 
 
 };
@@ -125,12 +143,17 @@ class ThinkingRobot: public SeeingRobot
         bool *shootingUpgrade;
         bool *seeingUpgrade;
 
+        bool *movingUpgradeDone;
+        bool *shootingUpgradeDone;
+        bool *seeingUpgradeDone;
+
 
     public:
         bool *shootFlag = new bool(false);
         ThinkingRobot(){};
         ThinkingRobot(int row, int col); // ni robot first
         void ShootheRobot();
+        void UpdateUsage();
         ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
         ~ThinkingRobot();
         void Think();
