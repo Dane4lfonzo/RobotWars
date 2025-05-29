@@ -77,19 +77,21 @@ class UpgradeRobot
         int *jumpUsage;
 
         int *scoutUsage;
+        int *trackUsage;
 
     public:
         bool *RobotUpgraded = new bool(false); // For shooting: when it upgrades, it cant upgrade anymore until respawn
+        string *trackList;
         UpgradeRobot();
         UpgradeRobot(const UpgradeRobot& obj);
         ~UpgradeRobot();
         bool HideBot();
         bool JumpBot();
         bool LongShotBot();
-        void SemiAutoBot();
+        bool SemiAutoBot();
         void ThirtyShotBot();
         bool ScoutBot();
-        void TrackBot(string signia, string seen_signia);
+        bool TrackBot();
 
 
 };

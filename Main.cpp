@@ -209,18 +209,19 @@ int main()
                         {
                             continue;
                         }
-                        cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees";
+                        cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
 
                         for (int x = 0; x < RoboMoveCopies.size(); x++)
                         {
                             if (RoboMoveCopies[x] == nullptr || RoboMoveCopies[x]->current_row == nullptr 
                                 || RoboMoveCopies[x]->current_col == nullptr || x == k) continue;
-                            cout << ",";
                                                                                                                                
-                            cout << " Robot " <<RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                            cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                            cout << ",";
                         }
-            
+                        cout << endl;
                     }
+
                 }
                 
                 battlefield.delay(500);
