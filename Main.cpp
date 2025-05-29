@@ -19,7 +19,7 @@ int main()
     infile.open("Robotinput.txt");
 
     ofstream outfile;
-    outfile.open("Robotoutput.txt"); // place ',ios::append' if u wish to not overwrite the file
+    outfile.open("Robotoutput.txt", ios::app); // place ',ios::append' if u wish to not overwrite the file
 
     //shows error if both files fail to open
     if (!infile || !outfile)
@@ -72,6 +72,11 @@ int main()
             if (Spawning)
             {
                 cout << "Spawning..." << endl;
+                
+                ofstream outfile;
+                outfile.open("Robotoutput.txt", ios::app);
+                outfile << "Spawning..." << endl;
+
                 RoboMoveCopies[i]->PlaceRobot(battlefield.Grid);
             }
             
@@ -151,6 +156,11 @@ int main()
                             battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                         }
                         cout << "Robot " << x << " was shot and removed.\n";
+
+                        ofstream outfile;
+                        outfile.open("Robotoutput.txt", ios::app);
+                        outfile << "Robot " << x << " was shot and removed.\n";
+
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
@@ -167,6 +177,13 @@ int main()
                         } 
 
                     cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+
+
+                    ofstream outfile;
+                    outfile.open("Robotoutput.txt", ios::app);
+                    outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
                         << " col: " << *RoboMoveCopies[k]->current_col
                         << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
                         
