@@ -126,6 +126,11 @@ void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& itera
 
 }
 
+void MovingRobot::GetShells(int bullets)
+{
+    *shells = bullets;
+}
+
 MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobot(obj) //ni utk robot lain
 {
     lives = new int(*obj.lives);
@@ -472,6 +477,11 @@ void ShootingRobot::CheckShot()
     *detection = false;
     *shootFlag = false;
     }
+}
+
+int ShootingRobot::Checkshells()
+{
+    return (*shells);
 }
 
 

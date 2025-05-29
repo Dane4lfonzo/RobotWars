@@ -94,7 +94,7 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         int *current_col;
         void stats() override
         {
-            shells = new int (10);
+            shells = new int;
             lives = new int(3);
             explosion = new bool(false);
             inQueue = new bool(false);
@@ -105,6 +105,7 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
         string GetSignia();
+        void GetShells(int bullets);
         void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
         void WheretoMove();
         void PlaceRobot(vector<vector<string>>& sharedGrid);
@@ -169,6 +170,7 @@ class ShootingRobot : public ThinkingRobot
         ~ShootingRobot();
         void CheckShot();
         bool GetShooting();
+        int Checkshells();
         
 };
 
