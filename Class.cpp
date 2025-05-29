@@ -453,7 +453,7 @@ ShootingRobot::~ShootingRobot()
     delete shooting;
 }
 
-void ShootingRobot::CheckShot()
+void ShootingRobot::CheckShot(string Robotname)
 {
     *shooting = false;
 
@@ -466,11 +466,11 @@ void ShootingRobot::CheckShot()
             {
                 *shooting = true;
                 *shells -= 1;
-                cout << "Shots fired successfully" << endl;
+                cout << "Robot " << Robotname << " was shot successfully" << endl;
             }
             else
             {
-                cout << "Shots missed" << endl;
+                cout << "Robot " << Robotname << " avoided the shot" << endl;
             }
         }
         

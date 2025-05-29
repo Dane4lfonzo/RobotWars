@@ -168,7 +168,7 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(int row, int col);
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
-        void CheckShot();
+        void CheckShot(string Robotname);
         bool GetShooting();
         int Checkshells();
         

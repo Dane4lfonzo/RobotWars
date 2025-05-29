@@ -15,7 +15,10 @@ int main()
     bool SetSignia = true;
     int Round = 0;
     bool Spawning = true;
-    int spawnbot = 0;
+    int Spawnbot = 0;
+    int Endgame = 0;
+    int ExtraBot = 0;
+    string Winner;
 
     ifstream infile;
     infile.open("Robotinput.txt");
@@ -72,7 +75,7 @@ int main()
             if (RoboMoveCopies[i]->CheckLives() <= 0) continue;
             
 
-            //system("CLS");
+            system("CLS");
 
             if (Spawning)
             {
@@ -95,7 +98,8 @@ int main()
             // Displays the Grid and Robots
             battlefield.printGrid();
             
-
+            Round += 1;
+            cout << endl << "ROUND " << Round << endl;
             vector<int> Trashbin;
 
             
@@ -135,9 +139,9 @@ int main()
 
                     if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue())
                     {
-                        cout << "Detection true for robot " << RoboMoveCopies[j]->GetSignia() << endl;
+                        cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
-                        RoboMoveCopies[i]->CheckShot();
+                        RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia());
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
@@ -154,9 +158,6 @@ int main()
                     }
                 }
             }
-
-            Round += 1;
-            cout << endl << "ROUND " << Round << endl;
 
             if (RoboMoveCopies[i]->CheckExplosion())
             {
@@ -179,9 +180,10 @@ int main()
 
                     if (RoboMoveCopies[x]->CheckLives() <= 0)
                     {
-                        cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
+                        cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " has lost all lives and is removed.\n";
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr;
+                        Endgame += 1;
                     }
                     else
                     {
@@ -195,6 +197,7 @@ int main()
                 }
             }
 
+            cout << endl;
             // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
             {
@@ -206,11 +209,35 @@ int main()
                     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
             }
 
-            battlefield.delay(500);
+            if (Endgame == (numberOfRobots - 1))
+            {
+                Winner = RoboMoveCopies[i]->GetSignia();
+                break;
+            }
+            if (Endgame == numberOfRobots)
+            {
+                break;
+            }
+            
+            battlefield.delay(1000);
+        }
+
+        int Gacha = rand() % 7;
+        //Get 3 new robots
+        if (Gacha == 0 && ExtraBot != 3)
+        {
+            cout << "A new AI bot has randomly spawned" << endl;
+            ShootingRobot* extraBot = new ShootingRobot(row, col);
+            string signia = "$&@";
+            extraBot->SetSignia(signia[ExtraBot]);
+            extraBot->GetShells(numberOfRobots);
+            extraBot->NewSpawn(battlefield.Grid);
+            RoboMoveCopies.push_back(extraBot);
+            ExtraBot += 1;
         }
 
         int turn = 0;
-        if (spawnbot > 0)
+        if (Spawnbot > 0)
         {
             if (!RobotQueue.empty() && turn == 0 )
             {
@@ -224,19 +251,40 @@ int main()
                     WaitingBot->GetShells(numberOfRobots);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    battlefield.delay(1000);
+                    battlefield.delay(1500);
                 }
                 turn += 1;
             }
-            spawnbot = 0;
+
+            Spawnbot = 0;
         }
         else
         {
-            spawnbot += 1;
+            Spawnbot += 1;
+        }
+
+        // Get winner of the program
+        if (Endgame == (numberOfRobots - 1))
+        {
+            break;
+        }
+
+        
+        if (Endgame == numberOfRobots)
+        {
+            break;
         }
         
         Spawning = false;
+    }
 
+    if (!Winner.empty())
+    {
+        cout << endl << "!!ROBOT " << Winner << " IS THE WINNER!!" << endl; 
+    }
+    else
+    {
+        cout << endl << "Match ends with no winner" << endl; 
     }
 
     return 0;
