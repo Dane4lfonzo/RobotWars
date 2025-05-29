@@ -77,11 +77,15 @@ class UpgradeRobot
         int *jumpUsage;
 
         int *scoutUsage;
-        int *trackUsage;
+
+        //int *trackUsage;
+        
 
     public:
+        int *trackUsage;     ///Temporary public
         bool *RobotUpgraded = new bool(false); // For shooting: when it upgrades, it cant upgrade anymore until respawn
         string *trackList;
+        bool *addtrackList;
         UpgradeRobot();
         UpgradeRobot(const UpgradeRobot& obj);
         ~UpgradeRobot();
@@ -176,7 +180,7 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(int row, int col);
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
-        void CheckShot();
+        void CheckShot(string Robotname, int numberofRobots);
         bool GetShooting();
         
 };

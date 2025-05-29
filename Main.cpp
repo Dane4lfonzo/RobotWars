@@ -118,6 +118,14 @@ int main()
             // Displays the Grid and Robots
             battlefield.printGrid();
 
+            if (RoboMoveCopies[i]->TrackBot()) ///////////////////////////////// Need to ensure that it still prints even after the uses run out
+            {
+                for (int i = 0; i < numberOfRobots; i++)
+                {
+                    cout << "TrackList: " << *RoboMoveCopies[i]->trackList << endl;
+                }
+            }
+
             vector<int> Trashbin;
 
             if (Spawning == false)
@@ -157,7 +165,7 @@ int main()
                     if (RoboMoveCopies[i]->RobotDetect())
                     {
                         RoboMoveCopies[i]->ShootheRobot();
-                        RoboMoveCopies[i]->CheckShot();
+                        RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
 
                         if (RoboMoveCopies[i]->GetShooting())
                         {
@@ -168,7 +176,6 @@ int main()
                                 *RoboMoveCopies[i]->RobotUpgraded = true;
                             }
                         }
-
                     }
                 }
             }
@@ -202,7 +209,7 @@ int main()
                     cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
                         << " col: " << *RoboMoveCopies[k]->current_col
                         << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
-                        
+
                     if (RoboMoveCopies[k]->ScoutBot())
                     {
                         if (RoboMoveCopies[k] == nullptr)
@@ -224,7 +231,7 @@ int main()
 
                 }
                 
-                battlefield.delay(500);
+                battlefield.delay(100);
             }
          Spawning = false;
     }
