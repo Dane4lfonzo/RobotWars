@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 
+
 using namespace std;
 
 class Battlefield
@@ -68,7 +69,7 @@ class UpgradeRobot
     bool HideBot();
     bool JumpBot();
     void LongShotBot();
-    void SemiAutoBot();
+    //bool SemiAutoBot();
     void ThirtyShotBot();
     void ScoutBot(string signia);
     void TrackBot();
