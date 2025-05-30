@@ -227,16 +227,17 @@ bool UpgradeRobot::TrackBot()
     return *seeingUpgradeUse_Track;
 }
 
+void UpgradeRobot::ResetBot()
+{
+
+}
+
 /**********************************MovingRobot**************************************/
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
     stats();
     current_row = new int;
     current_col = new int;
-
-
-    //*current_row = rand() % row;
-    //*current_col = rand() % col;
 
 }
 
@@ -332,7 +333,6 @@ void MovingRobot::WheretoMove()
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
-    // sharedGrid[*current_row][*current_col] = *signia;
 
     while (!validpos)
     {
@@ -340,7 +340,6 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
         {
             validpos = true;
             sharedGrid[*current_row][*current_col] = *signia;
-            cout << "\n\n\n\n\nWORK" << endl;
         }
 
         else
@@ -616,15 +615,15 @@ void ThinkingRobot::Upgrade()
     vector<int> areasAvailable{};
 
     // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
-    // if(*movingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(0);
-    // }
+    if(*movingUpgrade == false)
+    {
+        areasAvailable.push_back(0);
+    }
     
-    // if(*shootingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(1);
-    // }
+    if(*shootingUpgrade == false)
+    {
+        areasAvailable.push_back(1);
+    }
 
     if(*seeingUpgrade == false)
     {
@@ -641,13 +640,8 @@ void ThinkingRobot::Upgrade()
     int rand_see = rand() % 2;
 
     *movingUpgradeChosen = movingUpgradeChoice[rand_move];
-    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    //*shootingUpgradeChosen = "SemiAutoBot";
-    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
-    //*seeingUpgradeChosen = "ScoutBot";
-    *seeingUpgradeChosen = "TrackBot";
-    
-    
+    *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
 
     switch(choice)
     {
@@ -804,22 +798,26 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 
     if (*shootFlag && SemiAutoBot())
     {
-        for (int i = 0; i < 3; i++)
+        if (shells != 0)
         {
-            *shootChances = (rand() % 10) + 1;
+            for (int i = 0; i < 3; i++)
+            {
+                *shootChances = (rand() % 10) + 1;
 
-            if (*shootChances <= 7)
-            {
-                *shooting = true;
-                cout << "Shots fired successfully" << endl;
-                break;
-            }
-            else
-            {
-                cout << "Shots missed" << endl;
-                if (TrackBot())
+                if (*shootChances <= 7)
                 {
-                    *addtrackList = true;
+                    *shooting = true;
+                    shells -= 1;
+                    cout << "Robot " << Robotname << " was shot successfully" << endl;
+                    break;
+                }
+                else
+                {
+                    cout << "Robot " << Robotname << " avoided the shot" << endl;
+                    if (TrackBot())
+                    {
+                        *addtrackList = true;
+                    }
                 }
             }
         }
@@ -863,9 +861,6 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
     string line;
     int iterationval = 0;
     
-    // int numrows, numcols, numofsteps, numberofRobots;
-    // string RoboNames;
-
     while (getline(infile,line))
     {
 
