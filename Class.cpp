@@ -66,7 +66,7 @@ void Battlefield::printGrid()
         {
             cout << Grid[i][j];
             
-            outfile << Grid[i][j];
+            //outfile << Grid[i][j];
         }
         cout << " ";
         cout << "#";
@@ -80,7 +80,44 @@ void Battlefield::printGrid()
     {
         cout << "#";
     }
-    cout << endl;    
+    cout << endl;  
+    
+    // log
+    outfile << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        outfile << "#";
+    }
+
+    outfile << endl;
+
+    outfile << "#" << setw(*MaxCol+3) << "#" << endl; 
+
+    for (int i=0; i < *MaxRow; i++)
+    {
+        outfile << "#";
+        outfile << " ";
+        for (int j=0; j < *MaxCol; j++)
+        {
+            outfile << Grid[i][j];
+            
+            //outfile << Grid[i][j];
+        }
+        outfile << " ";
+        outfile << "#";
+        
+        outfile << endl;
+    }
+
+    outfile << "#" << setw(*MaxCol+3) << "#" << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        outfile << "#";
+    }
+    outfile << endl;  
+
 }
 
 void Battlefield::SetStep(int numofsteps)
@@ -103,7 +140,7 @@ void Battlefield::CountDownStep()
 
     ofstream outfile;
     outfile.open("Robotoutput.txt", ios::app);
-    outfile << "\n";
+    //outfile << "\n";
     outfile << "Remaining Steps: " << CountNumSteps << "\n\n";
 }
 
@@ -324,6 +361,8 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
     // sharedGrid[*current_row][*current_col] = *signia;
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
 
     while (!validpos)
     {
@@ -332,6 +371,8 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
             validpos = true;
             sharedGrid[*current_row][*current_col] = *signia;
             cout << "\n\n\n\n\nWORK" << endl;
+            outfile << "\n\n\n\n\nWORK" << endl;
+
         }
 
         else
@@ -432,6 +473,8 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
     *detection = false;
     *checkrow = Robo_current_row;
     *checkcol = Robo_current_col;
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
 
     if (!LongShotBot())
     {
@@ -440,6 +483,10 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
             {
                 cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
+                // log
+                
+                outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -453,6 +500,10 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
                 cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                //log
+                
+                outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                
                 *detection = true;
                 break;
             }
@@ -544,6 +595,9 @@ void ThinkingRobot::Upgrade()
     string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+
 
 
     vector<int> areasAvailable{};
@@ -588,16 +642,26 @@ void ThinkingRobot::Upgrade()
         case 0:
             *movingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
+            
+
             areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
             break;
         case 1:
             *shootingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << *shootingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << *shootingUpgradeChosen << endl;
+            
             areasAvailable.clear();
             break;
         case 2:
             *seeingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << *seeingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << *seeingUpgradeChosen << endl;
+
             areasAvailable.clear();
             break;
     }
@@ -721,11 +785,15 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         {
             *shooting = true;
             cout << "Shots fired successfully" << endl;
+            //log
+            outfile << "Shots fired successfully" << endl;
+            
             
         }
         else
         {
             cout << "Shots missed" << endl;
+            outfile << "Shots missed" << endl;
             // *addtrackList = true;
             if (TrackBot())
             {
@@ -747,11 +815,13 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             {
                 *shooting = true;
                 cout << "Shots fired successfully" << endl;
+                outfile << "Shots fired successfully" << endl;
                 break;
             }
             else
             {
                 cout << "Shots missed" << endl;
+                outfile << "Shots missed" << endl;
                 if (TrackBot())
                 {
                     *addtrackList = true;
@@ -777,6 +847,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         {
             *trackList += Robotname;
             cout << "Work Track" << endl;
+            outfile << "Work Track" << endl;
             *trackUsage -= 1;
             *addtrackList = false;
         }       
@@ -791,7 +862,7 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
 {
     string line;
     int iterationval = 0;
-    
+
     // int numrows, numcols, numofsteps, numberofRobots;
     // string RoboNames;
 

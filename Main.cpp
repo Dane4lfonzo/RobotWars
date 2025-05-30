@@ -40,6 +40,7 @@ int main()
     if (numberOfRobots > RoboNames.size())
     {
         cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
+        outfile << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
         return 1;
     }
 
@@ -68,12 +69,14 @@ int main()
         if ((*RoboMoveCopies[i]->current_row < 0) || (*RoboMoveCopies[i]->current_row >= row))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl; 
             return 1;
         }
 
         if ((*RoboMoveCopies[i]->current_col < 0) || (*RoboMoveCopies[i]->current_col >= col))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
             return 1;            
         }
     }
@@ -188,6 +191,10 @@ int main()
                             battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                         }
                         cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
+
+                        ofstream outfile;
+                        outfile.open("Robotoutput.txt", ios::app);
+                        outfile << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
@@ -207,9 +214,16 @@ int main()
                         << " col: " << *RoboMoveCopies[k]->current_col
                         << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
 
+                    ofstream outfile;
+                    outfile.open("Robotoutput.txt", ios::app);
+                    outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+
                     if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
                     {
                         cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                        outfile << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
                     }
 
                     if (RoboMoveCopies[k]->ScoutBot())
@@ -218,7 +232,11 @@ int main()
                         {
                             continue;
                         }
+                        
                         cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
+                        ofstream outfile;
+                        outfile.open("Robotoutput.txt", ios::app);
+                        outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
 
                         for (int x = 0; x < RoboMoveCopies.size(); x++)
                         {
@@ -227,8 +245,13 @@ int main()
                                                                                                                                
                             cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
                             cout << ",";
+                            ofstream outfile;
+                            outfile.open("Robotoutput.txt", ios::app);
+                            outfile << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                            outfile << ",";
                         }
                         cout << endl;
+                        outfile << endl;
                     }
 
                 }
