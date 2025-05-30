@@ -227,16 +227,17 @@ bool UpgradeRobot::TrackBot()
     return *seeingUpgradeUse_Track;
 }
 
+void UpgradeRobot::ResetBot()
+{
+
+}
+
 /**********************************MovingRobot**************************************/
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
     stats();
     current_row = new int;
     current_col = new int;
-
-
-    //*current_row = rand() % row;
-    //*current_col = rand() % col;
 
 }
 
@@ -332,7 +333,6 @@ void MovingRobot::WheretoMove()
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
-    // sharedGrid[*current_row][*current_col] = *signia;
 
     while (!validpos)
     {
@@ -340,7 +340,6 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
         {
             validpos = true;
             sharedGrid[*current_row][*current_col] = *signia;
-            //cout << "\n\nWORK" << endl;
         }
 
         else
@@ -642,8 +641,7 @@ void ThinkingRobot::Upgrade()
 
     *movingUpgradeChosen = movingUpgradeChoice[rand_move];
     *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
-    
+    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
 
     switch(choice)
     {
@@ -800,22 +798,26 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 
     if (*shootFlag && SemiAutoBot())
     {
-        for (int i = 0; i < 3; i++)
+        if (shells != 0)
         {
-            *shootChances = (rand() % 10) + 1;
+            for (int i = 0; i < 3; i++)
+            {
+                *shootChances = (rand() % 10) + 1;
 
-            if (*shootChances <= 7)
-            {
-                *shooting = true;
-                cout << "Shots fired successfully" << endl;
-                break;
-            }
-            else
-            {
-                cout << "Shots missed" << endl;
-                if (TrackBot())
+                if (*shootChances <= 7)
                 {
-                    *addtrackList = true;
+                    *shooting = true;
+                    shells -= 1;
+                    cout << "Robot " << Robotname << " was shot successfully" << endl;
+                    break;
+                }
+                else
+                {
+                    cout << "Robot " << Robotname << " avoided the shot" << endl;
+                    if (TrackBot())
+                    {
+                        *addtrackList = true;
+                    }
                 }
             }
         }
@@ -859,9 +861,6 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
     string line;
     int iterationval = 0;
     
-    // int numrows, numcols, numofsteps, numberofRobots;
-    // string RoboNames;
-
     while (getline(infile,line))
     {
 
