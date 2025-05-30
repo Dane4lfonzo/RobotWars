@@ -234,32 +234,28 @@ bool UpgradeRobot::TrackBot()
 
 void UpgradeRobot::ResetBot()
 {
-    RobotUpgraded = new bool(false);
+    *RobotUpgraded = false;
 
-    movingUpgradeUse_Jump = new bool(false);
-    movingUpgradeUse_Hide = new bool(false);
+    *movingUpgradeUse_Jump = false;
+    *movingUpgradeUse_Hide = false;
 
-    shootingUpgradeUse_LongShot = new bool(false);
-    shootingUpgradeUse_SemiAuto = new bool(false);
-    shootingUpgradeUse_ThirtyShot = new bool(false);
+    *shootingUpgradeUse_LongShot = false;
+    *shootingUpgradeUse_SemiAuto = false;
+    *shootingUpgradeUse_ThirtyShot = false;
 
-    seeingUpgradeUse_Scout = new bool(false);
-    seeingUpgradeUse_Track = new bool(false); 
+    *seeingUpgradeUse_Scout = false;
+    *seeingUpgradeUse_Track = false; 
 
-    movingUpgradeChosen = new string();
-    shootingUpgradeChosen = new string();
-    seeingUpgradeChosen = new string();
+    *hideUsage = 3;
 
-    hideUsage = new int(3);
+    *jumpUsage = 3;
 
-    jumpUsage = new int(3);
+    *scoutUsage = 3;
+    *trackUsage = 3;
 
-    scoutUsage = new int(3);
-    trackUsage = new int(3);
-
-    trackList = new string();
-    addtrackList = new bool(false);
-    printtrackList = new bool(false); 
+    //trackList = new string();
+    *addtrackList = false;
+    *printtrackList = false; 
 }
 
 /**********************************MovingRobot**************************************/
@@ -640,26 +636,24 @@ void ThinkingRobot::Upgrade()
     string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
-
-
     vector<int> areasAvailable{};
 
     // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi 
     
-    // if(*movingUpgrade == false) 
-    // {
-    //     areasAvailable.push_back(0);
-    // }
+    if(*movingUpgrade == false) 
+    {
+        areasAvailable.push_back(0);
+    }
     
     if(*shootingUpgrade == false) 
     {
         areasAvailable.push_back(1);
     }
 
-    // if(*seeingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(2);
-    // }
+    if(*seeingUpgrade == false)
+    {
+        areasAvailable.push_back(2);
+    }
 
     // if robot tu tkde any upgrades vector tu camni
     // areasAvailable{0,1,2}
@@ -670,11 +664,9 @@ void ThinkingRobot::Upgrade()
     int rand_shoot = rand() % 3;
     int rand_see = rand() % 2;
 
-    //*movingUpgradeChosen = movingUpgradeChoice[rand_move];
-    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
-
-    *shootingUpgradeChosen = "ThirtyShotBot";
+    *movingUpgradeChosen = movingUpgradeChoice[rand_move];
+    *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
 
     switch(choice)
     {
@@ -747,7 +739,6 @@ void ThinkingRobot::UpdateUsage(int numberOfRobots)
     if (HideBot())
     {
         *hideUsage -= 1;
-        //cout << "\n\n\nHideCount: " << *hideUsage << endl;
         if (*hideUsage <= 0)
         {
             *movingUpgradeUse_Hide = false;
@@ -758,7 +749,6 @@ void ThinkingRobot::UpdateUsage(int numberOfRobots)
     if (JumpBot())
     {
         *jumpUsage -= 1;
-        //cout << "\n\n\nJumpCount: " << *jumpUsage << endl;
         if (*jumpUsage <= 0)
         {
             *movingUpgradeUse_Jump = false;
@@ -788,7 +778,17 @@ void ThinkingRobot::UpdateUsage(int numberOfRobots)
             *seeingUpgradeUse_Track = false;
         }
     }
+}
 
+void ThinkingRobot::ResetUpgrades()
+{
+    *movingUpgrade = false;
+    *shootingUpgrade = false;
+    *seeingUpgrade = false;
+
+    *movingUpgradeDone = false;
+    *shootingUpgradeDone = false;
+    *seeingUpgradeDone = false;
 }
 /**********************************ShootingRobot**************************************/
 

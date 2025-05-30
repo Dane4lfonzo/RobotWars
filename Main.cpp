@@ -177,11 +177,11 @@ int main()
                             RoboMoveCopies[j]->SetQueue();
                             Trashbin.push_back(j); // Puts shot robot into an array
 
-                            if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
-                            {
-                                RoboMoveCopies[i]->Upgrade();
-                                *RoboMoveCopies[i]->RobotUpgraded = true;
-                            }
+                            //if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
+                            //{
+                            RoboMoveCopies[i]->Upgrade();
+                                //*RoboMoveCopies[i]->RobotUpgraded = true;
+                            //}
                             
                             if (RoboMoveCopies[i]->CheckExplosion())
                             {
@@ -224,6 +224,8 @@ int main()
                         {
                             cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and is in queue.\n";
                         }
+                        RoboMoveCopies[x]->ResetBot(); // Resets the robot upgrade variables for a clean slate
+                        RoboMoveCopies[x]->ResetUpgrades();
                         RobotQueue.push(RoboMoveCopies[x]);
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }

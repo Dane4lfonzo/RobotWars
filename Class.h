@@ -182,6 +182,7 @@ class ThinkingRobot: public SeeingRobot
         ThinkingRobot(const ThinkingRobot& obj); 
         void ShootheRobot();
         void UpdateUsage(int numberOfRobots);
+        void ResetUpgrades();
         ~ThinkingRobot();
         void Think();
         void Upgrade();
