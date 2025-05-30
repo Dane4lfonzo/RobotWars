@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <unordered_set>
 
 using namespace std;
 
@@ -143,6 +144,8 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
         void NewSpawn(vector<vector<string>>& sharedGrid);
+        // void NewSpawn2(vector<vector<string>>& sharedGrid);
+
 };
 
 // Class for Robot to detect other robots
@@ -181,7 +184,9 @@ class ThinkingRobot: public SeeingRobot
         ThinkingRobot(int row, int col); 
         ThinkingRobot(const ThinkingRobot& obj); 
         void ShootheRobot();
-        void UpdateUsage(int numberOfRobots);
+        void UpdateUsage();
+        void UpdateThirtyShot(int numberofRobots);
+        void PrintUpgrades();
         void ResetUpgrades();
         ~ThinkingRobot();
         void Think();
