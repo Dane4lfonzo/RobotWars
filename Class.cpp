@@ -44,14 +44,39 @@ void Battlefield::GridReset()//utk hilangkan after images
 
 void Battlefield::printGrid()
 {
+    string Name = "Battlefield";
+    cout << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        cout << "#";
+    }
+
+    cout << endl;
+
+    cout << "#" << setw(*MaxCol+3) << "#" << endl; 
+
     for (int i=0; i < *MaxRow; i++)
     {
+        cout << "#";
+        cout << " ";
         for (int j=0; j < *MaxCol; j++)
         {
             cout << Grid[i][j];
         }
+        cout << " ";
+        cout << "#";
+        
         cout << endl;
     }
+
+    cout << "#" << setw(*MaxCol+3) << "#" << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        cout << "#";
+    }
+    cout << endl;    
 }
 
 void Battlefield::SetStep(int numofsteps)
@@ -80,16 +105,138 @@ void Battlefield::delay(int milliseconds)
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
 }
 
+/********************************** UpgradeRobot **************************************/
+UpgradeRobot::UpgradeRobot()
+{
+    RobotUpgraded = new bool(false);
+
+    movingUpgradeUse_Jump = new bool(false);
+    movingUpgradeUse_Hide = new bool(false);
+
+    shootingUpgradeUse_LongShot = new bool(false);
+    shootingUpgradeUse_SemiAuto = new bool(false);
+    shootingUpgradeUse_ThirtyShot = new bool(false);
+
+    seeingUpgradeUse_Scout = new bool(false);
+    seeingUpgradeUse_Track = new bool(false); 
+
+    movingUpgradeChosen = new string();
+    shootingUpgradeChosen = new string();
+    seeingUpgradeChosen = new string();
+
+    hideUsage = new int(3);
+
+    jumpUsage = new int(3);
+
+    scoutUsage = new int(3);
+    trackUsage = new int(3);
+
+    trackList = new string();
+    addtrackList = new bool(false);
+    printtrackList = new bool(false); 
+
+}
+
+UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
+{
+    RobotUpgraded = new bool(*obj.RobotUpgraded);
+
+    movingUpgradeUse_Jump = new bool(*obj.movingUpgradeUse_Jump);
+    movingUpgradeUse_Hide = new bool(*obj.movingUpgradeUse_Hide);
+
+    shootingUpgradeUse_LongShot = new bool(*obj.shootingUpgradeUse_LongShot);
+    shootingUpgradeUse_SemiAuto = new bool(*obj.shootingUpgradeUse_SemiAuto);
+    shootingUpgradeUse_ThirtyShot = new bool(*obj.shootingUpgradeUse_ThirtyShot);
+
+    seeingUpgradeUse_Scout = new bool(*obj.seeingUpgradeUse_Scout);
+    seeingUpgradeUse_Track = new bool(*obj.seeingUpgradeUse_Track);
+
+    movingUpgradeChosen = new string(*obj.movingUpgradeChosen);
+    shootingUpgradeChosen = new string(*obj.shootingUpgradeChosen);
+    seeingUpgradeChosen = new string(*obj.seeingUpgradeChosen);
+
+    trackList = new string(*obj.trackList);
+
+    hideUsage = new int(*obj.hideUsage);
+
+    jumpUsage = new int(*obj.jumpUsage);
+
+    scoutUsage = new int(*obj.scoutUsage);
+
+    trackUsage = new int(*obj.trackUsage);
+    addtrackList = new bool(*obj.addtrackList);
+    printtrackList = new bool(*obj.printtrackList);
+}
+
+UpgradeRobot::~UpgradeRobot()
+{
+    delete RobotUpgraded;
+
+    delete hideUsage;
+    delete jumpUsage;
+
+    delete scoutUsage;
+    delete trackUsage;
+
+    delete movingUpgradeUse_Jump;
+    delete movingUpgradeUse_Hide;
+
+    delete shootingUpgradeUse_LongShot;
+    delete shootingUpgradeUse_SemiAuto;
+    delete shootingUpgradeUse_ThirtyShot;
+
+    delete seeingUpgradeUse_Scout;
+    delete seeingUpgradeUse_Track;
+
+    delete movingUpgradeChosen;
+    delete shootingUpgradeChosen;
+    delete seeingUpgradeChosen;
+
+    delete trackList;
+    delete addtrackList;
+    delete printtrackList;
+}
+
+bool UpgradeRobot::HideBot()
+{
+    return *movingUpgradeUse_Hide;
+}
+
+bool UpgradeRobot::JumpBot()
+{
+    return *movingUpgradeUse_Jump;
+}
+
+bool UpgradeRobot::LongShotBot()
+{
+    return *shootingUpgradeUse_LongShot;
+}
+
+bool UpgradeRobot::SemiAutoBot()
+{
+    return *shootingUpgradeUse_SemiAuto;
+}
+
+bool UpgradeRobot::ScoutBot()
+{
+    return *seeingUpgradeUse_Scout;
+}
+
+bool UpgradeRobot::TrackBot()
+{
+    return *seeingUpgradeUse_Track;
+}
+
 /**********************************MovingRobot**************************************/
-MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col)
+MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
     stats();
     current_row = new int;
     current_col = new int;
 
 
-    *current_row = rand() % row;
-    *current_col = rand() % col;
+    //*current_row = rand() % row;
+    //*current_col = rand() % col;
 
 }
 
@@ -144,7 +291,6 @@ MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobo
     move_row = new int (*obj.move_row);
     move_col = new int (*obj.move_col);
 
-
 }
 
 
@@ -185,7 +331,26 @@ void MovingRobot::WheretoMove()
 
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
-    sharedGrid[*current_row][*current_col] = *signia;
+    bool validpos = false;
+    // sharedGrid[*current_row][*current_col] = *signia;
+
+    while (!validpos)
+    {
+        if (sharedGrid[*current_row][*current_col] == ".")
+        {
+            validpos = true;
+            sharedGrid[*current_row][*current_col] = *signia;
+            cout << "\n\n\n\n\nWORK" << endl;
+        }
+
+        else
+        {
+            *current_row = rand() % *MaxRow;
+            *current_col = rand() % *MaxCol;
+            validpos = false;
+        }
+    }
+
 }
 
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
@@ -195,25 +360,50 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
     int new_row = *current_row + *move_row;
     int new_col = *current_col + *move_col;
 
+    int rand_row = rand() % *MaxRow;
+    int rand_col = rand() % *MaxCol;
+
     bool validpos = false;
 
     while (!validpos)
     {
-        if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
+        if (!JumpBot()) 
         {
-            *current_row = new_row;
-            *current_col = new_col;
+            if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
+            {
+                *current_row = new_row;
+                *current_col = new_col;
 
-            sharedGrid[*current_row][*current_col] = *signia;
-            validpos = true;
+                sharedGrid[*current_row][*current_col] = *signia;
+                validpos = true;
+            }
+
+            else 
+            {
+                WheretoMove();
+                new_row = *current_row + *move_row;
+                new_col = *current_col + *move_col;        
+                validpos = false;
+            }
         }
 
-        else 
+        if(JumpBot())
         {
-            WheretoMove();
-            new_row = *current_row + *move_row;
-            new_col = *current_col + *move_col;        
-            validpos = false;
+            if (sharedGrid[rand_row][rand_col] == ".")
+            {
+                *current_row = rand_row;
+                *current_col = rand_col;
+
+                sharedGrid[*current_row][*current_col] = *signia;
+                validpos = true;
+            }
+
+            else 
+            {
+                rand_row = rand() % *MaxRow;
+                rand_col = rand() % *MaxCol;      
+                validpos = false;
+            } 
         }
     }
 
@@ -276,15 +466,32 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
     *checkrow = Robo_current_row;
     *checkcol = Robo_current_col;
 
-    for (int i = 0; i < 8; i++)
+    if (!LongShotBot())
     {
-        if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
+        for (int i = 0; i < 8; i++)
         {
-            //cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
-            *detection = true;
-            break;
+            if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
+            {
+                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                *detection = true;
+                break;
+            }
         }
     }
+
+    if (LongShotBot())
+    {
+        for (int j = 0; j < 24; j++)
+        {
+            if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
+            {
+                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                *detection = true;
+                break;
+            }
+        }
+    }
+
 }
 
 bool SeeingRobot::RobotDetect()
@@ -297,18 +504,28 @@ bool SeeingRobot::RobotDetect()
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
     shootFlag = new bool(false);
+
     movingUpgrade = new bool(false);
     shootingUpgrade = new bool(false);
     seeingUpgrade = new bool(false);
+
+    movingUpgradeDone = new bool(false);
+    shootingUpgradeDone = new bool(false);
+    seeingUpgradeDone = new bool(false);
 
 }
 
 ThinkingRobot::ThinkingRobot(const ThinkingRobot& obj) : SeeingRobot(obj)
 {
     shootFlag = new bool(*obj.shootFlag); // copy content of shootFlag into address of shootFlag
+
     movingUpgrade = new bool(*obj.movingUpgrade);
     shootingUpgrade = new bool(*obj.shootingUpgrade);
     seeingUpgrade = new bool(*obj.seeingUpgrade);
+
+    movingUpgradeDone = new bool(*obj.movingUpgradeDone);
+    shootingUpgradeDone = new bool(*obj.shootingUpgradeDone);
+    seeingUpgradeDone = new bool(*obj.seeingUpgradeDone);
 }
 
 void ThinkingRobot::ShootheRobot()
@@ -317,6 +534,7 @@ void ThinkingRobot::ShootheRobot()
     {
         *shootFlag = true;
     }
+
 }
 
 ThinkingRobot::~ThinkingRobot()
@@ -325,6 +543,9 @@ ThinkingRobot::~ThinkingRobot()
     delete movingUpgrade;
     delete shootingUpgrade;
     delete seeingUpgrade;
+    delete movingUpgradeDone;
+    delete shootingUpgradeDone;
+    delete seeingUpgradeDone;
 
 }
 
@@ -385,50 +606,149 @@ bool ThinkingRobot::NullifyQueue()
 
 void ThinkingRobot::Upgrade()
 {
+    
     string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
     string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
+
+
     vector<int> areasAvailable{};
 
     // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
-    if(*movingUpgrade == false)
-    {
-        areasAvailable.push_back(0);
-    }
-
-    if(*shootingUpgrade == false)
-    {
-        areasAvailable.push_back(1);
-    }
+    // if(*movingUpgrade == false)
+    // {
+    //     areasAvailable.push_back(0);
+    // }
+    
+    // if(*shootingUpgrade == false)
+    // {
+    //     areasAvailable.push_back(1);
+    // }
 
     if(*seeingUpgrade == false)
     {
         areasAvailable.push_back(2);
     }
+
     // if robot tu tkde any upgrades vector tu camni
     // areasAvailable{0,1,2}
 
     int choice = areasAvailable[rand() % areasAvailable.size()]; // utk randomly choose
 
+    int rand_move = rand() % 2;
+    int rand_shoot = rand() % 3;
+    int rand_see = rand() % 2;
+
+    *movingUpgradeChosen = movingUpgradeChoice[rand_move];
+    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    //*shootingUpgradeChosen = "SemiAutoBot";
+    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
+    //*seeingUpgradeChosen = "ScoutBot";
+    *seeingUpgradeChosen = "TrackBot";
+    
+    
+
     switch(choice)
     {
         case 0:
             *movingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << movingUpgradeChoice[rand() % sizeof(movingUpgradeChoice)/4] << endl;
+            cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
             areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
             break;
         case 1:
             *shootingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << shootingUpgradeChoice[rand() % sizeof(shootingUpgradeChoice)/4] << endl;
+            cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << *shootingUpgradeChosen << endl;
             areasAvailable.clear();
             break;
         case 2:
             *seeingUpgrade = true;
-            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << seeingUpgradeChoice[rand() % sizeof(seeingUpgradeChoice)/4] << endl;
+            cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << *seeingUpgradeChosen << endl;
             areasAvailable.clear();
             break;
+    }
 
+    if (movingUpgradeChoice[rand_move] == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
+    {
+        *movingUpgradeUse_Hide = true;
+        *movingUpgradeDone = true;
+
+    }
+
+    if (movingUpgradeChoice[rand_move] == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
+    {
+        *movingUpgradeUse_Jump = true;
+        *movingUpgradeDone = true;
+    }
+
+    if (*shootingUpgradeChosen == "LongShotBot" && !*shootingUpgradeDone && *shootingUpgrade)
+    {
+        *shootingUpgradeUse_LongShot = true;
+        *shootingUpgradeDone = true;
+    }
+
+    if(*shootingUpgradeChosen == "SemiAutoBot" && !*shootingUpgradeDone && *shootingUpgrade)
+    {
+        *shootingUpgradeUse_SemiAuto = true;
+        *shootingUpgradeDone = true;
+    }
+
+    if (*seeingUpgradeChosen == "ScoutBot" && !*seeingUpgradeDone && *seeingUpgrade)
+    {
+        *seeingUpgradeUse_Scout = true;
+        *seeingUpgradeDone = true;
+    }
+
+    if (*seeingUpgradeChosen == "TrackBot" && !*seeingUpgradeDone && *seeingUpgrade)
+    {
+        *seeingUpgradeUse_Track = true;
+        *seeingUpgradeDone = true;
+        *printtrackList = true;
+    }
+
+
+}
+
+void ThinkingRobot::UpdateUsage()
+{
+    if (HideBot())
+    {
+        *hideUsage -= 1;
+        //cout << "\n\n\nHideCount: " << *hideUsage << endl;
+        if (*hideUsage <= 0)
+        {
+            *movingUpgradeUse_Hide = false;
+            
+        }
+    } 
+
+    if (JumpBot())
+    {
+        *jumpUsage -= 1;
+        //cout << "\n\n\nJumpCount: " << *jumpUsage << endl;
+        if (*jumpUsage <= 0)
+        {
+            *movingUpgradeUse_Jump = false;
+            
+        }
+    }
+
+    if (ScoutBot())
+    {
+        *scoutUsage -= 1;
+        
+        if (*scoutUsage <= 0)
+        {
+            *seeingUpgradeUse_Scout = false;
+        }
+    }
+
+    if (TrackBot())
+    {
+        if (*trackUsage <= 0)
+        {
+            *seeingUpgradeUse_Track = false;
+        }
     }
 
 }
@@ -453,11 +773,11 @@ ShootingRobot::~ShootingRobot()
     delete shooting;
 }
 
-void ShootingRobot::CheckShot(string Robotname)
+void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 {
     *shooting = false;
 
-    if (*shootFlag)
+    if (*shootFlag && !SemiAutoBot())
     {
         if (shells != 0)
         {
@@ -471,11 +791,60 @@ void ShootingRobot::CheckShot(string Robotname)
             else
             {
                 cout << "Robot " << Robotname << " avoided the shot" << endl;
+                if (TrackBot())
+                {
+                    *addtrackList = true;
+                }
             }
         }
         
     *detection = false;
     *shootFlag = false;
+    }
+
+    if (*shootFlag && SemiAutoBot())
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            *shootChances = (rand() % 10) + 1;
+
+            if (*shootChances <= 7)
+            {
+                *shooting = true;
+                cout << "Shots fired successfully" << endl;
+                break;
+            }
+            else
+            {
+                cout << "Shots missed" << endl;
+                if (TrackBot())
+                {
+                    *addtrackList = true;
+                }
+            }
+        }
+        *detection = false;
+        *shootFlag = false;
+    }
+    
+    if (TrackBot() && *addtrackList)
+    {
+        for (int x = 0; x < (*trackList).length(); x++)
+        {
+            if ((*trackList)[x] == Robotname[0])
+            {
+                *addtrackList = false;
+                break;
+            }
+        }     
+
+        if (*addtrackList)
+        {
+            *trackList += Robotname;
+            cout << "Work Track" << endl;
+            *trackUsage -= 1;
+            *addtrackList = false;
+        }       
     }
 }
 
@@ -488,64 +857,6 @@ int ShootingRobot::Checkshells()
 bool ShootingRobot::GetShooting()
 {return *shooting;}
 
-/********************************** UpgradeRobot **************************************/
-
-UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
-{
-
-    RobotHidden = new bool(*obj.RobotHidden);
-    hideUsage = new int(*hideUsage);
-    RobotJump = new bool(*obj.RobotJump);
-    jumpUsage = new int(*obj.jumpUsage);
-
-}
-
-bool UpgradeRobot::HideBot()
-{
-
-    // if (*hideUsage == 0)
-    // {
-    //     *hideUsage = 3;
-    // }
-
-    if (*hideUsage != 0)
-    {
-        *hideUsage -= 1;
-        *RobotHidden = true;
-    }
-
-    else 
-    {
-        *RobotJump = false;
-    }
-
-    return RobotHidden;
-}
-
-bool UpgradeRobot::JumpBot()
-{
-    if (*jumpUsage != 0)
-    {
-        *jumpUsage -= 1;
-        *RobotJump = true;
-    }
-
-    else
-    {
-        *RobotJump = false;
-    }
-
-    return RobotJump;
-}
-
-void UpgradeRobot::ScoutBot(string signia)
-{
-    if (*scoutUsage != 0)
-    {
-        cout << "Robot " << signia << " is scouting the entire Battlefield" << endl;
-        *scoutUsage -= 1;
-    }
-}
 
 void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols, int& numofsteps, int& numberofRobots, string& RoboNames, vector<string>& check_spawn_condition)
 {

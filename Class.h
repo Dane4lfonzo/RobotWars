@@ -6,6 +6,7 @@
 #include <set>
 #include <fstream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -14,9 +15,10 @@ class Battlefield
     protected:
         int* MaxRow = new int(0);
         int* MaxCol = new int(0);
-        int CountNumSteps = 0;
+        
 
     public:
+        int CountNumSteps = 0;
         vector<vector<string>> Grid;
         Battlefield(){};
         Battlefield(int row, int col);
@@ -44,6 +46,12 @@ class Robot
         int *lives;
         bool *inQueue;
 
+
+        int upgraded_arraychoice[2][24] = {
+            {-1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 2, 2, 2, 1, 0, -1, -2, -2, -2, 0, 3, 0, -3},
+            {-1, -1, -1, 0, 1, 1, 1, 0, -2, -2, -2, -1, 0, 1, 2, 2, 2, 1, 0, -1, -3, 0, 3, 0}
+        };
+        
     
     public:
         Robot(){}
@@ -55,26 +63,45 @@ class Robot
 class UpgradeRobot
 {
     protected:
-    bool *ReadyForUpgrade = new bool(false); // For shooting: when it kills a robot, it now allows the robot to choose an upgrade
 
-    bool *RobotHidden = new bool(false);
-    int *hideUsage = new int(3);
+        bool *movingUpgradeUse_Jump;
+        bool *movingUpgradeUse_Hide;
 
-    bool *RobotJump = new bool(false);
-    int *jumpUsage = new int(3);
+        bool *shootingUpgradeUse_LongShot;
+        bool *shootingUpgradeUse_SemiAuto;
+        bool *shootingUpgradeUse_ThirtyShot;
 
-    int *scoutUsage = new int(3);
+        bool *seeingUpgradeUse_Scout;
+        bool *seeingUpgradeUse_Track;
+
+        string *movingUpgradeChosen;
+        string *shootingUpgradeChosen;
+        string *seeingUpgradeChosen;
+
+        int *hideUsage;
+
+        int *jumpUsage;
+
+        int *scoutUsage;
+
+        int *trackUsage;
+        
 
     public:
-    UpgradeRobot(){};
-    UpgradeRobot(const UpgradeRobot& obj);
-    bool HideBot();
-    bool JumpBot();
-    void LongShotBot();
-    void SemiAutoBot();
-    void ThirtyShotBot();
-    void ScoutBot(string signia);
-    void TrackBot();
+        bool *printtrackList;
+        bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
+        string *trackList;
+        bool *addtrackList;
+        UpgradeRobot();
+        UpgradeRobot(const UpgradeRobot& obj);
+        ~UpgradeRobot();
+        bool HideBot();
+        bool JumpBot();
+        bool LongShotBot();
+        bool SemiAutoBot();
+        void ThirtyShotBot();
+        bool ScoutBot();
+        bool TrackBot();
 
 
 };
@@ -82,7 +109,6 @@ class UpgradeRobot
 class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
-        
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
@@ -138,12 +164,17 @@ class ThinkingRobot: public SeeingRobot
         bool *shootingUpgrade;
         bool *seeingUpgrade;
 
+        bool *movingUpgradeDone;
+        bool *shootingUpgradeDone;
+        bool *seeingUpgradeDone;
+
 
     public:
         bool *shootFlag = new bool(false);
         ThinkingRobot(){};
         ThinkingRobot(int row, int col); // ni robot first
         void ShootheRobot();
+        void UpdateUsage();
         ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
         ~ThinkingRobot();
         void Think();
@@ -168,7 +199,7 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(int row, int col);
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
-        void CheckShot(string Robotname);
+        void CheckShot(string Robotname, int numberofRobots);
         bool GetShooting();
         int Checkshells();
         
