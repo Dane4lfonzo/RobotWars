@@ -118,14 +118,6 @@ int main()
             // Displays the Grid and Robots
             battlefield.printGrid();
 
-            if (RoboMoveCopies[i]->TrackBot()) ///////////////////////////////// Need to ensure that it still prints even after the uses run out
-            {
-                for (int i = 0; i < numberOfRobots; i++)
-                {
-                    cout << "TrackList: " << *RoboMoveCopies[i]->trackList << endl;
-                }
-            }
-
             vector<int> Trashbin;
 
             if (Spawning == false)
@@ -170,7 +162,7 @@ int main()
                         if (RoboMoveCopies[i]->GetShooting())
                         {
                             Trashbin.push_back(j); // Puts shot robot into an array
-                            if (!*RoboMoveCopies[i]->RobotUpgraded)
+                            if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
                             {
                                 RoboMoveCopies[i]->Upgrade();
                                 *RoboMoveCopies[i]->RobotUpgraded = true;
@@ -210,6 +202,11 @@ int main()
                         << " col: " << *RoboMoveCopies[k]->current_col
                         << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
 
+                    if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
+                    {
+                        cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    }
+
                     if (RoboMoveCopies[k]->ScoutBot())
                     {
                         if (RoboMoveCopies[k] == nullptr)
@@ -231,7 +228,7 @@ int main()
 
                 }
                 
-                battlefield.delay(100);
+                battlefield.delay(1000);
             }
          Spawning = false;
     }

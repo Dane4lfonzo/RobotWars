@@ -133,6 +133,7 @@ UpgradeRobot::UpgradeRobot()
 
     trackList = new string();
     addtrackList = new bool(false);
+    printtrackList = new bool(false); 
 
 }
 
@@ -164,6 +165,7 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 
     trackUsage = new int(*obj.trackUsage);
     addtrackList = new bool(*obj.addtrackList);
+    printtrackList = new bool(*obj.printtrackList);
 }
 
 UpgradeRobot::~UpgradeRobot()
@@ -192,6 +194,7 @@ UpgradeRobot::~UpgradeRobot()
 
     delete trackList;
     delete addtrackList;
+    delete printtrackList;
 }
 
 bool UpgradeRobot::HideBot()
@@ -222,7 +225,6 @@ bool UpgradeRobot::ScoutBot()
 bool UpgradeRobot::TrackBot()
 {
     return *seeingUpgradeUse_Track;
-    //return true;
 }
 
 /**********************************MovingRobot**************************************/
@@ -311,7 +313,26 @@ void MovingRobot::WheretoMove()
 
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
-    sharedGrid[*current_row][*current_col] = *signia;
+    bool validpos = false;
+    // sharedGrid[*current_row][*current_col] = *signia;
+
+    while (!validpos)
+    {
+        if (sharedGrid[*current_row][*current_col] == ".")
+        {
+            validpos = true;
+            sharedGrid[*current_row][*current_col] = *signia;
+            cout << "\n\n\n\n\nWORK" << endl;
+        }
+
+        else
+        {
+            *current_row = rand() % *MaxRow;
+            *current_col = rand() % *MaxCol;
+            validpos = false;
+        }
+    }
+
 }
 
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
@@ -328,7 +349,7 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
     while (!validpos)
     {
-        if (!JumpBot()) //!JumpBot()
+        if (!JumpBot()) 
         {
             if ((new_row >= 0 && new_row < *MaxRow) && (new_col >= 0 && new_col < *MaxCol) && sharedGrid[new_row][new_col] == ".")
             {
@@ -600,6 +621,7 @@ void ThinkingRobot::Upgrade()
     {
         *seeingUpgradeUse_Track = true;
         *seeingUpgradeDone = true;
+        *printtrackList = true;
     }
 
 
@@ -676,7 +698,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     {
         *shootChances = (rand() % 10) + 1;
 
-        if (*shootChances <= 0)//7
+        if (*shootChances <= 7)
         {
             *shooting = true;
             cout << "Shots fired successfully" << endl;
@@ -685,11 +707,11 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         else
         {
             cout << "Shots missed" << endl;
-            *addtrackList = true;
-            // if (TrackBot())
-            // {
-            //     *addtrackList = true;
-            // }
+            // *addtrackList = true;
+            if (TrackBot())
+            {
+                *addtrackList = true;
+            }
             
         }
     *detection = false;
@@ -711,7 +733,10 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             else
             {
                 cout << "Shots missed" << endl;
-                *addtrackList = true;
+                if (TrackBot())
+                {
+                    *addtrackList = true;
+                }
             }
         }
         *detection = false;
@@ -720,21 +745,14 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     
     if (TrackBot() && *addtrackList)
     {
-        // if ((*trackList).length() == 0)
-        // {
-        //     *trackList += Robotname;
-        // }
-        // else
-        //{
-            for (int x = 0; x < (*trackList).length(); x++)
+        for (int x = 0; x < (*trackList).length(); x++)
+        {
+            if ((*trackList)[x] == Robotname[0])
             {
-                if ((*trackList)[x] == Robotname[0])
-                {
-                    *addtrackList = false;
-                    break;
-                }
-            }     
-        //}
+                *addtrackList = false;
+                break;
+            }
+        }     
 
         if (*addtrackList)
         {
@@ -742,13 +760,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             cout << "Work Track" << endl;
             *trackUsage -= 1;
             *addtrackList = false;
-        }
-
-         
-        // *trackList += Robotname;
-        // cout << "\n\n\n\n\nWork Track" << endl;
-
-        
+        }       
     }
 }
 

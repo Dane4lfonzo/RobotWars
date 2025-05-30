@@ -78,12 +78,12 @@ class UpgradeRobot
 
         int *scoutUsage;
 
-        //int *trackUsage;
+        int *trackUsage;
         
 
     public:
-        int *trackUsage;     ///Temporary public
-        bool *RobotUpgraded = new bool(false); // For shooting: when it upgrades, it cant upgrade anymore until respawn
+        bool *printtrackList;
+        bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
         string *trackList;
         bool *addtrackList;
         UpgradeRobot();
@@ -103,7 +103,6 @@ class UpgradeRobot
 class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
-        
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);

@@ -2,8 +2,8 @@ numrows by numcols: 5 10
 numofsteps: 200
 numberofRobots: 6
 GenericRobot A random random
-GenericRobot B random random
+GenericRobot B 4 4
 GenericRobot C random random
 GenericRobot D random random
-GenericRobot E random random
+GenericRobot E 4 4
 GenericRobot F random random
