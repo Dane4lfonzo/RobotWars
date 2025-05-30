@@ -102,7 +102,7 @@ class UpgradeRobot
         bool JumpBot();
         bool LongShotBot();
         bool SemiAutoBot();
-        void ThirtyShotBot();
+        bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
         void ResetBot();

@@ -229,7 +229,32 @@ bool UpgradeRobot::TrackBot()
 
 void UpgradeRobot::ResetBot()
 {
+    RobotUpgraded = new bool(false);
 
+    movingUpgradeUse_Jump = new bool(false);
+    movingUpgradeUse_Hide = new bool(false);
+
+    shootingUpgradeUse_LongShot = new bool(false);
+    shootingUpgradeUse_SemiAuto = new bool(false);
+    shootingUpgradeUse_ThirtyShot = new bool(false);
+
+    seeingUpgradeUse_Scout = new bool(false);
+    seeingUpgradeUse_Track = new bool(false); 
+
+    movingUpgradeChosen = new string();
+    shootingUpgradeChosen = new string();
+    seeingUpgradeChosen = new string();
+
+    hideUsage = new int(3);
+
+    jumpUsage = new int(3);
+
+    scoutUsage = new int(3);
+    trackUsage = new int(3);
+
+    trackList = new string();
+    addtrackList = new bool(false);
+    printtrackList = new bool(false); 
 }
 
 /**********************************MovingRobot**************************************/
