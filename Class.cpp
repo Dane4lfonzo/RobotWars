@@ -340,7 +340,7 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
         {
             validpos = true;
             sharedGrid[*current_row][*current_col] = *signia;
-            cout << "\n\n\n\n\nWORK" << endl;
+            //cout << "\n\nWORK" << endl;
         }
 
         else
@@ -616,15 +616,15 @@ void ThinkingRobot::Upgrade()
     vector<int> areasAvailable{};
 
     // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
-    // if(*movingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(0);
-    // }
+    if(*movingUpgrade == false)
+    {
+        areasAvailable.push_back(0);
+    }
     
-    // if(*shootingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(1);
-    // }
+    if(*shootingUpgrade == false)
+    {
+        areasAvailable.push_back(1);
+    }
 
     if(*seeingUpgrade == false)
     {
@@ -641,12 +641,8 @@ void ThinkingRobot::Upgrade()
     int rand_see = rand() % 2;
 
     *movingUpgradeChosen = movingUpgradeChoice[rand_move];
-    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    //*shootingUpgradeChosen = "SemiAutoBot";
-    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
-    //*seeingUpgradeChosen = "ScoutBot";
-    *seeingUpgradeChosen = "TrackBot";
-    
+    *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
     
 
     switch(choice)
