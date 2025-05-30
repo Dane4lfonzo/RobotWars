@@ -217,6 +217,11 @@ bool UpgradeRobot::SemiAutoBot()
     return *shootingUpgradeUse_SemiAuto;
 }
 
+bool UpgradeRobot::ThirtyShotBot()
+{
+    return *shootingUpgradeUse_ThirtyShot;
+}
+
 bool UpgradeRobot::ScoutBot()
 {
     return *seeingUpgradeUse_Scout;
@@ -639,21 +644,22 @@ void ThinkingRobot::Upgrade()
 
     vector<int> areasAvailable{};
 
-    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
-    if(*movingUpgrade == false)
-    {
-        areasAvailable.push_back(0);
-    }
+    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi 
     
-    if(*shootingUpgrade == false)
+    // if(*movingUpgrade == false) 
+    // {
+    //     areasAvailable.push_back(0);
+    // }
+    
+    if(*shootingUpgrade == false) 
     {
         areasAvailable.push_back(1);
     }
 
-    if(*seeingUpgrade == false)
-    {
-        areasAvailable.push_back(2);
-    }
+    // if(*seeingUpgrade == false)
+    // {
+    //     areasAvailable.push_back(2);
+    // }
 
     // if robot tu tkde any upgrades vector tu camni
     // areasAvailable{0,1,2}
@@ -664,9 +670,11 @@ void ThinkingRobot::Upgrade()
     int rand_shoot = rand() % 3;
     int rand_see = rand() % 2;
 
-    *movingUpgradeChosen = movingUpgradeChoice[rand_move];
-    *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
+    //*movingUpgradeChosen = movingUpgradeChoice[rand_move];
+    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
+
+    *shootingUpgradeChosen = "ThirtyShotBot";
 
     switch(choice)
     {
@@ -712,6 +720,12 @@ void ThinkingRobot::Upgrade()
         *shootingUpgradeDone = true;
     }
 
+    if(*shootingUpgradeChosen == "ThirtyShotBot" && !*shootingUpgradeDone && *shootingUpgrade)
+    {
+        *shootingUpgradeUse_ThirtyShot = true;
+        *shootingUpgradeDone = true;
+    }
+
     if (*seeingUpgradeChosen == "ScoutBot" && !*seeingUpgradeDone && *seeingUpgrade)
     {
         *seeingUpgradeUse_Scout = true;
@@ -728,7 +742,7 @@ void ThinkingRobot::Upgrade()
 
 }
 
-void ThinkingRobot::UpdateUsage()
+void ThinkingRobot::UpdateUsage(int numberOfRobots)
 {
     if (HideBot())
     {
@@ -750,6 +764,11 @@ void ThinkingRobot::UpdateUsage()
             *movingUpgradeUse_Jump = false;
             
         }
+    }
+    if (ThirtyShotBot())
+    {
+        *shells = numberOfRobots * 3; // 3 shells per robot
+        *shootingUpgradeUse_ThirtyShot = false; 
     }
 
     if (ScoutBot())

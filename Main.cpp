@@ -121,7 +121,7 @@ int main()
             }
 
             //Updates the number of uses of each upgrades if the robot has one
-            RoboMoveCopies[i]->UpdateUsage();
+            RoboMoveCopies[i]->UpdateUsage(numberOfRobots);
 
             // Counts one step for robot
             battlefield.CountDownStep();
