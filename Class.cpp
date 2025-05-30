@@ -230,8 +230,10 @@ bool UpgradeRobot::TrackBot()
 /**********************************MovingRobot**************************************/
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
-    current_row = new int(0);
-    current_col = new int(0);
+    stats();
+    current_row = new int;
+    current_col = new int;
+
 
     //*current_row = rand() % row;
     //*current_col = rand() % col;
@@ -240,6 +242,11 @@ MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot
 
 void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& iterationval)
 {
+    bool validrow = false;
+    bool validcol = false;
+
+    cout << "work" << endl;
+
     if (check_spawn_condition[iterationval] != "random")
     {
         *current_row = stoi(check_spawn_condition[iterationval]);
@@ -266,8 +273,17 @@ void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& itera
 
 }
 
+void MovingRobot::GetShells(int bullets)
+{
+    *shells = bullets;
+}
+
 MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobot(obj) //ni utk robot lain
 {
+    lives = new int(*obj.lives);
+    shells = new int(*obj.shells);
+    inQueue = new bool(*obj.inQueue);
+    explosion = new bool(*obj.explosion);
     current_row = new int (*obj.current_row); // to create new memory for next loc
     current_col = new int (*obj.current_col);
 
@@ -286,6 +302,8 @@ MovingRobot::~MovingRobot()
     delete current_row;
     delete current_col;
     delete signia;
+    delete lives;
+    delete shells;
 }
 
 void MovingRobot::SetSignia(char character)
@@ -389,7 +407,31 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
         }
     }
 
+}
 
+void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
+{
+    sharedGrid[*current_row][*current_col] = ".";
+    bool validnewspawn = false;
+    int rand_row = rand() % *MaxRow;
+    int rand_col = rand() % *MaxCol;
+
+    while (!validnewspawn)
+    if (sharedGrid[rand_row][rand_col] == ".")
+    {
+        *current_row = rand_row;
+        *current_col = rand_col;
+
+        sharedGrid[*current_row][*current_col] = *signia;
+        validnewspawn = true;
+    }
+
+    else 
+    {
+        rand_row = rand() % *MaxRow;
+        rand_col = rand() % *MaxCol;      
+        validnewspawn = false;
+    }
 }
 
 /**********************************SeeingRobot**************************************/
@@ -520,6 +562,46 @@ void ThinkingRobot::Think()
         *shootFlag = false;
     }
 
+}
+
+bool ThinkingRobot::CheckExplosion()
+{
+    if (*shells == 0)
+    {
+        *explosion = true;
+    }
+    else
+    {
+        *explosion = false;
+    }
+    return (*explosion);
+}
+
+int ThinkingRobot::CheckLives()
+{return (*lives);}
+
+int ThinkingRobot::DeductLives()
+{
+    if (*lives != 0)
+    {
+        *lives -= 1;
+    }
+    return (*lives);
+}
+
+bool ThinkingRobot::CheckQueue()
+{return (*inQueue);}
+
+bool ThinkingRobot::SetQueue()
+{
+    *inQueue = true;
+    return (*inQueue);
+}
+
+bool ThinkingRobot::NullifyQueue()
+{
+    *inQueue = false;
+    return (*inQueue);
 }
 
 void ThinkingRobot::Upgrade()
@@ -682,6 +764,7 @@ ShootingRobot::ShootingRobot(const ShootingRobot& obj) : ThinkingRobot(obj)
 {
     shootChances = new int(*obj.shootChances);
     shooting = new bool(*obj.shooting);
+    
 }
 
 ShootingRobot::~ShootingRobot()
@@ -696,24 +779,25 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 
     if (*shootFlag && !SemiAutoBot())
     {
-        *shootChances = (rand() % 10) + 1;
-
-        if (*shootChances <= 7)
+        if (shells != 0)
         {
-            *shooting = true;
-            cout << "Shots fired successfully" << endl;
-            
-        }
-        else
-        {
-            cout << "Shots missed" << endl;
-            // *addtrackList = true;
-            if (TrackBot())
+            *shootChances = (rand() % 10) + 1;
+            if (*shootChances <= 7)
             {
-                *addtrackList = true;
+                *shooting = true;
+                *shells -= 1;
+                cout << "Robot " << Robotname << " was shot successfully" << endl;
             }
-            
+            else
+            {
+                cout << "Robot " << Robotname << " avoided the shot" << endl;
+                if (TrackBot())
+                {
+                    *addtrackList = true;
+                }
+            }
         }
+        
     *detection = false;
     *shootFlag = false;
     }
@@ -763,6 +847,12 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         }       
     }
 }
+
+int ShootingRobot::Checkshells()
+{
+    return (*shells);
+}
+
 
 bool ShootingRobot::GetShooting()
 {return *shooting;}

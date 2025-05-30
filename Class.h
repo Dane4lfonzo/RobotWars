@@ -2,6 +2,8 @@
 #include <vector>
 #include <cstdlib> 
 #include <ctime>
+#include <queue>
+#include <set>
 #include <fstream>
 #include <string>
 #include <iomanip>
@@ -39,17 +41,21 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
+        int *shells;
+        bool *explosion;
+        int *lives;
+        bool *inQueue;
+
 
         int upgraded_arraychoice[2][24] = {
             {-1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 2, 2, 2, 1, 0, -1, -2, -2, -2, 0, 3, 0, -3},
             {-1, -1, -1, 0, 1, 1, 1, 0, -2, -2, -2, -1, 0, 1, 2, 2, 2, 1, 0, -1, -3, 0, 3, 0}
         };
-        int ammo = 30;
         
     
     public:
         Robot(){}
-        virtual void show() = 0;
+        virtual void stats() = 0;
         virtual ~Robot() {}
 
 };
@@ -106,22 +112,32 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
-        string* signia = new string();;
+        string* signia = new string();
+
 
     public:
         int *current_row;
         int *current_col;
-        void show() override{}
+        void stats() override
+        {
+            shells = new int;
+            lives = new int(3);
+            explosion = new bool(false);
+            inQueue = new bool(false);
+
+        }
         MovingRobot(){}
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
         string GetSignia();
+        void GetShells(int bullets);
         void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
         void WheretoMove();
         void PlaceRobot(vector<vector<string>>& sharedGrid);
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
+        void NewSpawn(vector<vector<string>>& sharedGrid);
 };
 
 class SeeingRobot: public MovingRobot
@@ -163,8 +179,12 @@ class ThinkingRobot: public SeeingRobot
         ~ThinkingRobot();
         void Think();
         void Upgrade();
-
-
+        bool CheckExplosion();
+        bool CheckQueue();
+        bool SetQueue();
+        bool NullifyQueue();
+        int CheckLives();
+        int DeductLives();
 };
 
 class ShootingRobot : public ThinkingRobot
@@ -181,6 +201,7 @@ class ShootingRobot : public ThinkingRobot
         ~ShootingRobot();
         void CheckShot(string Robotname, int numberofRobots);
         bool GetShooting();
+        int Checkshells();
         
 };
 
