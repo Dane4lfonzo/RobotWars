@@ -102,7 +102,7 @@ class UpgradeRobot
         bool JumpBot();
         bool LongShotBot();
         bool SemiAutoBot();
-        void ThirtyShotBot();
+        bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
         void ResetBot();
@@ -181,7 +181,7 @@ class ThinkingRobot: public SeeingRobot
         ThinkingRobot(int row, int col); 
         ThinkingRobot(const ThinkingRobot& obj); 
         void ShootheRobot();
-        void UpdateUsage();
+        void UpdateUsage(int numberOfRobots);
         ~ThinkingRobot();
         void Think();
         void Upgrade();
