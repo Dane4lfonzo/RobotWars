@@ -10,6 +10,7 @@
 
 using namespace std;
 
+// Battlefield class to create the grid
 class Battlefield
 {
     protected:
@@ -34,6 +35,7 @@ class Battlefield
 };
 
 
+// Base abstract class that is inheritted
 class Robot
 {
     protected:
@@ -60,6 +62,7 @@ class Robot
 
 };
 
+// Class to upgrade robots
 class UpgradeRobot
 {
     protected:
@@ -107,6 +110,7 @@ class UpgradeRobot
 
 };
 
+// Class for all robot's movement and spawn places
 class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
@@ -141,6 +145,7 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         void NewSpawn(vector<vector<string>>& sharedGrid);
 };
 
+// Class for Robot to detect other robots
 class SeeingRobot: public MovingRobot
 {
     protected:
@@ -173,10 +178,10 @@ class ThinkingRobot: public SeeingRobot
     public:
         bool *shootFlag = new bool(false);
         ThinkingRobot(){};
-        ThinkingRobot(int row, int col); // ni robot first
+        ThinkingRobot(int row, int col); 
+        ThinkingRobot(const ThinkingRobot& obj); 
         void ShootheRobot();
         void UpdateUsage();
-        ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
         ~ThinkingRobot();
         void Think();
         void Upgrade();
@@ -188,6 +193,7 @@ class ThinkingRobot: public SeeingRobot
         int DeductLives();
 };
 
+// Class for robot to shoot and kill other robots
 class ShootingRobot : public ThinkingRobot
 {
     protected:
@@ -206,5 +212,5 @@ class ShootingRobot : public ThinkingRobot
         
 };
 
-
+// Function to read file
 void filereading(ifstream&, ofstream&, int&, int&, int&, int&, string&, vector<string>&);

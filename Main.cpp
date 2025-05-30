@@ -3,6 +3,7 @@
 int main()
 {
     srand(time(0));
+
 /*************** Variables for Yuven's readfile function later **************************/
     int row;
     int col;
@@ -10,9 +11,10 @@ int main()
     int numberOfRobots;
     vector<string> check_spawn_condition;
     string RoboNames;
-
     int TestVal = 0;
     bool SetSignia = true;
+
+/************************* Variables for main program ***********************************/
     int Round = 0;
     bool Spawning = true;
     int Spawnbot = 0;
@@ -44,6 +46,7 @@ int main()
     queue<ShootingRobot*> RobotQueue;
 
 
+    // Check whether the 
     if (numberOfRobots > RoboNames.size())
     {
         cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
@@ -101,7 +104,7 @@ int main()
                 break;
             }
 
-            //system("CLS");
+            system("CLS");
 
             if (Spawning)
             {
@@ -140,10 +143,7 @@ int main()
                     {
                         continue;
                     }
-                    /*if (!(*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col && 
-                        *RoboMoveCopies[i]->current_row == *RoboMoveCopies[j]->current_row)) continue; // prevents from "looking " at itself */
                     
-
                     if (!RoboMoveCopies[i]->current_row || !RoboMoveCopies[i]->current_col ||
                     !RoboMoveCopies[j]->current_row || !RoboMoveCopies[j]->current_col)  
                     {
@@ -187,7 +187,6 @@ int main()
                             {
                                 break;
                             }
-                            
                         }
                     }
                 }
@@ -229,6 +228,7 @@ int main()
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
                 }
+            }
 
             cout << endl;
             // Print logs
@@ -266,8 +266,6 @@ int main()
                 }
 
             }
-
-            
 
             if (Endgame == (numberOfRobots - 1))
             {
@@ -315,7 +313,6 @@ int main()
                 }
                 turn += 1;
             }
-
             Spawnbot = 0;
         }
         else
@@ -328,8 +325,6 @@ int main()
         {
             break;
         }
-
-        
         if (Endgame == numberOfRobots)
         {
             break;
@@ -348,5 +343,5 @@ int main()
     }
 
     return 0;
-    }
+    
 }
