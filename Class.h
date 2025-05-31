@@ -179,11 +179,12 @@ class ThinkingRobot: public SeeingRobot
         ThinkingRobot(){};
         ThinkingRobot(int row, int col); 
         ThinkingRobot(const ThinkingRobot& obj); 
+        ~ThinkingRobot();
         void ShootheRobot();
         void UpdateUsage();
-        ~ThinkingRobot();
-        void Think();
         void Upgrade();
+        void PrintUpgrades();
+        void Think();
         bool CheckExplosion();
         bool CheckQueue();
         bool SetQueue();

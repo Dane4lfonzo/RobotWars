@@ -104,7 +104,7 @@ int main()
                 break;
             }
 
-            system("CLS");
+            //system("CLS");
 
             if (Spawning)
             {
@@ -131,6 +131,7 @@ int main()
             
             Round += 1;
             cout << endl << "ROUND " << Round << endl;
+            cout << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
             vector<int> Trashbin;
             
@@ -139,7 +140,7 @@ int main()
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j || RoboMoveCopies[j]->HideBot()) //|| RoboMoveCopies[j]->HideBot()
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j )
                     {
                         continue;
                     }
@@ -165,7 +166,7 @@ int main()
 
                     RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
-                    if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue())
+                    if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue() && !RoboMoveCopies[j]->HideBot())
                     {
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
@@ -241,6 +242,8 @@ int main()
                     << "," << *RoboMoveCopies[k]->current_col << ")"
                     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
 
+                RoboMoveCopies[k]->PrintUpgrades();
+
                 if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
                 {
                     cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
@@ -264,6 +267,7 @@ int main()
                     }
                     cout << endl;
                 }
+                cout << endl;
 
             }
 
@@ -280,19 +284,24 @@ int main()
             battlefield.delay(1000);
         }
 
-        int Gacha = rand() % 7;
-        //Get 3 new robots
-        if (Gacha == 0 && ExtraBot != 3)
+        if (!Spawning)
         {
-            cout << "A new AI bot has randomly spawned" << endl;
-            ShootingRobot* extraBot = new ShootingRobot(row, col);
-            string signia = "$&@";
-            extraBot->SetSignia(signia[ExtraBot]);
-            extraBot->GetShells(numberOfRobots);
-            extraBot->NewSpawn(battlefield.Grid);
-            RoboMoveCopies.push_back(extraBot);
-            ExtraBot += 1;
+            int Gacha = rand() % 7;
+            //Get 3 new robots
+            if (Gacha == 0 && ExtraBot != 3)
+            {
+                cout << "!!A new AI bot has randomly spawned!!" << endl;
+                ShootingRobot* extraBot = new ShootingRobot(row, col);
+                string signia = "$&@";
+                extraBot->SetSignia(signia[ExtraBot]);
+                extraBot->GetShells(numberOfRobots);
+                extraBot->NewSpawn(battlefield.Grid);
+                RoboMoveCopies.push_back(extraBot);
+                ExtraBot += 1;
+                battlefield.delay(1500);
+            }
         }
+        
 
         int turn = 0;
         if (Spawnbot > 0)

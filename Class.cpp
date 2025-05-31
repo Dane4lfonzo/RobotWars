@@ -494,6 +494,45 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
 
 }
 
+// void SeeingRobot::Look(vector<vector<string>>& sharedGrid)
+// {
+//     *detection = false;
+//     *checkrow = 0;
+//     *checkcol = 0;
+//     sharedGrid[*current_row][*current_col] = ".";
+
+//     if (!LongShotBot())
+//     {
+//         for (int i = 0; i < 8; i++)
+//         {
+//             if (sharedGrid[*current_row + arraychoice[0][i]][*current_col+ arraychoice[1][i]] != ".")
+//             {
+//                 *checkrow = *current_row + arraychoice[0][i];
+//                 *checkcol = *current_col+ arraychoice[1][i];
+//                 cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+//                 *detection = true;
+//                 break;
+//             }
+//         }
+//     }
+
+//     if (LongShotBot())
+//     {
+//         for (int j = 0; j < 24; j++)
+//         {
+//             if (sharedGrid[*current_row + upgraded_arraychoice[0][j]][*current_col+ upgraded_arraychoice[1][j]] != ".")
+//             {
+//                 *checkrow = *current_row + upgraded_arraychoice[0][j];
+//                 *checkcol = *current_col+ upgraded_arraychoice[1][j];
+//                 cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+//                 *detection = true;
+//                 break;
+//             }
+//         }
+//     }
+
+// }
+
 bool SeeingRobot::RobotDetect()
 {
     return *detection;
@@ -606,12 +645,9 @@ bool ThinkingRobot::NullifyQueue()
 
 void ThinkingRobot::Upgrade()
 {
-    
     string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
-    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
+    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
-
-
 
     vector<int> areasAvailable{};
 
@@ -748,6 +784,29 @@ void ThinkingRobot::UpdateUsage()
     }
 
 }
+
+void ThinkingRobot::PrintUpgrades()
+{
+    string movingUpgName, shootingUpgName, seeingUpgName;
+    cout << "Robot " << *signia << " Upgrades: ";
+    if (!*movingUpgradeDone && !*shootingUpgradeDone && !*seeingUpgradeDone)
+    {
+        cout << "None ";
+    }
+    if (*movingUpgradeDone)
+    {
+        cout << *movingUpgradeChosen << " ";
+    }
+    if (*shootingUpgradeDone)
+    {
+        cout << *shootingUpgradeChosen << " ";
+    }
+    if (*seeingUpgradeDone)
+    {
+        cout << *seeingUpgradeChosen << " ";
+    }
+    cout << endl;
+}
 /**********************************ShootingRobot**************************************/
 
 ShootingRobot::ShootingRobot(int row, int col): ThinkingRobot(row, col)
@@ -775,13 +834,13 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 
     if (*shootFlag && !SemiAutoBot())
     {
-        if (shells != 0)
+        if (*shells != 0)
         {
             *shootChances = (rand() % 10) + 1;
+            *shells -= 1;
             if (*shootChances <= 7)
             {
                 *shooting = true;
-                *shells -= 1;
                 cout << "Robot " << Robotname << " was shot successfully" << endl;
             }
             else
@@ -800,22 +859,25 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 
     if (*shootFlag && SemiAutoBot())
     {
-        for (int i = 0; i < 3; i++)
+        if (*shells != 0)
         {
-            *shootChances = (rand() % 10) + 1;
-
-            if (*shootChances <= 7)
+            for (int i = 0; i < 3; i++)
             {
-                *shooting = true;
-                cout << "Shots fired successfully" << endl;
-                break;
-            }
-            else
-            {
-                cout << "Shots missed" << endl;
-                if (TrackBot())
+                *shootChances = (rand() % 10) + 1;
+                *shells -= 1;
+                if (*shootChances <= 7)
                 {
-                    *addtrackList = true;
+                    *shooting = true;
+                    cout << "Shots fired successfully" << endl;
+                    break;
+                }
+                else
+                {
+                    cout << "Shots missed" << endl;
+                    if (TrackBot())
+                    {
+                        *addtrackList = true;
+                    }
                 }
             }
         }
