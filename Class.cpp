@@ -410,7 +410,6 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
 void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
 {
-    sharedGrid[*current_row][*current_col] = ".";
     bool validnewspawn = false;
     int rand_row = rand() % *MaxRow;
     int rand_col = rand() % *MaxCol;
@@ -749,11 +748,11 @@ void ThinkingRobot::UpdateUsage()
     }
 }
 
-void ThinkingRobot::UpdateThirtyShot(int numberofRobots)
+void ThinkingRobot::UpdateThirtyShot()
 {
     if (ThirtyShotBot())
     {
-        *shells = numberofRobots * 3; // 3 shells per robot
+        *shells = 30; // 3 shells per robot
         *shootingUpgradeUse_ThirtyShot = false; 
         //cout << "\n\n\n\n\nWORK" << endl;
     }
@@ -854,6 +853,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             }
             else
             {
+                *shooting = false;
                 cout << "Robot " << Robotname << " avoided the shot" << endl;
                 if (TrackBot())
                 {
@@ -861,7 +861,6 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
                 }
             }
         }
-        
     *detection = false;
     *shootFlag = false;
     }
@@ -889,6 +888,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
                 }
                 else
                 {
+                    *shooting = false;
                     cout << "Robot " << Robotname << " avoided the shot" << endl;
                     if (TrackBot())
                     {
@@ -904,14 +904,19 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     
     if (TrackBot() && *addtrackList)
     {
-        for (int x = 0; x < (*trackList).length(); x++)
+        // for (int x = 0; x < (*trackList).length(); x++)
+        // {
+        //     if ((*trackList)[x] == Robotname[0])
+        //     {
+        //         *addtrackList = false;
+        //         break;
+        //     }
+        // }
+        
+        if ((*trackList).find(Robotname) != string::npos)
         {
-            if ((*trackList)[x] == Robotname[0])
-            {
-                *addtrackList = false;
-                break;
-            }
-        }     
+            *addtrackList = false;
+        }
 
         if (*addtrackList)
         {

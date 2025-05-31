@@ -60,7 +60,7 @@ int main()
             ShootingRobot* newBot = new ShootingRobot(row, col); // Creates new object during the runtime (
                                                                 //  dynamically) and store a new pointer
             newBot->SetSignia(RoboNames[i]);
-            newBot->GetShells(numberOfRobots); 
+            newBot->GetShells(10); 
             RoboMoveCopies.push_back(newBot); // Each object is created anew and pushed into the vector         
         }
     
@@ -236,11 +236,10 @@ int main()
                 }
             }
             cout << endl;
-            if (RoboMoveCopies[i] == nullptr)
+            if (RoboMoveCopies[i] != nullptr)
             {
-                continue;
+                RoboMoveCopies[i]->UpdateThirtyShot();
             }
-            RoboMoveCopies[i]->UpdateThirtyShot(numberOfRobots);
 
             // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
@@ -258,7 +257,14 @@ int main()
 
                 if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
                 {
-                    cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    if (!(*RoboMoveCopies[k]->trackList).empty())
+                    {
+                        cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    }
+                    else
+                    {
+                        cout << "TrackList: None" << endl;
+                    }
                 }
 
                 if (RoboMoveCopies[k]->ScoutBot())
@@ -282,8 +288,11 @@ int main()
 
             if (Endgame == (numberOfRobots + ExtraBot - 1))
             {
-                Winner = RoboMoveCopies[i]->GetSignia();
-                break;
+                if (RoboMoveCopies[i] != nullptr)
+                {
+                    Winner = RoboMoveCopies[i]->GetSignia();
+                    break;
+                }
             }
             if (Endgame == numberOfRobots + ExtraBot)
             {
@@ -304,7 +313,7 @@ int main()
                 ShootingRobot* extraBot = new ShootingRobot(row, col);
                 string sig = "$&@";
                 extraBot->SetSignia(sig[ExtraBot]);
-                extraBot->GetShells(numberOfRobots);
+                extraBot->GetShells(10);
                 extraBot->NewSpawn(battlefield.Grid);
                 RoboMoveCopies.push_back(extraBot);
                 ExtraBot += 1;
@@ -326,7 +335,7 @@ int main()
                     cout << "Robot " << WaitingBot->GetSignia() << " is removed from queue.\n";
                     WaitingBot->NullifyQueue();
                     WaitingBot->ResetUpgrades(); // Resets the robot upgrade variables for a clean slate
-                    WaitingBot->GetShells(numberOfRobots);
+                    WaitingBot->GetShells(10);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
                     battlefield.delay(1000);
