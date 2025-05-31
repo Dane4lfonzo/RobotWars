@@ -2,13 +2,17 @@
 #include <vector>
 #include <cstdlib> 
 #include <ctime>
+#include <queue>
+#include <set>
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <unordered_set>
 
 
 using namespace std;
 
+// Battlefield class to create the grid
 class Battlefield
 {
     protected:
@@ -33,6 +37,7 @@ class Battlefield
 };
 
 
+// Base abstract class that is inheritted
 class Robot
 {
     protected:
@@ -40,21 +45,25 @@ class Robot
             {-1, 0, 1, 1, 1, 0, -1, -1},
             {-1, -1, -1, 0, 1, 1, 1, 0}
         };
+        int *shells;
+        bool *explosion;
+        int *lives;
+        bool *inQueue;
+
 
         int upgraded_arraychoice[2][24] = {
             {-1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 2, 2, 2, 1, 0, -1, -2, -2, -2, 0, 3, 0, -3},
             {-1, -1, -1, 0, 1, 1, 1, 0, -2, -2, -2, -1, 0, 1, 2, 2, 2, 1, 0, -1, -3, 0, 3, 0}
         };
-        int ammo = 30;
-
-
+        
     public:
         Robot(){}
-        virtual void show() = 0;
+        virtual void stats() = 0;
         virtual ~Robot() {}
 
 };
 
+// Class to upgrade robots
 class UpgradeRobot
 {
     protected:
@@ -85,6 +94,7 @@ class UpgradeRobot
     public:
         bool *printtrackList;
         bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
+        int *UpgradeLimit;
         string *trackList;
         bool *addtrackList;
         UpgradeRobot();
@@ -94,13 +104,14 @@ class UpgradeRobot
         bool JumpBot();
         bool LongShotBot();
         bool SemiAutoBot();
-        void ThirtyShotBot();
+        bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
 
 
 };
 
+// Class for all robot's movement and spawn places
 class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
 {
     protected:
@@ -108,26 +119,35 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         int *move_row = new int(0);
         int *move_col = new int(0);
 
-
-
-        string* signia = new string();;
+        string* signia = new string();
 
     public:
         int *current_row;
         int *current_col;
-        void show() override{}
+        void stats() override
+        {
+            shells = new int;
+            lives = new int(3);
+            explosion = new bool(false);
+            inQueue = new bool(false);
+
+        }
         MovingRobot(){}
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
         string GetSignia();
+        void GetShells(int bullets);
         void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
         void WheretoMove();
         void PlaceRobot(vector<vector<string>>& sharedGrid);
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
+        void NewSpawn(vector<vector<string>>& sharedGrid);
+
 };
 
+// Class for Robot to detect other robots
 class SeeingRobot: public MovingRobot
 {
     protected:
@@ -160,17 +180,25 @@ class ThinkingRobot: public SeeingRobot
     public:
         bool *shootFlag = new bool(false);
         ThinkingRobot(){};
-        ThinkingRobot(int row, int col); // ni robot first
+        ThinkingRobot(int row, int col); 
+        ThinkingRobot(const ThinkingRobot& obj); 
+        ~ThinkingRobot();
         void ShootheRobot();
         void UpdateUsage();
-        ThinkingRobot(const ThinkingRobot& obj); // ni robot copied
-        ~ThinkingRobot();
-        void Think();
+        void UpdateThirtyShot(int numberofRobots);
+        void PrintUpgrades();
+        void ResetUpgrades();
         void Upgrade();
-
-
+        void Think();
+        bool CheckExplosion();
+        bool CheckQueue();
+        bool SetQueue();
+        bool NullifyQueue();
+        int CheckLives();
+        int DeductLives();
 };
 
+// Class for robot to shoot and kill other robots
 class ShootingRobot : public ThinkingRobot
 {
     protected:
@@ -184,9 +212,11 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
         void CheckShot(string Robotname, int numberofRobots);
+        int Checkshells();
         bool GetShooting();
 
 };
 
-
+// Function to read file
 void filereading(ifstream&, ofstream&, int&, int&, int&, int&, string&, vector<string>&);
+

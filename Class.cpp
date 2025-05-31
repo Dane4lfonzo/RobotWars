@@ -155,6 +155,7 @@ void Battlefield::delay(int milliseconds)
 UpgradeRobot::UpgradeRobot()
 {
     RobotUpgraded = new bool(false);
+    UpgradeLimit = new int(0);
 
     movingUpgradeUse_Jump = new bool(false);
     movingUpgradeUse_Hide = new bool(false);
@@ -186,6 +187,7 @@ UpgradeRobot::UpgradeRobot()
 UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 {
     RobotUpgraded = new bool(*obj.RobotUpgraded);
+    UpgradeLimit = new int(*obj.UpgradeLimit);
 
     movingUpgradeUse_Jump = new bool(*obj.movingUpgradeUse_Jump);
     movingUpgradeUse_Hide = new bool(*obj.movingUpgradeUse_Hide);
@@ -217,6 +219,7 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 UpgradeRobot::~UpgradeRobot()
 {
     delete RobotUpgraded;
+    delete UpgradeLimit;
 
     delete hideUsage;
     delete jumpUsage;
@@ -263,6 +266,11 @@ bool UpgradeRobot::SemiAutoBot()
     return *shootingUpgradeUse_SemiAuto;
 }
 
+bool UpgradeRobot::ThirtyShotBot()
+{
+    return *shootingUpgradeUse_ThirtyShot;
+}
+
 bool UpgradeRobot::ScoutBot()
 {
     return *seeingUpgradeUse_Scout;
@@ -276,16 +284,17 @@ bool UpgradeRobot::TrackBot()
 /**********************************MovingRobot**************************************/
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
-    current_row = new int(0);
-    current_col = new int(0);
-
-    //*current_row = rand() % row;
-    //*current_col = rand() % col;
+    stats();
+    current_row = new int;
+    current_col = new int;
 
 }
 
 void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& iterationval)
 {
+    bool validrow = false;
+    bool validcol = false;
+
     if (check_spawn_condition[iterationval] != "random")
     {
         *current_row = stoi(check_spawn_condition[iterationval]);
@@ -312,8 +321,17 @@ void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& itera
 
 }
 
+void MovingRobot::GetShells(int bullets)
+{
+    *shells = bullets;
+}
+
 MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobot(obj) //ni utk robot lain
 {
+    lives = new int(*obj.lives);
+    shells = new int(*obj.shells);
+    inQueue = new bool(*obj.inQueue);
+    explosion = new bool(*obj.explosion);
     current_row = new int (*obj.current_row); // to create new memory for next loc
     current_col = new int (*obj.current_col);
 
@@ -332,6 +350,8 @@ MovingRobot::~MovingRobot()
     delete current_row;
     delete current_col;
     delete signia;
+    delete lives;
+    delete shells;
 }
 
 void MovingRobot::SetSignia(char character)
@@ -360,6 +380,7 @@ void MovingRobot::WheretoMove()
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
+
     // sharedGrid[*current_row][*current_col] = *signia;
     ofstream outfile;
     outfile.open("Robotoutput.txt", ios::app);
@@ -370,9 +391,6 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
         {
             validpos = true;
             sharedGrid[*current_row][*current_col] = *signia;
-            cout << "\n\n\n\n\nWORK" << endl;
-            outfile << "\n\n\n\n\nWORK" << endl;
-
         }
 
         else
@@ -439,8 +457,36 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
         }
     }
 
+}
+
+void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
+{
+    //sharedGrid[*current_row][*current_col] = ".";
+    bool validnewspawn = false;
+    int rand_row = rand() % *MaxRow;
+    int rand_col = rand() % *MaxCol;
+
+    while (!validnewspawn)
+    {
+        if (sharedGrid[rand_row][rand_col] == ".")
+        {
+            *current_row = rand_row;
+            *current_col = rand_col;
+
+            sharedGrid[*current_row][*current_col] = *signia;
+            validnewspawn = true;
+        }
+
+        else 
+        {
+            rand_row = rand() % *MaxRow;
+            rand_col = rand() % *MaxCol;      
+            validnewspawn = false;
+        }
+    }
 
 }
+
 
 /**********************************SeeingRobot**************************************/
 
@@ -487,6 +533,8 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
                 // log
                 
                 outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
                 *detection = true;
                 break;
             }
@@ -499,11 +547,13 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
+
                 cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 //log
                 
                 outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -588,30 +638,69 @@ void ThinkingRobot::Think()
 
 }
 
+bool ThinkingRobot::CheckExplosion()
+{
+    if (*shells <= 0)
+    {
+        *explosion = true;
+    }
+    else
+    {
+        *explosion = false;
+    }
+    return (*explosion);
+}
+
+int ThinkingRobot::CheckLives()
+{return (*lives);}
+
+int ThinkingRobot::DeductLives()
+{
+    if (*lives != 0)
+    {
+        *lives -= 1;
+    }
+    return (*lives);
+}
+
+bool ThinkingRobot::CheckQueue()
+{return (*inQueue);}
+
+bool ThinkingRobot::SetQueue()
+{
+    *inQueue = true;
+    return (*inQueue);
+}
+
+bool ThinkingRobot::NullifyQueue()
+{
+    *inQueue = false;
+    return (*inQueue);
+}
+
 void ThinkingRobot::Upgrade()
 {
-    
     string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
-    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
+    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
     ofstream outfile;
     outfile.open("Robotoutput.txt", ios::app);
 
 
-
     vector<int> areasAvailable{};
 
-    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi
-    // if(*movingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(0);
-    // }
+    // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi 
     
-    // if(*shootingUpgrade == false)
-    // {
-    //     areasAvailable.push_back(1);
-    // }
+    if(*movingUpgrade == false) 
+    {
+        areasAvailable.push_back(0);
+    }
+    
+    if(*shootingUpgrade == false) 
+    {
+        areasAvailable.push_back(1);
+    }
 
     if(*seeingUpgrade == false)
     {
@@ -628,13 +717,8 @@ void ThinkingRobot::Upgrade()
     int rand_see = rand() % 2;
 
     *movingUpgradeChosen = movingUpgradeChoice[rand_move];
-    //*shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
-    //*shootingUpgradeChosen = "SemiAutoBot";
-    //*seeingUpgradeChosen = seeingUpgradeChoice[rand_see];
-    //*seeingUpgradeChosen = "ScoutBot";
-    *seeingUpgradeChosen = "TrackBot";
-    
-    
+    *shootingUpgradeChosen = shootingUpgradeChoice[rand_shoot];
+    *seeingUpgradeChosen = seeingUpgradeChoice[rand_see];    
 
     switch(choice)
     {
@@ -666,14 +750,13 @@ void ThinkingRobot::Upgrade()
             break;
     }
 
-    if (movingUpgradeChoice[rand_move] == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Hide = true;
         *movingUpgradeDone = true;
-
     }
 
-    if (movingUpgradeChoice[rand_move] == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Jump = true;
         *movingUpgradeDone = true;
@@ -688,6 +771,12 @@ void ThinkingRobot::Upgrade()
     if(*shootingUpgradeChosen == "SemiAutoBot" && !*shootingUpgradeDone && *shootingUpgrade)
     {
         *shootingUpgradeUse_SemiAuto = true;
+        *shootingUpgradeDone = true;
+    }
+
+    if(*shootingUpgradeChosen == "ThirtyShotBot" && !*shootingUpgradeDone && *shootingUpgrade)
+    {
+        *shootingUpgradeUse_ThirtyShot = true;
         *shootingUpgradeDone = true;
     }
 
@@ -712,18 +801,15 @@ void ThinkingRobot::UpdateUsage()
     if (HideBot())
     {
         *hideUsage -= 1;
-        //cout << "\n\n\nHideCount: " << *hideUsage << endl;
         if (*hideUsage <= 0)
         {
-            *movingUpgradeUse_Hide = false;
-            
+            *movingUpgradeUse_Hide = false;       
         }
     } 
 
     if (JumpBot())
     {
         *jumpUsage -= 1;
-        //cout << "\n\n\nJumpCount: " << *jumpUsage << endl;
         if (*jumpUsage <= 0)
         {
             *movingUpgradeUse_Jump = false;
@@ -748,7 +834,94 @@ void ThinkingRobot::UpdateUsage()
             *seeingUpgradeUse_Track = false;
         }
     }
+}
 
+void ThinkingRobot::UpdateThirtyShot(int numberofRobots)
+{
+    if (ThirtyShotBot())
+    {
+        *shells = numberofRobots * 3; // 3 shells per robot
+        *shootingUpgradeUse_ThirtyShot = false; 
+    }
+}
+
+void ThinkingRobot::PrintUpgrades()
+{ 
+    string movingUpgName, shootingUpgName, seeingUpgName;
+    cout << "Robot " << *signia << " Upgrades: ";
+    if (!*movingUpgradeDone && !*shootingUpgradeDone && !*seeingUpgradeDone)
+    {
+        cout << "None ";
+    }
+
+    if (*movingUpgradeDone)
+    {
+        cout << *movingUpgradeChosen << " ";
+    }
+
+    if (*shootingUpgradeDone)
+    {
+        cout << *shootingUpgradeChosen << " ";
+    }
+
+    if (*seeingUpgradeDone)
+    {
+        cout << *seeingUpgradeChosen << " ";
+    }
+
+    if (HideBot())
+    {
+        cout << "\nHide Uses: " << *hideUsage << " Left"; 
+    }
+    if (JumpBot())
+    {
+        cout << "\nJump Uses: " << *jumpUsage << " Left";
+    }
+
+    if (ScoutBot())
+    {
+        cout << "\nScout Uses: " << *scoutUsage << " Left";
+    }
+    if (TrackBot())
+    {
+        cout << "\nTrackers: " << *trackUsage << " Left";
+    }
+    cout << endl;
+}
+
+void ThinkingRobot::ResetUpgrades()
+{
+    *movingUpgrade = false;
+    *shootingUpgrade = false;
+    *seeingUpgrade = false;
+
+    *movingUpgradeDone = false;
+    *shootingUpgradeDone = false;
+    *seeingUpgradeDone = false;
+
+    *RobotUpgraded = false;
+    *UpgradeLimit = 0;
+
+    *movingUpgradeUse_Jump = false;
+    *movingUpgradeUse_Hide = false;
+
+    *shootingUpgradeUse_LongShot = false;
+    *shootingUpgradeUse_SemiAuto = false;
+    *shootingUpgradeUse_ThirtyShot = false;
+
+    *seeingUpgradeUse_Scout = false;
+    *seeingUpgradeUse_Track = false; 
+
+    *hideUsage = 3;
+
+    *jumpUsage = 3;
+
+    *scoutUsage = 3;
+    *trackUsage = 3;
+
+    (*trackList).clear();
+    *addtrackList = false;
+    *printtrackList = false; 
 }
 /**********************************ShootingRobot**************************************/
 
@@ -762,6 +935,7 @@ ShootingRobot::ShootingRobot(const ShootingRobot& obj) : ThinkingRobot(obj)
 {
     shootChances = new int(*obj.shootChances);
     shooting = new bool(*obj.shooting);
+    
 }
 
 ShootingRobot::~ShootingRobot()
@@ -777,11 +951,12 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     outfile.open("Robotoutput.txt", ios::app);
     
 
+    int times = 0;
+
+
     if (*shootFlag && !SemiAutoBot())
     {
-        *shootChances = (rand() % 10) + 1;
-
-        if (*shootChances <= 7)
+        if (*shells != 0)
         {
             *shooting = true;
             cout << "Shots fired successfully" << endl;
@@ -797,19 +972,36 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             // *addtrackList = true;
             if (TrackBot())
             {
-                *addtrackList = true;
+                *shootChances = (rand() % 10) + 1;
+                *shells -= 1;
             }
-            
+            if (*shootChances <= 7)
+
+            {
+                *shooting = true;
+                cout << "Robot " << Robotname << " was shot successfully" << endl;
+            }
+            else
+            {
+                cout << "Robot " << Robotname << " avoided the shot" << endl;
+                if (TrackBot())
+                {
+                    *addtrackList = true;
+                }
+            }
         }
+        
     *detection = false;
     *shootFlag = false;
     }
 
     if (*shootFlag && SemiAutoBot())
     {
-        for (int i = 0; i < 3; i++)
+        if (*shells != 0)
         {
-            *shootChances = (rand() % 10) + 1;
+            while(times != 3)
+            {
+                *shootChances = (rand() % 10) + 1;
 
             if (*shootChances <= 7)
             {
@@ -823,13 +1015,34 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
                 cout << "Shots missed" << endl;
                 outfile << "Shots missed" << endl;
                 if (TrackBot())
+
+                if (*  shells == 0 || *shooting)
                 {
-                    *addtrackList = true;
+                    break;
                 }
+
+                *shells -= 1;
+
+                if (*shootChances <= 7)
+                {
+                    *shooting = true;
+                    cout << "Robot " << Robotname << " was shot successfully" << endl;
+                    break;
+                }
+                else
+                {
+                    cout << "Robot " << Robotname << " avoided the shot" << endl;
+                    if (TrackBot())
+                    {
+                        *addtrackList = true;
+                    }
+                }
+                times += 1;
             }
         }
         *detection = false;
         *shootFlag = false;
+        }
     }
     
     if (TrackBot() && *addtrackList)
@@ -846,13 +1059,17 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         if (*addtrackList)
         {
             *trackList += Robotname;
-            cout << "Work Track" << endl;
-            outfile << "Work Track" << endl;
             *trackUsage -= 1;
             *addtrackList = false;
         }       
     }
 }
+
+int ShootingRobot::Checkshells()
+{
+    return (*shells);
+}
+
 
 bool ShootingRobot::GetShooting()
 {return *shooting;}
@@ -862,10 +1079,7 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
 {
     string line;
     int iterationval = 0;
-
-    // int numrows, numcols, numofsteps, numberofRobots;
-    // string RoboNames;
-
+    
     while (getline(infile,line))
     {
 

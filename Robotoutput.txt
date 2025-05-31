@@ -1,7 +1,7 @@
 Row: 5
 Col: 10
 Number of Steps: 200
-Number of Robots:6
+Number of Robots:4
 Robot Name: A Row: random Col: random
 Robot Name: B Row: 4 Col: 4
 Robot Name: C Row: random Col: random
@@ -200,3 +200,1144 @@ TrackList:
 Robot C row: 3 col: 5 Shots: 0
 Robot D row: 0 col: 6 Shots: 0
 Robot E row: 2 col: 2 Shots: 0
+Row: 5
+Col: 10
+Number of Steps: 200
+Number of Robots:4
+Robot Name: A Row: random Col: random
+Robot Name: B Row: 4 Col: 4
+Robot Name: C Row: random Col: random
+Robot Name: D Row: random Col: random
+Spawning...
+Remaining Steps: 199
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .......... #
+# .......... #
+# .........A #
+#            #
+##############
+Spawning...
+Remaining Steps: 198
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .......... #
+# .......... #
+# ....B....A #
+#            #
+##############
+Spawning...
+Remaining Steps: 197
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...C...... #
+# .......... #
+# .......... #
+# ....B....A #
+#            #
+##############
+Spawning...
+Remaining Steps: 196
+
+ Battlefield
+##############
+#            #
+# ........D. #
+# ...C...... #
+# .......... #
+# .......... #
+# ....B....A #
+#            #
+##############
+Remaining Steps: 195
+
+ Battlefield
+##############
+#            #
+# ........D. #
+# ...C...... #
+# .......... #
+# ........A. #
+# ....B..... #
+#            #
+##############
+Remaining Steps: 194
+
+ Battlefield
+##############
+#            #
+# ........D. #
+# ...C...... #
+# .......... #
+# ...B....A. #
+# .......... #
+#            #
+##############
+Remaining Steps: 193
+
+ Battlefield
+##############
+#            #
+# ........D. #
+# .......... #
+# ..C....... #
+# ...B....A. #
+# .......... #
+#            #
+##############
+Detection true at (3,3)
+Shots fired successfully
+Robot C has upgraded in Shooting Upgrade: LongShotBot
+Robot B was shot and removed.
+Robot A row: 3 col: 8 Shots: 0
+Robot C row: 2 col: 2 Shots: 0
+Robot D row: 0 col: 8 Shots: 0
+Remaining Steps: 192
+
+ Battlefield
+##############
+#            #
+# .......D.. #
+# .......... #
+# ..C....... #
+# ........A. #
+# .......... #
+#            #
+##############
+Remaining Steps: 191
+
+ Battlefield
+##############
+#            #
+# .......D.. #
+# .......... #
+# ..C....... #
+# .......... #
+# .....B.A.. #
+#            #
+##############
+Remaining Steps: 190
+
+ Battlefield
+##############
+#            #
+# .......D.. #
+# .C........ #
+# .......... #
+# .......... #
+# .....B.A.. #
+#            #
+##############
+Remaining Steps: 189
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .C......D. #
+# .......... #
+# .......... #
+# .....B.A.. #
+#            #
+##############
+Remaining Steps: 188
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .C......D. #
+# .......... #
+# .......... #
+# ......BA.. #
+#            #
+##############
+Detection true at (4,7)
+Shots fired successfully
+Robot B has upgraded in Moving Upgrade: JumpBot
+Robot A was shot and removed.
+Robot C row: 1 col: 1 Shots: 0
+Robot D row: 1 col: 8 Shots: 0
+Robot B row: 4 col: 6 Shots: 0
+Remaining Steps: 187
+
+ Battlefield
+##############
+#            #
+# .......... #
+# C.......D. #
+# .......... #
+# .......... #
+# ......B... #
+#            #
+##############
+Remaining Steps: 186
+
+ Battlefield
+##############
+#            #
+# .........D #
+# C......... #
+# .......... #
+# .......... #
+# ......B... #
+#            #
+##############
+Remaining Steps: 185
+
+ Battlefield
+##############
+#            #
+# .....B...D #
+# C......... #
+# .......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 184
+
+ Battlefield
+##############
+#            #
+# .....B...D #
+# .......... #
+# C......... #
+# A......... #
+# .......... #
+#            #
+##############
+Detection true at (3,0)
+Shots fired successfully
+Robot C has upgraded in Seeing Upgrade: ScoutBot
+Robot A was shot and removed.
+Robot C row: 2 col: 0 Shots: 0
+ Robot D at (0, 9), Robot B at (0, 5),Robot C sees:
+Robot D row: 0 col: 9 Shots: 0
+Robot B row: 0 col: 5 Shots: 0
+Remaining Steps: 183
+
+ Battlefield
+##############
+#            #
+# .....B.... #
+# .........D #
+# C......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 182
+
+ Battlefield
+##############
+#            #
+# ....B..... #
+# .........D #
+# C......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 181
+
+ Battlefield
+##############
+#            #
+# ....B..... #
+# .........D #
+# .......... #
+# C......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 180
+
+ Battlefield
+##############
+#            #
+# ....B..... #
+# .......... #
+# .........D #
+# C......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 179
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .........D #
+# C.......B. #
+# .......... #
+#            #
+##############
+Detection true at (2,9)
+Shots fired successfully
+Robot B has upgraded in Shooting Upgrade: ThirtyShotBot
+Robot D was shot and removed.
+Robot C row: 3 col: 0 Shots: 0
+ Robot B at (3, 8),Robot C sees:
+Robot B row: 3 col: 8 Shots: 0
+Remaining Steps: 178
+
+ Battlefield
+##############
+#            #
+# A......... #
+# .......... #
+# .C........ #
+# ........B. #
+# .......... #
+#            #
+##############
+Detection true at (0,0)
+Shots fired successfully
+Robot C has upgraded in Moving Upgrade: HideBot
+Robot A was shot and removed.
+Robot C row: 2 col: 1 Shots: 0
+ Robot B at (3, 8),Robot C sees:
+Robot B row: 3 col: 8 Shots: 0
+Remaining Steps: 177
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .C.....B.. #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 176
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .......B.. #
+# .C........ #
+# .......... #
+#            #
+##############
+Remaining Steps: 175
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# ......B... #
+# .C........ #
+# .......... #
+#            #
+##############
+Remaining Steps: 174
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# ...D..B... #
+# .......... #
+# C......... #
+#            #
+##############
+Remaining Steps: 173
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# ...D.B.... #
+# .......... #
+# C......... #
+#            #
+##############
+Remaining Steps: 172
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...D...... #
+# .....B.... #
+# .......... #
+# C......... #
+#            #
+##############
+Remaining Steps: 171
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...D...... #
+# .....B.... #
+# .C........ #
+# .......... #
+#            #
+##############
+Remaining Steps: 170
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...D...... #
+# .......... #
+# .C..B..... #
+# .......... #
+#            #
+##############
+Remaining Steps: 169
+
+ Battlefield
+##############
+#            #
+# ....D..... #
+# .......... #
+# .......... #
+# .C..B..... #
+# .......... #
+#            #
+##############
+Remaining Steps: 168
+
+ Battlefield
+##############
+#            #
+# ....D..... #
+# .......... #
+# .......... #
+# ....B..... #
+# C......... #
+#            #
+##############
+Remaining Steps: 167
+
+ Battlefield
+##############
+#            #
+# ....D..... #
+# .......... #
+# ....B..... #
+# .......... #
+# C......... #
+#            #
+##############
+Remaining Steps: 166
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...D...... #
+# ....B..... #
+# .......... #
+# C......... #
+#            #
+##############
+Detection true at (2,4)
+Shots fired successfully
+Robot D has upgraded in Shooting Upgrade: SemiAutoBot
+Robot B was shot and removed.
+Robot C row: 4 col: 0 Shots: 0
+Robot D row: 1 col: 3 Shots: 0
+Remaining Steps: 165
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...D...... #
+# .......... #
+# .C........ #
+# .....$.... #
+#            #
+##############
+Remaining Steps: 164
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ....D..... #
+# .......... #
+# .C........ #
+# .....$.... #
+#            #
+##############
+Remaining Steps: 163
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ....D..... #
+# .......... #
+# .C........ #
+# ....$..... #
+#            #
+##############
+Remaining Steps: 162
+
+ Battlefield
+##############
+#            #
+# &......... #
+# ....D..... #
+# ..C....... #
+# .......... #
+# ....$..B.. #
+#            #
+##############
+Detection true at (1,4)
+Shots fired successfully
+Robot D was shot and removed.
+Robot C row: 2 col: 2 Shots: 0
+Robot $ row: 4 col: 4 Shots: 0
+Robot & row: 0 col: 0 Shots: 0
+Robot B row: 4 col: 7 Shots: 0
+Remaining Steps: 161
+
+ Battlefield
+##############
+#            #
+# &......... #
+# .......... #
+# ..C....... #
+# ....$..... #
+# .......B.. #
+#            #
+##############
+Remaining Steps: 160
+
+ Battlefield
+##############
+#            #
+# .......... #
+# &......... #
+# ..C....... #
+# ....$..... #
+# .......B.. #
+#            #
+##############
+Remaining Steps: 159
+
+ Battlefield
+##############
+#            #
+# .......... #
+# &......... #
+# ..C....... #
+# ....$.B... #
+# .......... #
+#            #
+##############
+Remaining Steps: 158
+
+ Battlefield
+##############
+#            #
+# .......... #
+# &..C...... #
+# .......... #
+# ....$.B... #
+# .......... #
+#            #
+##############
+Detection true at (3,4)
+Shots fired successfully
+Detection true at (1,0)
+Shots fired successfully
+Robot & was shot and removed.
+Robot C row: 1 col: 3 Shots: 0
+Robot $ row: 3 col: 4 Shots: 0
+Robot B row: 3 col: 6 Shots: 0
+Robot $ was shot and removed.
+Robot C row: 1 col: 3 Shots: 0
+Robot B row: 3 col: 6 Shots: 0
+Remaining Steps: 157
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...C...... #
+# .....B.... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 156
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .....B.... #
+# .....D.... #
+# .......... #
+#            #
+##############
+Remaining Steps: 155
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .......... #
+# .....DB... #
+# .......... #
+#            #
+##############
+Detection true at (3,5)
+Shots fired successfully
+Robot B has upgraded in Moving Upgrade: HideBot
+Robot D was shot and removed.
+Robot C row: 0 col: 2 Shots: 0
+Robot B row: 3 col: 6 Shots: 0
+Remaining Steps: 154
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......... #
+# .......... #
+# ......B... #
+# .........@ #
+#            #
+##############
+Remaining Steps: 153
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......... #
+# .......B.. #
+# .......... #
+# .........@ #
+#            #
+##############
+Remaining Steps: 152
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......... #
+# .......B.. #
+# .........@ #
+# .......... #
+#            #
+##############
+Remaining Steps: 151
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .......B.. #
+# ...&.....@ #
+# .......... #
+#            #
+##############
+Remaining Steps: 150
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .......... #
+# ...&..B..@ #
+# .......... #
+#            #
+##############
+Remaining Steps: 149
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .........@ #
+# ...&..B... #
+# .......... #
+#            #
+##############
+Remaining Steps: 148
+
+ Battlefield
+##############
+#            #
+# ..C....... #
+# .......... #
+# .........@ #
+# ....&.B... #
+# .......... #
+#            #
+##############
+Remaining Steps: 147
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...C...... #
+# .........@ #
+# ....&.B... #
+# .......... #
+#            #
+##############
+Detection true at (3,4)
+Shots fired successfully
+Robot & was shot and removed.
+Robot C row: 1 col: 3 Shots: 0
+Robot B row: 3 col: 6 Shots: 0
+Robot @ row: 2 col: 9 Shots: 0
+Remaining Steps: 146
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...C...... #
+# .......B.@ #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 145
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ...C...... #
+# .......B@. #
+# .......... #
+# .......... #
+#            #
+##############
+Detection true at (2,7)
+Shots fired successfully
+Robot @ has upgraded in Shooting Upgrade: LongShotBot
+Robot B was shot and removed.
+Robot C row: 1 col: 3 Shots: 0
+Robot @ row: 2 col: 8 Shots: 0
+Remaining Steps: 144
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ..C....... #
+# ........@$ #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 143
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ..C....@.. #
+# .........$ #
+# .......... #
+# .......... #
+#            #
+##############
+Detection true at (2,9)
+Shots fired successfully
+Robot @ has upgraded in Moving Upgrade: JumpBot
+Robot $ was shot and removed.
+Robot C row: 1 col: 2 Shots: 0
+Robot @ row: 1 col: 7 Shots: 0
+Remaining Steps: 142
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......@.. #
+# .......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 141
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# ......@... #
+# .......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 140
+
+ Battlefield
+##############
+#            #
+# ....C..... #
+# ......@... #
+# .......... #
+# .&........ #
+# .......... #
+#            #
+##############
+Detection true at (1,6)
+Shots fired successfully
+Robot @ was shot and removed.
+Robot C row: 0 col: 4 Shots: 0
+Robot & row: 3 col: 1 Shots: 0
+Remaining Steps: 139
+
+ Battlefield
+##############
+#            #
+# ....C..... #
+# .......... #
+# .......... #
+# .......... #
+# .&........ #
+#            #
+##############
+Remaining Steps: 138
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......... #
+# .......... #
+# .......... #
+# .&........ #
+#            #
+##############
+Remaining Steps: 137
+
+ Battlefield
+##############
+#            #
+# ...C...... #
+# .......... #
+# .......... #
+# ..&....... #
+# .......... #
+#            #
+##############
+Remaining Steps: 136
+
+ Battlefield
+##############
+#            #
+# ....C..... #
+# $......... #
+# .......... #
+# ..&....... #
+# .......... #
+#            #
+##############
+Remaining Steps: 135
+
+ Battlefield
+##############
+#            #
+# ....C..... #
+# $......... #
+# .......... #
+# .......... #
+# ...&...... #
+#            #
+##############
+Remaining Steps: 134
+
+ Battlefield
+##############
+#            #
+# ....C..... #
+# .......... #
+# .$........ #
+# .......... #
+# ...&...... #
+#            #
+##############
+Remaining Steps: 133
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ....C..... #
+# .$........ #
+# .......... #
+# ...&...... #
+#            #
+##############
+Remaining Steps: 132
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ....C..... #
+# .$........ #
+# ....&..... #
+# .......... #
+#            #
+##############
+Remaining Steps: 131
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ....C..... #
+# .......... #
+# $...&..... #
+# .......... #
+#            #
+##############
+Remaining Steps: 130
+
+ Battlefield
+##############
+#            #
+# .....C.... #
+# .@........ #
+# .......... #
+# $...&..... #
+# .......... #
+#            #
+##############
+Remaining Steps: 129
+
+ Battlefield
+##############
+#            #
+# .....C.... #
+# .@........ #
+# .......... #
+# $......... #
+# .....&.... #
+#            #
+##############
+Remaining Steps: 128
+
+ Battlefield
+##############
+#            #
+# .....C.... #
+# .@........ #
+# .......... #
+# .......... #
+# .$...&.... #
+#            #
+##############
+Remaining Steps: 127
+
+ Battlefield
+##############
+#            #
+# .....C.... #
+# ..@....... #
+# .......... #
+# .......... #
+# .$...&.... #
+#            #
+##############
+Remaining Steps: 126
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ..@...C... #
+# .......... #
+# .......... #
+# .$...&.... #
+#            #
+##############
+Remaining Steps: 125
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ..@...C... #
+# .......... #
+# .....&.... #
+# .$........ #
+#            #
+##############
+Remaining Steps: 124
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ..@...C... #
+# .......... #
+# .$...&.... #
+# .......... #
+#            #
+##############
+Remaining Steps: 123
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ......C... #
+# .@........ #
+# .$...&.... #
+# .......... #
+#            #
+##############
+Detection true at (3,1)
+Shots fired successfully
+Robot @ has upgraded in Moving Upgrade: HideBot
+Robot $ was shot and removed.
+Robot C row: 1 col: 6 Shots: 0
+Robot & row: 3 col: 5 Shots: 0
+Robot @ row: 2 col: 1 Shots: 0
+Remaining Steps: 122
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# .@....C... #
+# .....&.... #
+# .......... #
+#            #
+##############
+Detection true at (3,5)
+Shots fired successfully
+Robot & was shot and removed.
+Robot C row: 2 col: 6 Shots: 0
+Robot @ row: 2 col: 1 Shots: 0
+Remaining Steps: 121
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# @.....C... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 120
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# @....C.... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 119
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .@........ #
+# .....C.... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 118
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .@....C... #
+# .......... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 117
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ......C... #
+# ..@....... #
+# .......... #
+# .......... #
+#            #
+##############
+Remaining Steps: 116
+
+ Battlefield
+##############
+#            #
+# .......... #
+# .......... #
+# ..@..C.... #
+# .......... #
+# .......... #
+#            #
+##############
+Detection true at (2,2)
+Shots fired successfully
+Robot @ was shot and removed.
+Robot C row: 2 col: 5 Shots: 0
+Remaining Steps: 115
+
+ Battlefield
+##############
+#            #
+# .......... #
+# ......C... #
+# ......@... #
+# .......... #
+# .......... #
+#            #
+##############
+Detection true at (2,6)
+Shots fired successfully
+Robot @ was shot and removed.
+Robot C row: 1 col: 6 Shots: 0
