@@ -60,7 +60,7 @@ int main()
             ShootingRobot* newBot = new ShootingRobot(row, col); // Creates new object during the runtime (
                                                                 //  dynamically) and store a new pointer
             newBot->SetSignia(RoboNames[i]);
-            newBot->GetShells(numberOfRobots);
+            newBot->GetShells(numberOfRobots); 
             RoboMoveCopies.push_back(newBot); // Each object is created anew and pushed into the vector         
         }
     
@@ -104,7 +104,7 @@ int main()
                 break;
             }
 
-            system("CLS");
+            //system("CLS");
 
             if (Spawning)
             {
@@ -131,15 +131,16 @@ int main()
             
             Round += 1;
             cout << endl << "ROUND " << Round << endl;
+            cout << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
-            vector<int> Trashbin;
+            unordered_set<int> Trashbin;
             
             if (!Spawning)
             {
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
-                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j || RoboMoveCopies[j]->HideBot()) //|| RoboMoveCopies[j]->HideBot()
+                    if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j)
                     {
                         continue;
                     }
@@ -170,12 +171,17 @@ int main()
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
+                        cout << "Robot Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
                             RoboMoveCopies[j]->DeductLives();
                             RoboMoveCopies[j]->SetQueue();
-                            Trashbin.push_back(j); // Puts shot robot into an array
+                            if (RoboMoveCopies[j]->CheckLives() != 0)
+                            {
+                                cout << "Robot " << RoboMoveCopies[j]->GetSignia() << " was shot and is in queue.\n";
+                            }
+                            Trashbin.insert(j); // Puts shot robot into an array
 
                             if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
                             {
@@ -197,7 +203,7 @@ int main()
                 cout << "Robot " << RoboMoveCopies[i]->GetSignia() << " is out of shells and is now initiating self-destruct." << endl;
                 RoboMoveCopies[i]->DeductLives();
                 RoboMoveCopies[i]->SetQueue();
-                Trashbin.push_back(i);
+                Trashbin.insert(i);
             }
 
             // Cleans up the shot Robot
@@ -206,7 +212,7 @@ int main()
                 if (RoboMoveCopies[x] != nullptr)
                 {
                     // Clear grid symbol before deleting
-                    if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                    if (RoboMoveCopies[x]->current_row != nullptr && RoboMoveCopies[x]->current_col != nullptr)
                     {
                         battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                     }
@@ -218,28 +224,37 @@ int main()
                         RoboMoveCopies[x] = nullptr;
                         Endgame += 1;
                     }
-                    else
+                    else if (RoboMoveCopies[x]->CheckLives() > 0)
                     {
-                        if (RoboMoveCopies[x]->Checkshells() != 0)
-                        {
-                            cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and is in queue.\n";
-                        }
+                        // if (RoboMoveCopies[x]->Checkshells() != 0)
+                        // {
+                        //     cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and is in queue.\n";
+                        // }
                         RobotQueue.push(RoboMoveCopies[x]);
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
                 }
             }
-
             cout << endl;
+            if (RoboMoveCopies[i] == nullptr)
+            {
+                continue;
+            }
+            RoboMoveCopies[i]->UpdateThirtyShot(numberOfRobots);
+
             // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
             {
-                if (!RoboMoveCopies[k]) continue;
-                if (!RoboMoveCopies[k]->current_row || !RoboMoveCopies[k]->current_col || !RoboMoveCopies[k]->CheckLives()) continue;
+                if (RoboMoveCopies[k] == nullptr) continue;
+
+                if (RoboMoveCopies[k]->current_row == nullptr || RoboMoveCopies[k]->current_col == nullptr || 
+                    RoboMoveCopies[k]->CheckLives() <= 0 ) continue;
 
                 cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
                     << "," << *RoboMoveCopies[k]->current_col << ")"
                     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+
+                RoboMoveCopies[k]->PrintUpgrades();
 
                 if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
                 {
@@ -248,16 +263,13 @@ int main()
 
                 if (RoboMoveCopies[k]->ScoutBot())
                 {
-                    if (RoboMoveCopies[k] == nullptr)
-                    {
-                        continue;
-                    }
                     cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
 
                     for (int x = 0; x < RoboMoveCopies.size(); x++)
                     {
-                        if (RoboMoveCopies[x] == nullptr || RoboMoveCopies[x]->current_row == nullptr 
-                            || RoboMoveCopies[x]->current_col == nullptr || x == k) continue;
+                        if (RoboMoveCopies[x] == nullptr) continue;
+                        if (x == k) continue;
+                        if (RoboMoveCopies[x]->current_row == nullptr || RoboMoveCopies[x]->current_col == nullptr) continue;
                                                                                                                             
                         cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
                         cout << ",";
@@ -267,37 +279,39 @@ int main()
 
             }
 
-            if (Endgame == (numberOfRobots - 1))
+            if (Endgame == (numberOfRobots + ExtraBot - 1))
             {
                 Winner = RoboMoveCopies[i]->GetSignia();
                 break;
             }
-            if (Endgame == numberOfRobots)
+            if (Endgame == numberOfRobots + ExtraBot)
             {
                 break;
             }
-            
-            battlefield.delay(1000);
+            cout << Endgame << endl;
+            battlefield.delay(500);
         }
-
-        int Gacha = rand() % 7;
+        
+        int Gacha = rand() % 3;
+        int oneSpawn = 0;
         //Get 3 new robots
-        if (Gacha == 0 && ExtraBot != 3)
+        if (Gacha == 0 && ExtraBot != 3 && oneSpawn == 0)
         {
             cout << "A new AI bot has randomly spawned" << endl;
             ShootingRobot* extraBot = new ShootingRobot(row, col);
-            string signia = "$&@";
-            extraBot->SetSignia(signia[ExtraBot]);
+            string sig = "$&@";
+            extraBot->SetSignia(sig[ExtraBot]);
             extraBot->GetShells(numberOfRobots);
             extraBot->NewSpawn(battlefield.Grid);
             RoboMoveCopies.push_back(extraBot);
             ExtraBot += 1;
+            oneSpawn += 1;
         }
 
         int turn = 0;
         if (Spawnbot > 0)
         {
-            if (!RobotQueue.empty() && turn == 0 )
+            if (!RobotQueue.empty() && turn == 0)
             {
                 ShootingRobot* WaitingBot = RobotQueue.front();
                 RobotQueue.pop();
@@ -306,10 +320,11 @@ int main()
                 {
                     cout << "Robot " << WaitingBot->GetSignia() << " is removed from queue.\n";
                     WaitingBot->NullifyQueue();
+                    WaitingBot->ResetUpgrades(); // Resets the robot upgrade variables for a clean slate
                     WaitingBot->GetShells(numberOfRobots);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    battlefield.delay(1500);
+                    //battlefield.delay(1500);
                 }
                 turn += 1;
             }
@@ -319,13 +334,14 @@ int main()
         {
             Spawnbot += 1;
         }
+        
 
         // Get winner of the program
-        if (Endgame == (numberOfRobots - 1))
+        if (Endgame == (numberOfRobots + ExtraBot - 1))
         {
             break;
         }
-        if (Endgame == numberOfRobots)
+        if (Endgame == numberOfRobots + ExtraBot)
         {
             break;
         }
