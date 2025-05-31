@@ -26,7 +26,7 @@ int main()
     infile.open("Robotinput.txt");
 
     ofstream outfile;
-    outfile.open("Robotoutput.txt", ios::app); // place ',ios::append' if u wish to not overwrite the file
+    outfile.open("Robotoutput.txt"); // place ',ios::append' if u wish to not overwrite the file
 
     //shows error if both files fail to open
     if (!infile || !outfile)
@@ -45,12 +45,14 @@ int main()
     vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
     queue<ShootingRobot*> RobotQueue;
 
+    ofstream outlogfile;
+    outlogfile.open("Robotoutput.txt", ios::app);
 
     // Check whether the 
     if (numberOfRobots > RoboNames.size())
     {
         cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
-        outfile << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
+        outlogfile << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
         return 1;
     }
 
@@ -61,7 +63,7 @@ int main()
             ShootingRobot* newBot = new ShootingRobot(row, col); // Creates new object during the runtime (
                                                                 //  dynamically) and store a new pointer
             newBot->SetSignia(RoboNames[i]);
-            newBot->GetShells(numberOfRobots); 
+            newBot->GetShells(10); 
             RoboMoveCopies.push_back(newBot); // Each object is created anew and pushed into the vector         
         }
     
@@ -80,14 +82,14 @@ int main()
         if ((*RoboMoveCopies[i]->current_row < 0) || (*RoboMoveCopies[i]->current_row >= row))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
-            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl; 
+            outlogfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl; 
             return 1;
         }
 
         if ((*RoboMoveCopies[i]->current_col < 0) || (*RoboMoveCopies[i]->current_col >= col))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
-            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            outlogfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
             return 1;            
         }
     }
@@ -95,6 +97,7 @@ int main()
 
     while (battlefield.StepCount())
     {
+        
 
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
@@ -112,10 +115,7 @@ int main()
             if (Spawning)
             {
                 cout << "Spawning..." << endl;
-                
-                ofstream outfile;
-                outfile.open("Robotoutput.txt", ios::app);
-                outfile << "Spawning..." << endl;
+                outlogfile << "Spawning..." << endl;
 
                 RoboMoveCopies[i]->PlaceRobot(battlefield.Grid);
             }
@@ -140,6 +140,8 @@ int main()
             Round += 1;
             cout << endl << "ROUND " << Round << endl;
             cout << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
+
+            outlogfile << endl << "ROUND " << Round << endl << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
             unordered_set<int> Trashbin;
             
@@ -180,9 +182,11 @@ int main()
                     if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue() && !RoboMoveCopies[j]->HideBot())
                     {
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
+                        outlogfile << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
                         cout << RoboMoveCopies[i]->GetSignia() << "'s Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
+                        outlogfile << RoboMoveCopies[i]->GetSignia() << "'s Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
@@ -191,6 +195,7 @@ int main()
                             if (RoboMoveCopies[j]->CheckLives() != 0)
                             {
                                 cout << "Robot " << RoboMoveCopies[j]->GetSignia() << " was shot and is in queue.\n";
+                                outlogfile << "Robot " << RoboMoveCopies[j]->GetSignia() << " was shot and is in queue.\n";
                             }
                             Trashbin.insert(j); // Puts shot robot into an array
 
@@ -216,6 +221,8 @@ int main()
             if (RoboMoveCopies[i]->CheckExplosion())
             {
                 cout << "Robot " << RoboMoveCopies[i]->GetSignia() << " is out of shells and is now initiating self-destruct." << endl;
+                outlogfile << "Robot " << RoboMoveCopies[i]->GetSignia() << " is out of shells and is now initiating self-destruct." << endl;
+
                 RoboMoveCopies[i]->DeductLives();
                 RoboMoveCopies[i]->SetQueue();
                 Trashbin.insert(i);
@@ -229,24 +236,17 @@ int main()
                     // Clear grid symbol before deleting
                     if (RoboMoveCopies[x]->current_row != nullptr && RoboMoveCopies[x]->current_col != nullptr)
                     {
-
                         // Clear grid symbol before deleting
                         if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
                         {
                             battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                         }
-                        cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
-
-                        ofstream outfile;
-                        outfile.open("Robotoutput.txt", ios::app);
-                        outfile << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
-                        battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                     }
 
                     if (RoboMoveCopies[x]->CheckLives() <= 0)
                     {
                         cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " has lost all lives and is removed.\n";
-
+                        outlogfile << "Robot " << RoboMoveCopies[x]->GetSignia() << " has lost all lives and is removed.\n";
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr;
                         Endgame += 1;
@@ -257,71 +257,15 @@ int main()
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
                 }
-
-                // Print logs
-                for (int k = 0; k < RoboMoveCopies.size(); k++)
-                {
-                    //if (RoboMoveCopies[k] == nullptr) continue;
-                    if (RoboMoveCopies[k] == nullptr || RoboMoveCopies[k]->current_row == nullptr 
-                        || RoboMoveCopies[k]->current_col == nullptr || RoboMoveCopies[k]->shootFlag == nullptr)
-                        {
-                            continue;
-                        } 
-
-                    cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
-                        << " col: " << *RoboMoveCopies[k]->current_col
-                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
-
-                    ofstream outfile;
-                    outfile.open("Robotoutput.txt", ios::app);
-                    outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
-                        << " col: " << *RoboMoveCopies[k]->current_col
-                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
-
-                    if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
-                    {
-                        cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
-                        outfile << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
-                    }
-
-                    if (RoboMoveCopies[k]->ScoutBot())
-                    {
-                        if (RoboMoveCopies[k] == nullptr)
-                        {
-                            continue;
-                        }
-                        
-                        cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
-                        ofstream outfile;
-                        outfile.open("Robotoutput.txt", ios::app);
-                        outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
-
-                        for (int x = 0; x < RoboMoveCopies.size(); x++)
-                        {
-                            if (RoboMoveCopies[x] == nullptr || RoboMoveCopies[x]->current_row == nullptr 
-                                || RoboMoveCopies[x]->current_col == nullptr || x == k) continue;
-                                                                                                                               
-                            cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
-                            cout << ",";
-                            ofstream outfile;
-                            outfile.open("Robotoutput.txt", ios::app);
-                            outfile << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
-                            outfile << ",";
-                        }
-                        cout << endl;
-                        outfile << endl;
-                    }
-
-                }
-                
-                battlefield.delay(1000);
             }
+
             cout << endl;
-            if (RoboMoveCopies[i] == nullptr)
+            outlogfile << endl;
+
+            if (RoboMoveCopies[i] != nullptr)
             {
-                continue;
+                RoboMoveCopies[i]->UpdateThirtyShot();
             }
-            RoboMoveCopies[i]->UpdateThirtyShot(numberOfRobots);
 
             // Print logs
             for (int k = 0; k < RoboMoveCopies.size(); k++)
@@ -335,16 +279,30 @@ int main()
                     << "," << *RoboMoveCopies[k]->current_col << ")"
                     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
 
+                outlogfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
+                    << "," << *RoboMoveCopies[k]->current_col << ")"
+                    << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+
                 RoboMoveCopies[k]->PrintUpgrades();
 
                 if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
                 {
-                    cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    if (!(*RoboMoveCopies[k]->trackList).empty())
+                    {
+                        cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                        outlogfile << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    }
+                    else
+                    {
+                        cout << "TrackList: None" << endl;
+                        outlogfile << "TrackList: None" << endl;
+                    }
                 }
 
                 if (RoboMoveCopies[k]->ScoutBot())
                 {
                     cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
+                    outlogfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
 
                     for (int x = 0; x < RoboMoveCopies.size(); x++)
                     {
@@ -354,23 +312,32 @@ int main()
                                                                                                                             
                         cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
                         cout << ",";
+                        outlogfile << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " 
+                        << *RoboMoveCopies[x]->current_col << ")" << ",";
                     }
                     cout << endl;
+                    outlogfile << endl;
                 }
                 cout << endl;
+                outlogfile << endl;
 
             }
 
             if (Endgame == (numberOfRobots + ExtraBot - 1))
             {
-                Winner = RoboMoveCopies[i]->GetSignia();
-                break;
+                if (RoboMoveCopies[i] != nullptr)
+                {
+                    Winner = RoboMoveCopies[i]->GetSignia();
+                    break;
+                }
             }
             if (Endgame == numberOfRobots + ExtraBot)
             {
                 break;
             }
             cout << "Dead Robots: " << Endgame << endl;
+            outlogfile << "Dead Robots: " << Endgame << endl;
+
             battlefield.delay(500);
         }
         
@@ -382,10 +349,11 @@ int main()
             if (Gacha == 0 && ExtraBot != 3 && oneSpawn == 0)
             {
                 cout << "!!A new AI bot has randomly spawned!!" << endl;
+                outlogfile << "!!A new AI bot has randomly spawned!!" << endl;
                 ShootingRobot* extraBot = new ShootingRobot(row, col);
                 string sig = "$&@";
                 extraBot->SetSignia(sig[ExtraBot]);
-                extraBot->GetShells(numberOfRobots);
+                extraBot->GetShells(10);
                 extraBot->NewSpawn(battlefield.Grid);
                 RoboMoveCopies.push_back(extraBot);
                 ExtraBot += 1;
@@ -405,12 +373,13 @@ int main()
                 if (WaitingBot != nullptr && WaitingBot->CheckLives() > 0)
                 {
                     cout << "Robot " << WaitingBot->GetSignia() << " is removed from queue.\n";
+                    outlogfile << "Robot " << WaitingBot->GetSignia() << " is removed from queue.\n";
                     WaitingBot->NullifyQueue();
                     WaitingBot->ResetUpgrades(); // Resets the robot upgrade variables for a clean slate
-                    WaitingBot->GetShells(numberOfRobots);
+                    WaitingBot->GetShells(10);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    //battlefield.delay(1000);
+                    battlefield.delay(1000);
                 }
                 turn += 1;
             }
@@ -420,8 +389,6 @@ int main()
         {
             Spawnbot += 1;
         }
-        
-
         // Get winner of the program
         if (Endgame == (numberOfRobots + ExtraBot - 1))
         {
@@ -438,10 +405,12 @@ int main()
     if (!Winner.empty())
     {
         cout << endl << "!!ROBOT " << Winner << " IS THE WINNER!!" << endl; 
+        outlogfile << endl << "!!ROBOT " << Winner << " IS THE WINNER!!" << endl; 
     }
     else
     {
         cout << endl << "Match ends with no winner" << endl; 
+        outlogfile << endl << "Match ends with no winner" << endl; 
     }
 
     return 0;

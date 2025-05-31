@@ -107,6 +107,7 @@ class UpgradeRobot
         bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
+        //void ResetBot();
 
 
 };
@@ -185,7 +186,7 @@ class ThinkingRobot: public SeeingRobot
         ~ThinkingRobot();
         void ShootheRobot();
         void UpdateUsage();
-        void UpdateThirtyShot(int numberofRobots);
+        void UpdateThirtyShot();
         void PrintUpgrades();
         void ResetUpgrades();
         void Upgrade();
