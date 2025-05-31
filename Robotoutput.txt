@@ -1,8 +1,202 @@
-Row: 10
+Row: 5
 Col: 10
-Number of Steps: 1000
-Number of Robots:4
-Robot Name: A Row: 5 Col: 7 
-Robot Name: B Row: 5 Col: 5
-Robot Name: C Row: 6 Col: 1
-Robot Name: D Row: 2 Col: 3
+Number of Steps: 200
+Number of Robots:6
+Robot Name: A Row: random Col: random
+Robot Name: B Row: 4 Col: 4
+Robot Name: C Row: random Col: random
+Robot Name: D Row: random Col: random
+Robot Name: E Row: 4 Col: 4
+Robot Name: F Row: random Col: random
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 199
+
+ Battlefield
+##############
+#            #
+# .....A.... #
+# .......... #
+# .......... #
+# .......... #
+# .......... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 4 col: 4 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 198
+
+ Battlefield
+##############
+#            #
+# .....A.... #
+# .......... #
+# .......... #
+# .......... #
+# ....B..... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 4 col: 4 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 197
+
+ Battlefield
+##############
+#            #
+# .....A.... #
+# .......... #
+# .......... #
+# .....C.... #
+# ....B..... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 4 col: 4 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 196
+
+ Battlefield
+##############
+#            #
+# .....AD... #
+# .......... #
+# .......... #
+# .....C.... #
+# ....B..... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 4 col: 4 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 195
+
+ Battlefield
+##############
+#            #
+# .....AD... #
+# .......... #
+# ..E....... #
+# .....C.... #
+# ....B..... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 2 col: 2 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Spawning...
+
+
+
+
+
+WORK
+Remaining Steps: 194
+
+ Battlefield
+##############
+#            #
+# .....AD... #
+# .......... #
+# ..E....... #
+# ..F..C.... #
+# ....B..... #
+#            #
+##############
+Robot A row: 0 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 2 col: 2 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Remaining Steps: 193
+
+ Battlefield
+##############
+#            #
+# ......D... #
+# .....A.... #
+# ..E....... #
+# ..F..C.... #
+# ....B..... #
+#            #
+##############
+Detection true at (0,6)
+Shots missed
+Robot A row: 1 col: 5 Shots: 0
+Robot B row: 4 col: 4 Shots: 0
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 2 col: 2 Shots: 0
+Robot F row: 3 col: 2 Shots: 0
+Remaining Steps: 192
+
+ Battlefield
+##############
+#            #
+# ......D... #
+# .....A.... #
+# ..E....... #
+# ..F..C.... #
+# ...B...... #
+#            #
+##############
+Detection true at (3,2)
+Shots fired successfully
+Robot B has upgraded in Seeing Upgrade: TrackBot
+Robot F was shot and removed.
+Robot A row: 1 col: 5 Shots: 0
+Robot B row: 4 col: 3 Shots: 0
+TrackList: 
+Robot C row: 3 col: 5 Shots: 0
+Robot D row: 0 col: 6 Shots: 0
+Robot E row: 2 col: 2 Shots: 0
