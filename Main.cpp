@@ -164,7 +164,10 @@ int main()
                         continue;
                     }
 
-                    RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
+                    if (!RoboMoveCopies[j]->HideBot())
+                    {
+                        RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
+                    }
 
                     if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue() && !RoboMoveCopies[j]->HideBot())
                     {
@@ -329,7 +332,7 @@ int main()
                     WaitingBot->GetShells(numberOfRobots);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    battlefield.delay(1000);
+                    //battlefield.delay(1000);
                 }
                 turn += 1;
             }
