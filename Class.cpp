@@ -1,6 +1,39 @@
+/**********|**********|**********|
+ Program: Main.cpp / Class.cpp / Class.h 
+Course: Data Structures and Algorithms
+ Trimester: 2410
+
+ Name: DANIEL ARIF BIN ABD ZAINEE
+ ID: 242UC244JU
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: DANIEL.ARIF.ABD@student.mmu.edu.my
+ Phone: 0137469125
+
+ Name: NUR YASMIN BINTI MOHD SABRI
+ ID: 242UC244TX
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: NUR.YASMIN.MOHD@student.mmu.edu.my
+ Phone: 0197828428
+
+ Name: MUHAMMAD NUR AIZAD BIN MURTADHA
+ ID: 242UC244T5
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: MUHAMMAD.NUR.AIZAD@student.mmu.edu.my
+ Phone: 0195659972
+
+ Name: YUVENDAR A/L MARAN
+ ID: 242UC244DJ
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: YUVENDAR.MARAN@student.mmu.edu.my
+ Phone: 0127420244
+ **********|**********|**********/
 #include "Class.h"
 
-/*************************Battlefield***************************************/
+//----------------------------------------------------------Battlefield---------------------------------------------------------------//
 Battlefield::Battlefield(int row, int col)
 {
     *MaxRow = row;
@@ -21,6 +54,7 @@ Battlefield::~Battlefield()
     delete MaxCol;
 }
 
+// to create battlefield grid
 void Battlefield::GridMaker()
 {
     Grid.resize(*MaxRow);
@@ -31,7 +65,7 @@ void Battlefield::GridMaker()
     }
 }
 
-void Battlefield::GridReset()//utk hilangkan after images
+void Battlefield::GridReset() // reset the grid and remove the afterimages
 {
     for (int i=0; i < *MaxRow; i++)
     {
@@ -42,7 +76,7 @@ void Battlefield::GridReset()//utk hilangkan after images
     }
 }
 
-void Battlefield::printGrid()
+void Battlefield::printGrid() // to print out the created grid
 {
     string Name = "Battlefield";
     cout << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
@@ -63,8 +97,6 @@ void Battlefield::printGrid()
         for (int j=0; j < *MaxCol; j++)
         {
             cout << Grid[i][j];
-            
-            //outfile << Grid[i][j];
         }
         cout << " ";
         cout << "#";
@@ -82,7 +114,7 @@ void Battlefield::printGrid()
 
 }
 
-void Battlefield::SetStep(int numofsteps)
+void Battlefield::SetStep(int numofsteps) // get number of steps
 {
     CountNumSteps = numofsteps;
 }
@@ -95,7 +127,7 @@ bool Battlefield::StepCount()
         return false;
 }
 
-void Battlefield::CountDownStep()
+void Battlefield::CountDownStep() // remove one step after each round
 {
     CountNumSteps -= 1;
     cout << "Remaining Steps: " << CountNumSteps << "\n\n";
@@ -106,14 +138,15 @@ void Battlefield::CountDownStep()
     outfile << "Remaining Steps: " << CountNumSteps << "\n\n";
 }
 
-void Battlefield::delay(int milliseconds) 
+void Battlefield::delay(int milliseconds) // delay runtime
 {
     // Simple delay using a loop 
     clock_t start_time = clock();
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);
 }
 
-/********************************** UpgradeRobot **************************************/
+//---------------------------------------------------------UpgradeRobot------------------------------------------------------------------//
+
 UpgradeRobot::UpgradeRobot()
 {
     RobotUpgraded = new bool(false);
@@ -243,7 +276,7 @@ bool UpgradeRobot::TrackBot()
     return *seeingUpgradeUse_Track;
 }
 
-/**********************************MovingRobot**************************************/
+//---------------------------------------------------------*MovingRobot--------------------------------------------------------------------//
 MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot()
 {   
     stats();
@@ -252,6 +285,7 @@ MovingRobot::MovingRobot(int row, int col) : Battlefield(row, col), UpgradeRobot
 
 }
 
+// to check "random coordinates" from input file
 void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& iterationval)
 {
     bool validrow = false;
@@ -303,7 +337,6 @@ MovingRobot::MovingRobot(const MovingRobot& obj) : Battlefield(obj), UpgradeRobo
 
 }
 
-
 MovingRobot::~MovingRobot()
 {
     delete movingchoice;
@@ -326,6 +359,7 @@ string MovingRobot::GetSignia() const
     return (*signia);
 }
 
+// Get random number to determine movement
 void MovingRobot::WheretoMove()
 {
     *movingchoice = rand() % 8;
@@ -339,11 +373,11 @@ void MovingRobot::WheretoMove()
 
 }
 
+// for spawning
 void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
 
-    // sharedGrid[*current_row][*current_col] = *signia;
     ofstream outfile;
     outfile.open("Robotoutput.txt", ios::app);
 
@@ -365,6 +399,7 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 
 }
 
+// Function for robot to choose its next movement
 void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid) 
 {
     sharedGrid[*current_row][*current_col] = "."; //utk replace afterimage // to replace the previous position to '.'
@@ -421,6 +456,7 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
 }
 
+// Get new coordinates for the robot after queue
 void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
 {
     bool validnewspawn = false;
@@ -449,7 +485,7 @@ void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
 }
 
 
-/**********************************SeeingRobot**************************************/
+//-------------------------------------------------------SeeingRobot-----------------------------------------------------------------------//
 
 SeeingRobot::SeeingRobot(int row, int col): MovingRobot(row, col)
 {
@@ -475,6 +511,7 @@ SeeingRobot::~SeeingRobot()
     
 }
 
+// Check each coordinates of the robot and compare to the bounds of the current robot
 void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
 {
     *detection = false;
@@ -526,7 +563,8 @@ bool SeeingRobot::RobotDetect()
 }
  
 
-/**********************************ThinkingRobot**************************************/
+//--------------------------------------------------------ThinkingRobot---------------------------------------------------------
+
 ThinkingRobot::ThinkingRobot(int row, int col) : SeeingRobot(row,col)
 {
     shootFlag = new bool(false);
@@ -575,27 +613,7 @@ ThinkingRobot::~ThinkingRobot()
 
 }
 
-void ThinkingRobot::Think()
-{
-    cout << "Robot "<< signia <<" is thinking" << endl;
-
-    ofstream outfile;
-    outfile.open("Robotoutput.txt", ios::app);
-    outfile << "Robot "<< signia <<" is thinking" << endl;
-
-    
-
-    if(*detection == true)
-    {
-        *shootFlag = true;
-    }
-    else
-    {
-        *shootFlag = false;
-    }
-
-}
-
+// Self destruct (explode) if robot runs out of shells
 bool ThinkingRobot::CheckExplosion()
 {
     if (*shells <= 0)
@@ -636,6 +654,7 @@ bool ThinkingRobot::NullifyQueue()
     return (*inQueue);
 }
 
+// Getting upgrades
 void ThinkingRobot::Upgrade()
 {
     string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
@@ -687,7 +706,6 @@ void ThinkingRobot::Upgrade()
             //log
             outfile << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
             
-
             areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
             break;
         case 1:
@@ -794,11 +812,12 @@ void ThinkingRobot::UpdateUsage()
     }
 }
 
+// Updating the shells for Thirtyshotbot
 void ThinkingRobot::UpdateThirtyShot()
 {
     if (ThirtyShotBot())
     {
-        *shells = 30; // 3 shells per robot
+        *shells = 30; // 30 shells per robot
         *shootingUpgradeUse_ThirtyShot = false; 
     }
 }
@@ -894,7 +913,7 @@ void ThinkingRobot::ResetUpgrades()
     *addtrackList = false;
     *printtrackList = false; 
 }
-/**********************************ShootingRobot**************************************/
+//-----------------------------------------------------ShootingRobot-----------------------------------------------------------------//
 
 ShootingRobot::ShootingRobot(int row, int col): ThinkingRobot(row, col)
 {
@@ -906,7 +925,6 @@ ShootingRobot::ShootingRobot(const ShootingRobot& obj) : ThinkingRobot(obj)
 {
     shootChances = new int(*obj.shootChances);
     shooting = new bool(*obj.shooting);
-    
 }
 
 ShootingRobot::~ShootingRobot()
@@ -915,6 +933,7 @@ ShootingRobot::~ShootingRobot()
     delete shooting;
 }
 
+// Overloading Operator for printing
 ostream& operator<<(ostream& os, const ShootingRobot& obj) {
     os << "Robot " << obj.GetSignia()
        << " Coordinates: (" << *obj.current_row << ", " << *obj.current_col << ")"
@@ -923,7 +942,7 @@ ostream& operator<<(ostream& os, const ShootingRobot& obj) {
     return os;
 }
 
-
+// Robot's shooting functions
 void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 {
     *shooting = false;
@@ -1056,6 +1075,8 @@ bool ShootingRobot::GetShooting()
 {return *shooting;}
 
 
+// --------------------------------------------------Reading and Writing into file -----------------------------------------------------//
+
 void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols, int& numofsteps, int& numberofRobots, string& RoboNames, vector<string>& check_spawn_condition)
 {
     string line;
@@ -1064,12 +1085,9 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
     while (getline(infile,line))
     {
 
-    // to find numrows by numcols
-
+      // to find numrows by numcols -----------------------------------------------------------------------------------------------------
       if(line.find("numrows by numcols") != string::npos && line.find(":") != string::npos) // check if the line contains "numrows by numcols" and ":"
         {
-            //outfile << ">numrows by numcols fileOutput.txt;" << endl;
-            //cout << ">numrows by numcols fileOutput.txt;" << endl;
 
             int start = line.find(":"); // find the position of the colon - remove everything till ":"
             string numrowsCol = line.substr(start + 2); // takes " row by col" // "5 by 10"
@@ -1089,20 +1107,13 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
                 numcols = stoi(colStr); // change string to integer
             }
             
-            if (rowStr == "random")
-            {
-
-            }
             outfile << "Row: " << numrows << endl;
             outfile << "Col: " << numcols << endl;
-
-            //cout << "Row: " << numrows << endl;
-            //cout << "Col: " << numcols << endl;
-
         }
+        // -------------------------------------------------------------------------------------------------------------------------------
 
-        // to find numofsteps
 
+        // to find numofsteps -----------------------------------------------------------------------------------------------------------
         if (line.find("numofsteps") != string::npos && line.find(":") != string::npos) // check if the line contains "numofsteps" and ":"
         {
             //outfile << ">numofsteps fileOutput.txt;" << endl;
@@ -1116,9 +1127,10 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
             outfile << "Number of Steps: " << numofsteps << endl;
             //cout << "Number of Steps: " << numofsteps << endl;
         }
+        // ------------------------------------------------------------------------------------------------------------------------------
 
-        // to find number of robots
 
+        // to find number of robots ------------------------------------------------------------------------------------------------------
         if (line.find("numberofRobots") != string::npos && line.find(":")!= string::npos) // check if the line contains "numberofRobots" and ":"
         {
             //outfile << ">numofRobots fileOutput.txt;" << endl;
@@ -1132,13 +1144,12 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
             outfile << "Number of Robots:" << numberofRobots << endl;
             //cout << "Number of Robots: " << numberofRobots << endl;
         }
+        // ---------------------------------------------------------------------------------------------------------------------------------
 
-        // to find robots and positions
 
+        // to find robots and positions ---------------------------------------------------------------------------------------------
         if (line.find("GenericRobot") != string::npos) // check if the line contains "GenericRobot"
         {
-            //outfile << ">GenericRobot fileOutput.txt;" << endl;
-            //cout << ">GenericRobot fileOutput.txt;" << endl;
 
             int spaceone = line.find(" "); // find the position of the first space
             int spacetwo = line.find(" ", spaceone + 1); // find the position of the second space // after the first space
@@ -1149,7 +1160,6 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
             string colStr = line.substr(spacethree + 1); // remove column number
 
             outfile << "Robot Name: " << robotName;
-            //cout << "Robot Name: " << robotName;
 
             check_spawn_condition.push_back(rowStr);
     
@@ -1157,11 +1167,10 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
 
             outfile << " Row: " << check_spawn_condition[iterationval*2];
             outfile << " Col: " << check_spawn_condition[iterationval*2 +1] << endl;
-            // cout << " Row: " << check_spawn_condition[iterationval*2];
-            // cout << " Col: " << check_spawn_condition[iterationval*2 +1] << endl;
             
             RoboNames += robotName[0];
             iterationval += 1;
+        // --------------------------------------------------------------------------------------------------------------------------
                        
         }
     }

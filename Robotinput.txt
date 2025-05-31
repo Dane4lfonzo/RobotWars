@@ -1,7 +1,7 @@
-numrows by numcols: 2 2
+numrows by numcols: 9 21
 numofsteps: 200
-numberofRobots: 3
+numberofRobots: 4
 GenericRobot Abacus random random
-GenericRobot Boiler 0 0
+GenericRobot Boiler random random
 GenericRobot China random random
 GenericRobot Dandy random random
