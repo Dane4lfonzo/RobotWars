@@ -9,7 +9,6 @@
 #include <iomanip>
 #include <unordered_set>
 
-
 using namespace std;
 
 // Battlefield class to create the grid
@@ -23,21 +22,23 @@ class Battlefield
     public:
         int CountNumSteps = 0;
         vector<vector<string>> Grid;
+        // Constructor, copy constructor and destructor-----
         Battlefield(){};
         Battlefield(int row, int col);
         Battlefield(const Battlefield& obj);
         ~Battlefield();
-        void SetStep(int numofsteps);
-        bool StepCount();
-        void CountDownStep();
-        void GridMaker();
-        void GridReset();
-        void delay(int miliseconds);
-        void printGrid(); //gonna use this in a looped iteration to update display
+        // --------------------------------------------------
+        void SetStep(int numofsteps); // get number of steps
+        bool StepCount(); // return boolean
+        void CountDownStep(); // remove one step after each round
+        void GridMaker(); // to create battlefield grid
+        void GridReset(); // reset the grid and remove the afterimages
+        void delay(int miliseconds); // to print out the created grid
+        void printGrid(); // gonna use this in a looped iteration to update display
 };
 
 
-// Base abstract class that is inheritted
+// Base abstract class that is inherited
 class Robot
 {
     protected:
@@ -92,14 +93,16 @@ class UpgradeRobot
         
 
     public:
+        // Constructor, copy constructor and destructor-----
+        UpgradeRobot();
+        UpgradeRobot(const UpgradeRobot& obj);
+        ~UpgradeRobot();
+        // -------------------------------------------------
         bool *printtrackList;
         bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
         int *UpgradeLimit;
         string *trackList;
         bool *addtrackList;
-        UpgradeRobot();
-        UpgradeRobot(const UpgradeRobot& obj);
-        ~UpgradeRobot();
         bool HideBot();
         bool JumpBot();
         bool LongShotBot();
@@ -107,8 +110,6 @@ class UpgradeRobot
         bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
-        //void ResetBot();
-
 
 };
 
@@ -133,18 +134,20 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
             inQueue = new bool(false);
 
         }
+        // Constructor, copy constructor and destructor-----
         MovingRobot(){}
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
+        // ------------------------------------------------
         string GetSignia() const;
-        void GetShells(int bullets);
-        void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
-        void WheretoMove();
-        void PlaceRobot(vector<vector<string>>& sharedGrid);
-        void SetSignia(char character);
-        void MovetoSquare(vector<vector<string>>& sharedGrid);
-        void NewSpawn(vector<vector<string>>& sharedGrid);
+        void GetShells(int bullets); // return shells
+        void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval); // to check "random coordinates" from input file
+        void WheretoMove(); // Get random number to determine movement
+        void PlaceRobot(vector<vector<string>>& sharedGrid); // for spawning
+        void SetSignia(char character); // set robot's signia
+        void MovetoSquare(vector<vector<string>>& sharedGrid); // Function for robot to choose its next movement
+        void NewSpawn(vector<vector<string>>& sharedGrid); // Get new coordinates for the robot after queue
 
 };
 
@@ -157,18 +160,22 @@ class SeeingRobot: public MovingRobot
         bool *detection = new bool;
 
     public:
+        // Constructor, copy constructor and destructor-----
         SeeingRobot(){}
         SeeingRobot(int row, int col);
         SeeingRobot(const SeeingRobot& obj);
         ~SeeingRobot();
-        void Look(int row, int col);
-        bool RobotDetect();
+        // -------------------------------------------------
+        void Look(int row, int col); // Check each coordinates of the robot and compare to the bounds of the current robot
+        bool RobotDetect(); // return detection
 
 };
 
+// Class to think and return stats
 class ThinkingRobot: public SeeingRobot
 { 
     protected:
+        bool *shootFlag = new bool(false);
         bool *movingUpgrade;
         bool *shootingUpgrade;
         bool *seeingUpgrade;
@@ -179,24 +186,24 @@ class ThinkingRobot: public SeeingRobot
 
 
     public:
-        bool *shootFlag = new bool(false);
+        // Constructor, copy constructor and destructor-----
         ThinkingRobot(){};
         ThinkingRobot(int row, int col); 
         ThinkingRobot(const ThinkingRobot& obj); 
         ~ThinkingRobot();
-        void ShootheRobot();
-        void UpdateUsage();
-        void UpdateThirtyShot();
-        void PrintUpgrades();
-        void ResetUpgrades();
-        void Upgrade();
-        void Think();
-        bool CheckExplosion();
-        bool CheckQueue();
-        bool SetQueue();
-        bool NullifyQueue();
-        int CheckLives() const;
-        int DeductLives();
+        // -------------------------------------------------
+        void ShootheRobot(); // return shootflag
+        void UpdateUsage(); // increase the amount of upgrades used
+        void UpdateThirtyShot(); // upgrades for thirtyshotbot
+        void PrintUpgrades(); // printing upgrades
+        void ResetUpgrades(); // resetting upgrades
+        void Upgrade(); // Getting upgrades
+        bool CheckExplosion(); // check if robot explode
+        bool CheckQueue(); // check if robot in queue
+        bool SetQueue(); // return queue true 
+        bool NullifyQueue(); // return queue false
+        int CheckLives() const; // check robot's lives
+        int DeductLives(); // remove 1 life from robot
 };
 
 // Class for robot to shoot and kill other robots
@@ -208,17 +215,18 @@ class ShootingRobot : public ThinkingRobot
 
 
     public:
+        // Constructor, copy constructor and destructor-----
         ShootingRobot(){}
         ShootingRobot(int row, int col);
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
-        void CheckShot(string Robotname, int numberofRobots);
-        int Checkshells() const;
-        bool GetShooting();
-        friend ostream& operator<<(ostream& os, const ShootingRobot& robot);
+        // ------------------------------------------------
+        void CheckShot(string Robotname, int numberofRobots); // Robot shooting action
+        int Checkshells() const; // check how many shells left
+        bool GetShooting(); // return shooting
+        friend ostream& operator<<(ostream& os, const ShootingRobot& robot); // overloading operator for printing
 
 };
 
 // Function to read file
 void filereading(ifstream&, ofstream&, int&, int&, int&, int&, string&, vector<string>&);
-

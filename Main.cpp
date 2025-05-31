@@ -35,6 +35,7 @@ int main()
         return 1;
     }
 
+    // Function to read the input file and write into the output file
     filereading(infile, outfile, row, col, numofsteps, numberOfRobots, RoboNames, check_spawn_condition);
 /****************************************************************************************/
 
@@ -45,10 +46,11 @@ int main()
     vector<ShootingRobot*> RoboMoveCopies; // Copy Constructor class instance for the robot classes but as an Array(Vector)
     queue<ShootingRobot*> RobotQueue;
 
+    // output file variables
     ofstream outlogfile;
     outlogfile.open("Robotoutput.txt", ios::app);
 
-    // Check whether the 
+    // Check whether the Robot amount exceeds the bounds
     if (numberOfRobots > RoboNames.size())
     {
         cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
@@ -56,6 +58,7 @@ int main()
         return 1;
     }
 
+    // Set the Signia for Robots
     if (SetSignia)
     {
         for (int i = 0; i < numberOfRobots; i++)
@@ -101,23 +104,26 @@ int main()
     }
       
 
+    // Check while the amount of steps is not 0
     while (battlefield.StepCount())
     {
         
-
+        // Cycles through the robots in the array
         for (int i = 0; i < RoboMoveCopies.size(); i++) 
         {
             if (RoboMoveCopies[i] == nullptr) continue; // Checking for if the pointer for that specific element is null or not
             if (RoboMoveCopies[i]->CheckLives() <= 0) continue;
             
-
+            // If the amount of step has reached 0, the program automatically ends
             if (battlefield.CountNumSteps <= 0)
             {
                 break;
             }
 
+            // For cleaner printing
             system("CLS");
 
+            // Check if all the robots initiated in the beginning has spawned
             if (Spawning)
             {
                 cout << "Spawning..." << endl;
@@ -126,11 +132,13 @@ int main()
                 RoboMoveCopies[i]->PlaceRobot(battlefield.Grid);
             }
             
-            // Robot movement
+            // Get Robot choice for movement
             RoboMoveCopies[i]->WheretoMove();
 
+            // Condition to avoid robot from moving before all robots are initiated into the battlefield
             if (Spawning == false)
             {
+                // Robot Movements
                 RoboMoveCopies[i]->MovetoSquare(battlefield.Grid);
             }
 
@@ -143,12 +151,14 @@ int main()
             // Displays the Grid and Robots
             battlefield.printGrid();
             
+            // Printings
             Round += 1;
             cout << endl << "ROUND " << Round << endl;
             cout << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
             outlogfile << endl << "ROUND " << Round << endl << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
+            // Set array
             unordered_set<int> Trashbin;
             
             if (!Spawning)
@@ -156,6 +166,7 @@ int main()
                 // Robot Actions (Looking & Shooting)
                 for (int j=0; j<RoboMoveCopies.size(); j++)
                 {
+                    // Check if the current robot is not null and is not the same as the compared robot---------------------------
                     if (RoboMoveCopies[i] == nullptr || RoboMoveCopies[j] == nullptr || i == j)
                     {
                         continue;
@@ -172,6 +183,7 @@ int main()
                     {
                         continue;
                     }
+                    //-----------------------------------------------------------------------------------------------------------
 
                     // Check if robots are not in the same cell
                     if (*RoboMoveCopies[i]->current_col == *RoboMoveCopies[j]->current_col &&
@@ -180,15 +192,19 @@ int main()
                         continue;
                     }
 
+                    // Check so that the compared robot does not have the HideBot immunity
                     if (!RoboMoveCopies[j]->HideBot())
                     {
                         RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
                     }
 
+                    // Check for detection
                     if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue() && !RoboMoveCopies[j]->HideBot())
                     {
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         outlogfile << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
+
+                        // Check if Robot was able to shoot the detected robot
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
                         cout << RoboMoveCopies[i]->GetSignia() << "'s Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
@@ -196,25 +212,28 @@ int main()
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
-                            RoboMoveCopies[j]->DeductLives();
-                            RoboMoveCopies[j]->SetQueue();
+                            RoboMoveCopies[j]->DeductLives(); // Deduct shot robot's life
+                            RoboMoveCopies[j]->SetQueue(); // Set shot robot into queue
+
                             if (RoboMoveCopies[j]->CheckLives() != 0)
                             {
                                 cout << "Robot " << RoboMoveCopies[j]->GetSignia() << " was shot and is in queue.\n";
                                 outlogfile << "Robot " << RoboMoveCopies[j]->GetSignia() << " was shot and is in queue.\n";
                             }
-                            Trashbin.insert(j); // Puts shot robot into an array
+                            Trashbin.insert(j); // Puts shot robot into an array set
 
+                            // Check if the current robot has fully upgraded from a successful shot or not
                             if (!*RoboMoveCopies[i]->RobotUpgraded) 
                             {
-                                RoboMoveCopies[i]->Upgrade();
+                                RoboMoveCopies[i]->Upgrade(); // Choosing upgrades
                                 *RoboMoveCopies[i]->UpgradeLimit += 1;
-                                if (*RoboMoveCopies[i]->UpgradeLimit >= 3)
+                                if (*RoboMoveCopies[i]->UpgradeLimit >= 3) // Condition to check if all stack upgrades are in
                                 {
                                     *RoboMoveCopies[i]->RobotUpgraded = true;
                                 } 
                             }
                             
+                            // Check if current robot has run out of ammo or not
                             if (RoboMoveCopies[i]->CheckExplosion())
                             {
                                 break;
@@ -224,6 +243,7 @@ int main()
                 }
             }
 
+            // Initiate self-destruct for robot that has run out of shells
             if (RoboMoveCopies[i]->CheckExplosion())
             {
                 cout << "Robot " << RoboMoveCopies[i]->GetSignia() << " is out of shells and is now initiating self-destruct." << endl;
@@ -249,6 +269,7 @@ int main()
                         }
                     }
 
+                    // Check if robot has no lives left
                     if (RoboMoveCopies[x]->CheckLives() <= 0)
                     {
                         cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " has lost all lives and is removed.\n";
@@ -325,6 +346,7 @@ int main()
 
             }
 
+            // Check if only one robot is left in the battlefield
             if (Endgame == (numberOfRobots + ExtraBot - 1))
             {
                 if (RoboMoveCopies[i] != nullptr)
@@ -333,19 +355,21 @@ int main()
                     break;
                 }
             }
+            // Check if the last two robots in the battlefield dies at the same time
             if (Endgame == numberOfRobots + ExtraBot)
             {
                 break;
             }
+
             cout << "Dead Robots: " << Endgame << endl;
             outlogfile << "Dead Robots: " << Endgame << endl;
 
-            battlefield.delay(500);
+            battlefield.delay(500); // Program runtime
         }
         
+        //Get 3 new alien robots ---------------------------------------------------------------
         int Gacha = rand() % 3;
         int oneSpawn = 0;
-        //Get 3 new robots
         if (!Spawning)
         {
             if (Gacha == 0 && ExtraBot != 3 && oneSpawn == 0)
@@ -362,8 +386,9 @@ int main()
                 oneSpawn += 1;
             }
         }
-        
+        // ---------------------------------------------------------------------------------------
 
+        // Removing robots from queue and into the battlefield again ------------------------------------
         int turn = 0;
         if (Spawnbot > 0)
         {
@@ -391,6 +416,9 @@ int main()
         {
             Spawnbot += 1;
         }
+        // ----------------------------------------------------------------------------------------------
+
+
         // Get winner of the program
         if (Endgame == (numberOfRobots + ExtraBot - 1))
         {
@@ -404,6 +432,7 @@ int main()
         Spawning = false;
     }
 
+    // Printing for the winner of the program
     if (!Winner.empty())
     {
         cout << endl << "!!ROBOT " << Winner << " IS THE WINNER!!" << endl; 
