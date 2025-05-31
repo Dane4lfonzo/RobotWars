@@ -26,7 +26,7 @@ int main()
     infile.open("Robotinput.txt");
 
     ofstream outfile;
-    outfile.open("Robotoutput.txt"); // place ',ios::append' if u wish to not overwrite the file
+    outfile.open("Robotoutput.txt", ios::app); // place ',ios::append' if u wish to not overwrite the file
 
     //shows error if both files fail to open
     if (!infile || !outfile)
@@ -50,6 +50,7 @@ int main()
     if (numberOfRobots > RoboNames.size())
     {
         cout << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
+        outfile << "Number of robots entered exceed the amount given. Quitting Simulation..." << endl;
         return 1;
     }
 
@@ -79,12 +80,14 @@ int main()
         if ((*RoboMoveCopies[i]->current_row < 0) || (*RoboMoveCopies[i]->current_row >= row))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl; 
             return 1;
         }
 
         if ((*RoboMoveCopies[i]->current_col < 0) || (*RoboMoveCopies[i]->current_col >= col))
         {
             cout << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
+            outfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
             return 1;            
         }
     }
@@ -109,6 +112,11 @@ int main()
             if (Spawning)
             {
                 cout << "Spawning..." << endl;
+                
+                ofstream outfile;
+                outfile.open("Robotoutput.txt", ios::app);
+                outfile << "Spawning..." << endl;
+
                 RoboMoveCopies[i]->PlaceRobot(battlefield.Grid);
             }
             
@@ -221,12 +229,24 @@ int main()
                     // Clear grid symbol before deleting
                     if (RoboMoveCopies[x]->current_row != nullptr && RoboMoveCopies[x]->current_col != nullptr)
                     {
+
+                        // Clear grid symbol before deleting
+                        if (RoboMoveCopies[x]->current_row && RoboMoveCopies[x]->current_col)
+                        {
+                            battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
+                        }
+                        cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
+
+                        ofstream outfile;
+                        outfile.open("Robotoutput.txt", ios::app);
+                        outfile << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and removed.\n";
                         battlefield.Grid[*RoboMoveCopies[x]->current_row][*RoboMoveCopies[x]->current_col] = ".";
                     }
 
                     if (RoboMoveCopies[x]->CheckLives() <= 0)
                     {
                         cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " has lost all lives and is removed.\n";
+
                         delete RoboMoveCopies[x]; // Deletes the object of the shot robot
                         RoboMoveCopies[x] = nullptr;
                         Endgame += 1;
@@ -237,6 +257,64 @@ int main()
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
                 }
+
+                // Print logs
+                for (int k = 0; k < RoboMoveCopies.size(); k++)
+                {
+                    //if (RoboMoveCopies[k] == nullptr) continue;
+                    if (RoboMoveCopies[k] == nullptr || RoboMoveCopies[k]->current_row == nullptr 
+                        || RoboMoveCopies[k]->current_col == nullptr || RoboMoveCopies[k]->shootFlag == nullptr)
+                        {
+                            continue;
+                        } 
+
+                    cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+
+                    ofstream outfile;
+                    outfile.open("Robotoutput.txt", ios::app);
+                    outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " row: " << *RoboMoveCopies[k]->current_row
+                        << " col: " << *RoboMoveCopies[k]->current_col
+                        << " Shots: " << *RoboMoveCopies[k]->shootFlag << endl;
+
+                    if (*RoboMoveCopies[k]->printtrackList)  //Ensures that the robots being tracked are still printed after the uses run out
+                    {
+                        cout << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                        outfile << "TrackList: " << *RoboMoveCopies[k]->trackList << endl;
+                    }
+
+                    if (RoboMoveCopies[k]->ScoutBot())
+                    {
+                        if (RoboMoveCopies[k] == nullptr)
+                        {
+                            continue;
+                        }
+                        
+                        cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
+                        ofstream outfile;
+                        outfile.open("Robotoutput.txt", ios::app);
+                        outfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " sees:";
+
+                        for (int x = 0; x < RoboMoveCopies.size(); x++)
+                        {
+                            if (RoboMoveCopies[x] == nullptr || RoboMoveCopies[x]->current_row == nullptr 
+                                || RoboMoveCopies[x]->current_col == nullptr || x == k) continue;
+                                                                                                                               
+                            cout << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                            cout << ",";
+                            ofstream outfile;
+                            outfile.open("Robotoutput.txt", ios::app);
+                            outfile << " Robot " << RoboMoveCopies[x]->GetSignia() << " at (" << *RoboMoveCopies[x]->current_row << ", " << *RoboMoveCopies[x]->current_col << ")";
+                            outfile << ",";
+                        }
+                        cout << endl;
+                        outfile << endl;
+                    }
+
+                }
+                
+                battlefield.delay(1000);
             }
             cout << endl;
             if (RoboMoveCopies[i] == nullptr)
