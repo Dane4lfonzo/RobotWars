@@ -1,3 +1,36 @@
+/**********|**********|**********|
+ Program: Main.cpp / Class.cpp / Class.h 
+Course: Data Structures and Algorithms
+ Trimester: 2410
+
+ Name: DANIEL ARIF BIN ABD ZAINEE
+ ID: 242UC244JU
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: DANIEL.ARIF.ABD@student.mmu.edu.my
+ Phone: 0137469125
+
+ Name: NUR YASMIN BINTI MOHD SABRI
+ ID: 242UC244TX
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: NUR.YASMIN.MOHD@student.mmu.edu.my
+ Phone: 0197828428
+
+ Name: MUHAMMAD NUR AIZAD BIN MURTADHA
+ ID: 242UC244T5
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: MUHAMMAD.NUR.AIZAD@student.mmu.edu.my
+ Phone: 0195659972
+
+ Name: YUVENDAR A/L MARAN
+ ID: 242UC244DJ
+ Lecture Section: TC3L
+ Tutorial Section: T11L
+ Email: YUVENDAR.MARAN@student.mmu.edu.my
+ Phone: 0127420244
+ **********|**********|**********/
 #include <iostream>
 #include <vector>
 #include <cstdlib> 
