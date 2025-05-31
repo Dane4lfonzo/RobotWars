@@ -109,6 +109,7 @@ void Battlefield::delay(int milliseconds)
 UpgradeRobot::UpgradeRobot()
 {
     RobotUpgraded = new bool(false);
+    UpgradeLimit = new int(0);
 
     movingUpgradeUse_Jump = new bool(false);
     movingUpgradeUse_Hide = new bool(false);
@@ -140,6 +141,7 @@ UpgradeRobot::UpgradeRobot()
 UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 {
     RobotUpgraded = new bool(*obj.RobotUpgraded);
+    UpgradeLimit = new int(*obj.UpgradeLimit);
 
     movingUpgradeUse_Jump = new bool(*obj.movingUpgradeUse_Jump);
     movingUpgradeUse_Hide = new bool(*obj.movingUpgradeUse_Hide);
@@ -171,6 +173,7 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 UpgradeRobot::~UpgradeRobot()
 {
     delete RobotUpgraded;
+    delete UpgradeLimit;
 
     delete hideUsage;
     delete jumpUsage;
@@ -715,8 +718,7 @@ void ThinkingRobot::UpdateUsage()
         *hideUsage -= 1;
         if (*hideUsage <= 0)
         {
-            *movingUpgradeUse_Hide = false;
-            
+            *movingUpgradeUse_Hide = false;       
         }
     } 
 
@@ -772,16 +774,6 @@ void ThinkingRobot::PrintUpgrades()
         cout << *movingUpgradeChosen << " ";
     }
 
-    if (HideBot())
-    {
-        cout << "\nHide Uses: " << *hideUsage << " Left"; 
-    }
-    if (JumpBot())
-    {
-        cout << "\nJump Uses: " << *jumpUsage << " Left";
-    }
-
-
     if (*shootingUpgradeDone)
     {
         cout << *shootingUpgradeChosen << " ";
@@ -790,6 +782,15 @@ void ThinkingRobot::PrintUpgrades()
     if (*seeingUpgradeDone)
     {
         cout << *seeingUpgradeChosen << " ";
+    }
+
+    if (HideBot())
+    {
+        cout << "\nHide Uses: " << *hideUsage << " Left"; 
+    }
+    if (JumpBot())
+    {
+        cout << "\nJump Uses: " << *jumpUsage << " Left";
     }
 
     if (ScoutBot())
@@ -814,6 +815,7 @@ void ThinkingRobot::ResetUpgrades()
     *seeingUpgradeDone = false;
 
     *RobotUpgraded = false;
+    *UpgradeLimit = 0;
 
     *movingUpgradeUse_Jump = false;
     *movingUpgradeUse_Hide = false;

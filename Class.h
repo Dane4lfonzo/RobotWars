@@ -94,6 +94,7 @@ class UpgradeRobot
     public:
         bool *printtrackList;
         bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
+        int *UpgradeLimit;
         string *trackList;
         bool *addtrackList;
         UpgradeRobot();

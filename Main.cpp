@@ -189,7 +189,11 @@ int main()
                             if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
                             {
                                 RoboMoveCopies[i]->Upgrade();
-                                *RoboMoveCopies[i]->RobotUpgraded = true;
+                                *RoboMoveCopies[i]->UpgradeLimit += 1;
+                                if (*RoboMoveCopies[i]->UpgradeLimit >= 3)
+                                {
+                                    *RoboMoveCopies[i]->RobotUpgraded = true;
+                                } 
                             }
                             
                             if (RoboMoveCopies[i]->CheckExplosion())
@@ -229,10 +233,6 @@ int main()
                     }
                     else if (RoboMoveCopies[x]->CheckLives() > 0)
                     {
-                        // if (RoboMoveCopies[x]->Checkshells() != 0)
-                        // {
-                        //     cout << "Robot " << RoboMoveCopies[x]->GetSignia() << " was shot and is in queue.\n";
-                        // }
                         RobotQueue.push(RoboMoveCopies[x]);
                         RoboMoveCopies[x] = nullptr; // Cleans up the pointer of the removed robot
                     }
