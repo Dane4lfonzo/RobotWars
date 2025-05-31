@@ -472,7 +472,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
             {
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -485,7 +485,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -814,29 +814,6 @@ void ThinkingRobot::ResetUpgrades()
     //trackList = new string();
     *addtrackList = false;
     *printtrackList = false; 
-}
-
-void ThinkingRobot::PrintUpgrades()
-{
-    string movingUpgName, shootingUpgName, seeingUpgName;
-    cout << "Robot " << *signia << " Upgrades: ";
-    if (!*movingUpgradeDone && !*shootingUpgradeDone && !*seeingUpgradeDone)
-    {
-        cout << "None ";
-    }
-    if (*movingUpgradeDone)
-    {
-        cout << *movingUpgradeChosen << " ";
-    }
-    if (*shootingUpgradeDone)
-    {
-        cout << *shootingUpgradeChosen << " ";
-    }
-    if (*seeingUpgradeDone)
-    {
-        cout << *seeingUpgradeChosen << " ";
-    }
-    cout << endl;
 }
 /**********************************ShootingRobot**************************************/
 

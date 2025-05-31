@@ -1,5 +1,5 @@
 Row: 5
-Col: 5
+Col: 10
 Number of Steps: 200
 Number of Robots:4
 Robot Name: A Row: random Col: random

@@ -1,4 +1,4 @@
-numrows by numcols: 5 5
+numrows by numcols: 5 10
 numofsteps: 200
 numberofRobots: 4
 GenericRobot A random random

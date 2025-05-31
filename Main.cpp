@@ -171,7 +171,7 @@ int main()
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
-                        cout << "Robot Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
+                        cout << RoboMoveCopies[i]->GetSignia() << "'s Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
@@ -289,7 +289,7 @@ int main()
             {
                 break;
             }
-            cout << Endgame << endl;
+            cout << "Dead Robots: " << Endgame << endl;
             battlefield.delay(500);
         }
         
@@ -309,7 +309,6 @@ int main()
                 RoboMoveCopies.push_back(extraBot);
                 ExtraBot += 1;
                 oneSpawn += 1;
-                battlefield.delay(1000);
             }
         }
         
@@ -330,7 +329,7 @@ int main()
                     WaitingBot->GetShells(numberOfRobots);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    //battlefield.delay(1500);
+                    battlefield.delay(1000);
                 }
                 turn += 1;
             }

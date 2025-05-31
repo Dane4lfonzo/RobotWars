@@ -144,7 +144,6 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         void SetSignia(char character);
         void MovetoSquare(vector<vector<string>>& sharedGrid);
         void NewSpawn(vector<vector<string>>& sharedGrid);
-        // void NewSpawn2(vector<vector<string>>& sharedGrid);
 
 };
 
@@ -190,7 +189,6 @@ class ThinkingRobot: public SeeingRobot
         void PrintUpgrades();
         void ResetUpgrades();
         void Upgrade();
-        void PrintUpgrades();
         void Think();
         bool CheckExplosion();
         bool CheckQueue();
