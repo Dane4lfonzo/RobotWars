@@ -5,12 +5,17 @@
         "new": "cpp",
         "cstdlib": "cpp",
         "vector": "cpp",
+<<<<<<< HEAD
+        "iosfwd": "cpp",
+        "fstream": "cpp"
+=======
         "array": "cpp",
         "string_view": "cpp",
         "initializer_list": "cpp",
         "utility": "cpp",
         "fstream": "cpp",
         "string": "cpp"
+>>>>>>> Dane
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

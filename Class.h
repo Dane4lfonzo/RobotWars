@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <unordered_set>
 
+
 using namespace std;
 
 // Battlefield class to create the grid
@@ -55,7 +56,6 @@ class Robot
             {-1, -1, -1, 0, 1, 1, 1, 0, -2, -2, -2, -1, 0, 1, 2, 2, 2, 1, 0, -1, -3, 0, 3, 0}
         };
         
-    
     public:
         Robot(){}
         virtual void stats() = 0;
@@ -94,6 +94,7 @@ class UpgradeRobot
     public:
         bool *printtrackList;
         bool *RobotUpgraded;// For shooting: when it upgrades, it cant upgrade anymore until respawn
+        int *UpgradeLimit;
         string *trackList;
         bool *addtrackList;
         UpgradeRobot();
@@ -118,8 +119,8 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         int *movingchoice = new int(0);
         int *move_row = new int(0);
         int *move_col = new int(0);
-        string* signia = new string();
 
+        string* signia = new string();
 
     public:
         int *current_row;
@@ -162,7 +163,7 @@ class SeeingRobot: public MovingRobot
         ~SeeingRobot();
         void Look(int row, int col);
         bool RobotDetect();
-    
+
 };
 
 class ThinkingRobot: public SeeingRobot
@@ -212,10 +213,11 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
         void CheckShot(string Robotname, int numberofRobots);
-        bool GetShooting();
         int Checkshells();
-        
+        bool GetShooting();
+
 };
 
 // Function to read file
 void filereading(ifstream&, ofstream&, int&, int&, int&, int&, string&, vector<string>&);
+

@@ -44,6 +44,8 @@ void Battlefield::GridReset()//utk hilangkan after images
 
 void Battlefield::printGrid()
 {
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
     string Name = "Battlefield";
     cout << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
 
@@ -63,6 +65,8 @@ void Battlefield::printGrid()
         for (int j=0; j < *MaxCol; j++)
         {
             cout << Grid[i][j];
+            
+            //outfile << Grid[i][j];
         }
         cout << " ";
         cout << "#";
@@ -76,7 +80,44 @@ void Battlefield::printGrid()
     {
         cout << "#";
     }
-    cout << endl;    
+    cout << endl;  
+    
+    // log
+    outfile << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        outfile << "#";
+    }
+
+    outfile << endl;
+
+    outfile << "#" << setw(*MaxCol+3) << "#" << endl; 
+
+    for (int i=0; i < *MaxRow; i++)
+    {
+        outfile << "#";
+        outfile << " ";
+        for (int j=0; j < *MaxCol; j++)
+        {
+            outfile << Grid[i][j];
+            
+            //outfile << Grid[i][j];
+        }
+        outfile << " ";
+        outfile << "#";
+        
+        outfile << endl;
+    }
+
+    outfile << "#" << setw(*MaxCol+3) << "#" << endl;
+
+    for (int x=0; x < *MaxCol+4; x++)
+    {
+        outfile << "#";
+    }
+    outfile << endl;  
+
 }
 
 void Battlefield::SetStep(int numofsteps)
@@ -96,6 +137,11 @@ void Battlefield::CountDownStep()
 {
     CountNumSteps -= 1;
     cout << "Remaining Steps: " << CountNumSteps << "\n\n";
+
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+    //outfile << "\n";
+    outfile << "Remaining Steps: " << CountNumSteps << "\n\n";
 }
 
 void Battlefield::delay(int milliseconds) 
@@ -109,6 +155,7 @@ void Battlefield::delay(int milliseconds)
 UpgradeRobot::UpgradeRobot()
 {
     RobotUpgraded = new bool(false);
+    UpgradeLimit = new int(0);
 
     movingUpgradeUse_Jump = new bool(false);
     movingUpgradeUse_Hide = new bool(false);
@@ -140,6 +187,7 @@ UpgradeRobot::UpgradeRobot()
 UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 {
     RobotUpgraded = new bool(*obj.RobotUpgraded);
+    UpgradeLimit = new int(*obj.UpgradeLimit);
 
     movingUpgradeUse_Jump = new bool(*obj.movingUpgradeUse_Jump);
     movingUpgradeUse_Hide = new bool(*obj.movingUpgradeUse_Hide);
@@ -171,6 +219,7 @@ UpgradeRobot::UpgradeRobot(const UpgradeRobot& obj)
 UpgradeRobot::~UpgradeRobot()
 {
     delete RobotUpgraded;
+    delete UpgradeLimit;
 
     delete hideUsage;
     delete jumpUsage;
@@ -245,8 +294,6 @@ void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& itera
 {
     bool validrow = false;
     bool validcol = false;
-
-    cout << "work" << endl;
 
     if (check_spawn_condition[iterationval] != "random")
     {
@@ -334,6 +381,10 @@ void MovingRobot::PlaceRobot(vector<vector<string>>& sharedGrid)
 {
     bool validpos = false;
 
+    // sharedGrid[*current_row][*current_col] = *signia;
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+
     while (!validpos)
     {
         if (sharedGrid[*current_row][*current_col] == ".")
@@ -415,21 +466,24 @@ void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
     int rand_col = rand() % *MaxCol;
 
     while (!validnewspawn)
-    if (sharedGrid[rand_row][rand_col] == ".")
     {
-        *current_row = rand_row;
-        *current_col = rand_col;
+        if (sharedGrid[rand_row][rand_col] == ".")
+        {
+            *current_row = rand_row;
+            *current_col = rand_col;
 
-        sharedGrid[*current_row][*current_col] = *signia;
-        validnewspawn = true;
+            sharedGrid[*current_row][*current_col] = *signia;
+            validnewspawn = true;
+        }
+
+        else 
+        {
+            rand_row = rand() % *MaxRow;
+            rand_col = rand() % *MaxCol;      
+            validnewspawn = false;
+        }
     }
 
-    else 
-    {
-        rand_row = rand() % *MaxRow;
-        rand_col = rand() % *MaxCol;      
-        validnewspawn = false;
-    }
 }
 
 
@@ -464,6 +518,8 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
     *detection = false;
     *checkrow = Robo_current_row;
     *checkcol = Robo_current_col;
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
 
     if (!LongShotBot())
     {
@@ -471,7 +527,13 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
             {
+                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
+                // log
+                
+                outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
                 *detection = true;
                 break;
             }
@@ -484,6 +546,12 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
+
+                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                //log
+                
+                outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                
                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
@@ -552,6 +620,12 @@ void ThinkingRobot::Think()
 {
     cout << "Robot "<< signia <<" is thinking" << endl;
 
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+    outfile << "Robot "<< signia <<" is thinking" << endl;
+
+    
+
     if(*detection == true)
     {
         *shootFlag = true;
@@ -609,6 +683,10 @@ void ThinkingRobot::Upgrade()
     string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+
+
     vector<int> areasAvailable{};
 
     // if tkde movingUpgrade, letak dlm vector supaya bole pilih japgi 
@@ -643,31 +721,41 @@ void ThinkingRobot::Upgrade()
 
     switch(choice)
     {
+        
         case 0:
             *movingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Moving Upgrade: " << *movingUpgradeChosen << endl;
+            
+
             areasAvailable.clear(); // utk clear for next upgrade so this upgrade tkde dlm vector areasAvailable
             break;
         case 1:
             *shootingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << *shootingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Shooting Upgrade: " << *shootingUpgradeChosen << endl;
+            
             areasAvailable.clear();
             break;
         case 2:
             *seeingUpgrade = true;
             cout << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << *seeingUpgradeChosen << endl;
+            //log
+            outfile << "Robot " << *signia << " has upgraded in Seeing Upgrade: " << *seeingUpgradeChosen << endl;
+
             areasAvailable.clear();
             break;
     }
 
-    if (movingUpgradeChoice[rand_move] == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Hide = true;
         *movingUpgradeDone = true;
-
     }
 
-    if (movingUpgradeChoice[rand_move] == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Jump = true;
         *movingUpgradeDone = true;
@@ -714,8 +802,7 @@ void ThinkingRobot::UpdateUsage()
         *hideUsage -= 1;
         if (*hideUsage <= 0)
         {
-            *movingUpgradeUse_Hide = false;
-            
+            *movingUpgradeUse_Hide = false;       
         }
     } 
 
@@ -754,7 +841,6 @@ void ThinkingRobot::UpdateThirtyShot()
     {
         *shells = 30; // 3 shells per robot
         *shootingUpgradeUse_ThirtyShot = false; 
-        //cout << "\n\n\n\n\nWORK" << endl;
     }
 }
 
@@ -766,17 +852,38 @@ void ThinkingRobot::PrintUpgrades()
     {
         cout << "None ";
     }
+
     if (*movingUpgradeDone)
     {
         cout << *movingUpgradeChosen << " ";
     }
+
     if (*shootingUpgradeDone)
     {
         cout << *shootingUpgradeChosen << " ";
     }
+
     if (*seeingUpgradeDone)
     {
         cout << *seeingUpgradeChosen << " ";
+    }
+
+    if (HideBot())
+    {
+        cout << "\nHide Uses: " << *hideUsage << " Left"; 
+    }
+    if (JumpBot())
+    {
+        cout << "\nJump Uses: " << *jumpUsage << " Left";
+    }
+
+    if (ScoutBot())
+    {
+        cout << "\nScout Uses: " << *scoutUsage << " Left";
+    }
+    if (TrackBot())
+    {
+        cout << "\nTrackers: " << *trackUsage << " Left";
     }
     cout << endl;
 }
@@ -792,6 +899,7 @@ void ThinkingRobot::ResetUpgrades()
     *seeingUpgradeDone = false;
 
     *RobotUpgraded = false;
+    *UpgradeLimit = 0;
 
     *movingUpgradeUse_Jump = false;
     *movingUpgradeUse_Hide = false;
@@ -810,7 +918,7 @@ void ThinkingRobot::ResetUpgrades()
     *scoutUsage = 3;
     *trackUsage = 3;
 
-    //trackList = new string();
+    (*trackList).clear();
     *addtrackList = false;
     *printtrackList = false; 
 }
@@ -838,15 +946,36 @@ ShootingRobot::~ShootingRobot()
 void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 {
     *shooting = false;
+    ofstream outfile;
+    outfile.open("Robotoutput.txt", ios::app);
+    
+
     int times = 0;
+
 
     if (*shootFlag && !SemiAutoBot())
     {
         if (*shells != 0)
         {
-            *shootChances = (rand() % 10) + 1;
-            *shells -= 1;
+            *shooting = true;
+            cout << "Shots fired successfully" << endl;
+            //log
+            outfile << "Shots fired successfully" << endl;
+            
+            
+        }
+        else
+        {
+            cout << "Shots missed" << endl;
+            outfile << "Shots missed" << endl;
+            // *addtrackList = true;
+            if (TrackBot())
+            {
+                *shootChances = (rand() % 10) + 1;
+                *shells -= 1;
+            }
             if (*shootChances <= 7)
+
             {
                 *shooting = true;
                 cout << "Robot " << Robotname << " was shot successfully" << endl;
@@ -872,6 +1001,19 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             while(times != 3)
             {
                 *shootChances = (rand() % 10) + 1;
+
+            if (*shootChances <= 7)
+            {
+                *shooting = true;
+                cout << "Shots fired successfully" << endl;
+                outfile << "Shots fired successfully" << endl;
+                break;
+            }
+            else
+            {
+                cout << "Shots missed" << endl;
+                outfile << "Shots missed" << endl;
+                if (TrackBot())
 
                 if (*  shells == 0 || *shooting)
                 {
@@ -900,6 +1042,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
         }
         *detection = false;
         *shootFlag = false;
+        }
     }
     
     if (TrackBot() && *addtrackList)
@@ -925,7 +1068,6 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             *addtrackList = false;
         }       
     }
-
 }
 
 int ShootingRobot::Checkshells()
