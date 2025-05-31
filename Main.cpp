@@ -116,7 +116,7 @@ int main()
                 break;
             }
 
-            //system("CLS");
+            system("CLS");
 
             if (Spawning)
             {
