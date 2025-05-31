@@ -915,11 +915,11 @@ ShootingRobot::~ShootingRobot()
     delete shooting;
 }
 
-ostream& operator<<(ostream& os, const ShootingRobot& robot) {
-    os << "Robot " << robot.GetSignia()
-       << " Coordinates: (" << *robot.current_row << ", " << *robot.current_col << ")"
-       << " Lives: " << robot.CheckLives()
-       << " Shells left: " << robot.Checkshells();
+ostream& operator<<(ostream& os, const ShootingRobot& obj) {
+    os << "Robot " << obj.GetSignia()
+       << " Coordinates: (" << *obj.current_row << ", " << *obj.current_col << ")"
+       << " Lives: " << obj.CheckLives()
+       << " Shells left: " << obj.Checkshells();
     return os;
 }
 
