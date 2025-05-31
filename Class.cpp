@@ -246,8 +246,6 @@ void MovingRobot::SetCurrentPos(vector<string> check_spawn_condition, int& itera
     bool validrow = false;
     bool validcol = false;
 
-    cout << "work" << endl;
-
     if (check_spawn_condition[iterationval] != "random")
     {
         *current_row = stoi(check_spawn_condition[iterationval]);
@@ -410,27 +408,30 @@ void MovingRobot::MovetoSquare(vector<vector<string>>& sharedGrid)
 
 void MovingRobot::NewSpawn(vector<vector<string>>& sharedGrid)
 {
-    sharedGrid[*current_row][*current_col] = ".";
+    //sharedGrid[*current_row][*current_col] = ".";
     bool validnewspawn = false;
     int rand_row = rand() % *MaxRow;
     int rand_col = rand() % *MaxCol;
 
     while (!validnewspawn)
-    if (sharedGrid[rand_row][rand_col] == ".")
     {
-        *current_row = rand_row;
-        *current_col = rand_col;
+        if (sharedGrid[rand_row][rand_col] == ".")
+        {
+            *current_row = rand_row;
+            *current_col = rand_col;
 
-        sharedGrid[*current_row][*current_col] = *signia;
-        validnewspawn = true;
+            sharedGrid[*current_row][*current_col] = *signia;
+            validnewspawn = true;
+        }
+
+        else 
+        {
+            rand_row = rand() % *MaxRow;
+            rand_col = rand() % *MaxCol;      
+            validnewspawn = false;
+        }
     }
 
-    else 
-    {
-        rand_row = rand() % *MaxRow;
-        rand_col = rand() % *MaxCol;      
-        validnewspawn = false;
-    }
 }
 
 
@@ -661,14 +662,13 @@ void ThinkingRobot::Upgrade()
             break;
     }
 
-    if (movingUpgradeChoice[rand_move] == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "HideBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Hide = true;
         *movingUpgradeDone = true;
-
     }
 
-    if (movingUpgradeChoice[rand_move] == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
+    if (*movingUpgradeChosen == "JumpBot" && !*movingUpgradeDone && *movingUpgrade)
     {
         *movingUpgradeUse_Jump = true;
         *movingUpgradeDone = true;
@@ -755,7 +755,6 @@ void ThinkingRobot::UpdateThirtyShot(int numberofRobots)
     {
         *shells = numberofRobots * 3; // 3 shells per robot
         *shootingUpgradeUse_ThirtyShot = false; 
-        //cout << "\n\n\n\n\nWORK" << endl;
     }
 }
 
@@ -767,17 +766,39 @@ void ThinkingRobot::PrintUpgrades()
     {
         cout << "None ";
     }
+
     if (*movingUpgradeDone)
     {
         cout << *movingUpgradeChosen << " ";
     }
+
+    if (HideBot())
+    {
+        cout << "\nHide Uses: " << *hideUsage << " Left"; 
+    }
+    if (JumpBot())
+    {
+        cout << "\nJump Uses: " << *jumpUsage << " Left";
+    }
+
+
     if (*shootingUpgradeDone)
     {
         cout << *shootingUpgradeChosen << " ";
     }
+
     if (*seeingUpgradeDone)
     {
         cout << *seeingUpgradeChosen << " ";
+    }
+
+    if (ScoutBot())
+    {
+        cout << "\nScout Uses: " << *scoutUsage << " Left";
+    }
+    if (TrackBot())
+    {
+        cout << "\nTrackers: " << *trackUsage << " Left";
     }
     cout << endl;
 }
@@ -811,7 +832,7 @@ void ThinkingRobot::ResetUpgrades()
     *scoutUsage = 3;
     *trackUsage = 3;
 
-    //trackList = new string();
+    (*trackList).clear();
     *addtrackList = false;
     *printtrackList = false; 
 }

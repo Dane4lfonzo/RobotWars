@@ -106,7 +106,6 @@ class UpgradeRobot
         bool ThirtyShotBot();
         bool ScoutBot();
         bool TrackBot();
-        void ResetBot();
 
 
 };
