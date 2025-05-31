@@ -137,7 +137,7 @@ class MovingRobot : public Robot, public Battlefield, public UpgradeRobot
         MovingRobot(int row, int col);
         MovingRobot(const MovingRobot& obj);
         ~MovingRobot();
-        string GetSignia();
+        string GetSignia() const;
         void GetShells(int bullets);
         void SetCurrentPos(vector<string> check_spawn_condition, int& iterationval);
         void WheretoMove();
@@ -195,7 +195,7 @@ class ThinkingRobot: public SeeingRobot
         bool CheckQueue();
         bool SetQueue();
         bool NullifyQueue();
-        int CheckLives();
+        int CheckLives() const;
         int DeductLives();
 };
 
@@ -213,8 +213,9 @@ class ShootingRobot : public ThinkingRobot
         ShootingRobot(const ShootingRobot& obj);
         ~ShootingRobot();
         void CheckShot(string Robotname, int numberofRobots);
-        int Checkshells();
+        int Checkshells() const;
         bool GetShooting();
+        friend ostream& operator<<(ostream& os, const ShootingRobot& robot);
 
 };
 

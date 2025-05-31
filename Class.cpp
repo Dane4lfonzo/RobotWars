@@ -321,7 +321,7 @@ void MovingRobot::SetSignia(char character)
     *signia = character;
 }
 
-string MovingRobot::GetSignia()
+string MovingRobot::GetSignia() const
 {
     return (*signia);
 }
@@ -609,7 +609,7 @@ bool ThinkingRobot::CheckExplosion()
     return (*explosion);
 }
 
-int ThinkingRobot::CheckLives()
+int ThinkingRobot::CheckLives() const
 {return (*lives);}
 
 int ThinkingRobot::DeductLives()
@@ -915,6 +915,15 @@ ShootingRobot::~ShootingRobot()
     delete shooting;
 }
 
+ostream& operator<<(ostream& os, const ShootingRobot& obj) {
+    os << "Robot " << obj.GetSignia()
+       << " Coordinates: (" << *obj.current_row << ", " << *obj.current_col << ")"
+       << " Lives: " << obj.CheckLives()
+       << " Shells left: " << obj.Checkshells();
+    return os;
+}
+
+
 void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
 {
     *shooting = false;
@@ -1037,7 +1046,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     }
 }
 
-int ShootingRobot::Checkshells()
+int ShootingRobot::Checkshells() const
 {
     return (*shells);
 }
@@ -1151,7 +1160,7 @@ void filereading(ifstream& infile, ofstream& outfile, int& numrows, int& numcols
             // cout << " Row: " << check_spawn_condition[iterationval*2];
             // cout << " Col: " << check_spawn_condition[iterationval*2 +1] << endl;
             
-            RoboNames += robotName;
+            RoboNames += robotName[0];
             iterationval += 1;
                        
         }

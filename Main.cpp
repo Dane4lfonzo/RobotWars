@@ -199,7 +199,7 @@ int main()
                             }
                             Trashbin.insert(j); // Puts shot robot into an array
 
-                            if (!*RoboMoveCopies[i]->RobotUpgraded) ///////////////////////Going to make the upgrades stackable later
+                            if (!*RoboMoveCopies[i]->RobotUpgraded) 
                             {
                                 RoboMoveCopies[i]->Upgrade();
                                 *RoboMoveCopies[i]->UpgradeLimit += 1;
@@ -275,13 +275,15 @@ int main()
                 if (RoboMoveCopies[k]->current_row == nullptr || RoboMoveCopies[k]->current_col == nullptr || 
                     RoboMoveCopies[k]->CheckLives() <= 0 ) continue;
 
-                cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
-                    << "," << *RoboMoveCopies[k]->current_col << ")"
-                    << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+                // cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
+                //     << "," << *RoboMoveCopies[k]->current_col << ")"
+                //     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+                cout << *RoboMoveCopies[k] << endl; // <<operator overloading
 
-                outlogfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
-                    << "," << *RoboMoveCopies[k]->current_col << ")"
-                    << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+                // outlogfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
+                //     << "," << *RoboMoveCopies[k]->current_col << ")"
+                //     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
+                outlogfile << *RoboMoveCopies[k] << endl; // <<operator overloading
 
                 RoboMoveCopies[k]->PrintUpgrades();
 
