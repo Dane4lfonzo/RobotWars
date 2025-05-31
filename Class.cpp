@@ -44,8 +44,6 @@ void Battlefield::GridReset()//utk hilangkan after images
 
 void Battlefield::printGrid()
 {
-    ofstream outfile;
-    outfile.open("Robotoutput.txt", ios::app);
     string Name = "Battlefield";
     cout << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
 
@@ -81,42 +79,6 @@ void Battlefield::printGrid()
         cout << "#";
     }
     cout << endl;  
-    
-    // log
-    outfile << setw((*MaxCol / 2 + Name.size())-4) << Name << endl;
-
-    for (int x=0; x < *MaxCol+4; x++)
-    {
-        outfile << "#";
-    }
-
-    outfile << endl;
-
-    outfile << "#" << setw(*MaxCol+3) << "#" << endl; 
-
-    for (int i=0; i < *MaxRow; i++)
-    {
-        outfile << "#";
-        outfile << " ";
-        for (int j=0; j < *MaxCol; j++)
-        {
-            outfile << Grid[i][j];
-            
-            //outfile << Grid[i][j];
-        }
-        outfile << " ";
-        outfile << "#";
-        
-        outfile << endl;
-    }
-
-    outfile << "#" << setw(*MaxCol+3) << "#" << endl;
-
-    for (int x=0; x < *MaxCol+4; x++)
-    {
-        outfile << "#";
-    }
-    outfile << endl;  
 
 }
 
@@ -527,12 +489,9 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
             {
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
-
                 // log
-                
-                outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                outfile << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
 
                 *detection = true;
                 break;
@@ -847,45 +806,58 @@ void ThinkingRobot::UpdateThirtyShot()
 void ThinkingRobot::PrintUpgrades()
 { 
     string movingUpgName, shootingUpgName, seeingUpgName;
+    ofstream outlogfile;
+    outlogfile.open("Robotoutput.txt", ios::app);
+
     cout << "Robot " << *signia << " Upgrades: ";
+    outlogfile << "Robot " << *signia << " Upgrades: ";
     if (!*movingUpgradeDone && !*shootingUpgradeDone && !*seeingUpgradeDone)
     {
         cout << "None ";
+        outlogfile << "None ";
     }
 
     if (*movingUpgradeDone)
     {
         cout << *movingUpgradeChosen << " ";
+        outlogfile << *movingUpgradeChosen << " ";
     }
 
     if (*shootingUpgradeDone)
     {
         cout << *shootingUpgradeChosen << " ";
+        outlogfile << *shootingUpgradeChosen << " ";
     }
 
     if (*seeingUpgradeDone)
     {
         cout << *seeingUpgradeChosen << " ";
+        outlogfile << *seeingUpgradeChosen << " ";
     }
 
     if (HideBot())
     {
         cout << "\nHide Uses: " << *hideUsage << " Left"; 
+        outlogfile << "\nHide Uses: " << *hideUsage << " Left"; 
     }
     if (JumpBot())
     {
         cout << "\nJump Uses: " << *jumpUsage << " Left";
+        outlogfile << "\nJump Uses: " << *jumpUsage << " Left";
     }
 
     if (ScoutBot())
     {
         cout << "\nScout Uses: " << *scoutUsage << " Left";
+        outlogfile << "\nScout Uses: " << *scoutUsage << " Left";
     }
     if (TrackBot())
     {
         cout << "\nTrackers: " << *trackUsage << " Left";
+        outlogfile << "\nTrackers: " << *trackUsage << " Left";
     }
     cout << endl;
+    outlogfile << endl;
 }
 
 void ThinkingRobot::ResetUpgrades()
@@ -951,8 +923,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     
 
     int times = 0;
-
-
+    // Shooting for no upgrades
     if (*shootFlag && !SemiAutoBot())
     {
         if (*shells != 0)
@@ -961,8 +932,6 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             cout << "Shots fired successfully" << endl;
             //log
             outfile << "Shots fired successfully" << endl;
-            
-            
         }
         else
         {
@@ -979,11 +948,14 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             {
                 *shooting = true;
                 cout << "Robot " << Robotname << " was shot successfully" << endl;
+                outfile << "Robot " << Robotname << " was shot successfully" << endl;
+
             }
             else
             {
                 *shooting = false;
                 cout << "Robot " << Robotname << " avoided the shot" << endl;
+                outfile << "Robot " << Robotname << " avoided the shot" << endl;
                 if (TrackBot())
                 {
                     *addtrackList = true;
@@ -994,6 +966,7 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     *shootFlag = false;
     }
 
+    // Shooting for semiautobot
     if (*shootFlag && SemiAutoBot())
     {
         if (*shells != 0)
@@ -1026,12 +999,14 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
                 {
                     *shooting = true;
                     cout << "Robot " << Robotname << " was shot successfully" << endl;
+                    outfile << "Robot " << Robotname << " was shot successfully" << endl;
                     break;
                 }
                 else
                 {
                     *shooting = false;
                     cout << "Robot " << Robotname << " avoided the shot" << endl;
+                    outfile << "Robot " << Robotname << " avoided the shot" << endl;
                     if (TrackBot())
                     {
                         *addtrackList = true;
@@ -1047,14 +1022,6 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     
     if (TrackBot() && *addtrackList)
     {
-        // for (int x = 0; x < (*trackList).length(); x++)
-        // {
-        //     if ((*trackList)[x] == Robotname[0])
-        //     {
-        //         *addtrackList = false;
-        //         break;
-        //     }
-        // }
         
         if ((*trackList).find(Robotname) != string::npos)
         {
