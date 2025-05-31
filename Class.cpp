@@ -472,7 +472,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
             {
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -485,7 +485,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 *detection = true;
                 break;
             }
@@ -606,9 +606,8 @@ bool ThinkingRobot::NullifyQueue()
 
 void ThinkingRobot::Upgrade()
 {
-    
     string movingUpgradeChoice[2] = {"HideBot", "JumpBot"};
-    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"}; //////////////////////////////////////////////////
+    string shootingUpgradeChoice[3] = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot"};
     string seeingUpgradeChoice[2] = {"ScoutBot", "TrackBot"};
 
     vector<int> areasAvailable{};
@@ -851,7 +850,6 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             if (*shootChances <= 7)
             {
                 *shooting = true;
-                
                 cout << "Robot " << Robotname << " was shot successfully" << endl;
             }
             else

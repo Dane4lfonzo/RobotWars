@@ -166,12 +166,12 @@ int main()
 
                     RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
 
-                    if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue())
+                    if (RoboMoveCopies[i]->RobotDetect() && !RoboMoveCopies[j]->CheckQueue() && !RoboMoveCopies[j]->HideBot())
                     {
                         cout << "Robot "<< RoboMoveCopies[i]->GetSignia() << " detects Robot " << RoboMoveCopies[j]->GetSignia() << endl;
                         RoboMoveCopies[i]->ShootheRobot();
                         RoboMoveCopies[i]->CheckShot(RoboMoveCopies[j]->GetSignia(), numberOfRobots);
-                        cout << "Robot Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
+                        cout << RoboMoveCopies[i]->GetSignia() << "'s Shells left: " << RoboMoveCopies[i]->Checkshells() << endl;
 
                         if (RoboMoveCopies[i]->GetShooting() && !RoboMoveCopies[j]->CheckQueue())
                         {
@@ -276,6 +276,7 @@ int main()
                     }
                     cout << endl;
                 }
+                cout << endl;
 
             }
 
@@ -288,25 +289,29 @@ int main()
             {
                 break;
             }
-            cout << Endgame << endl;
+            cout << "Dead Robots: " << Endgame << endl;
             battlefield.delay(500);
         }
         
         int Gacha = rand() % 3;
         int oneSpawn = 0;
         //Get 3 new robots
-        if (Gacha == 0 && ExtraBot != 3 && oneSpawn == 0)
+        if (!Spawning)
         {
-            cout << "A new AI bot has randomly spawned" << endl;
-            ShootingRobot* extraBot = new ShootingRobot(row, col);
-            string sig = "$&@";
-            extraBot->SetSignia(sig[ExtraBot]);
-            extraBot->GetShells(numberOfRobots);
-            extraBot->NewSpawn(battlefield.Grid);
-            RoboMoveCopies.push_back(extraBot);
-            ExtraBot += 1;
-            oneSpawn += 1;
+            if (Gacha == 0 && ExtraBot != 3 && oneSpawn == 0)
+            {
+                cout << "!!A new AI bot has randomly spawned!!" << endl;
+                ShootingRobot* extraBot = new ShootingRobot(row, col);
+                string sig = "$&@";
+                extraBot->SetSignia(sig[ExtraBot]);
+                extraBot->GetShells(numberOfRobots);
+                extraBot->NewSpawn(battlefield.Grid);
+                RoboMoveCopies.push_back(extraBot);
+                ExtraBot += 1;
+                oneSpawn += 1;
+            }
         }
+        
 
         int turn = 0;
         if (Spawnbot > 0)
@@ -324,7 +329,7 @@ int main()
                     WaitingBot->GetShells(numberOfRobots);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    //battlefield.delay(1500);
+                    battlefield.delay(1000);
                 }
                 turn += 1;
             }
