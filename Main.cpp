@@ -92,6 +92,12 @@ int main()
             outlogfile << "Robot Position " << RoboMoveCopies[i]->GetSignia() << " is out of bounds. Quitting Simulation..." << endl;
             return 1;            
         }
+
+        if (numberOfRobots >= (row*col))
+        {
+           cout << "Number of robots maximizes Battlefield space, no room for simulation. Quitting Simulation..." << endl;
+           return 1; 
+        }
     }
       
 
@@ -275,14 +281,8 @@ int main()
                 if (RoboMoveCopies[k]->current_row == nullptr || RoboMoveCopies[k]->current_col == nullptr || 
                     RoboMoveCopies[k]->CheckLives() <= 0 ) continue;
 
-                // cout << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
-                //     << "," << *RoboMoveCopies[k]->current_col << ")"
-                //     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
                 cout << *RoboMoveCopies[k] << endl; // <<operator overloading
 
-                // outlogfile << "Robot " << RoboMoveCopies[k]->GetSignia() << " Coordinates: (" << *RoboMoveCopies[k]->current_row
-                //     << "," << *RoboMoveCopies[k]->current_col << ")"
-                //     << " Lives: " << RoboMoveCopies[k]->CheckLives() << " Shells left: "<< RoboMoveCopies[k]->Checkshells() << endl;
                 outlogfile << *RoboMoveCopies[k] << endl; // <<operator overloading
 
                 RoboMoveCopies[k]->PrintUpgrades();
