@@ -156,7 +156,7 @@ int main()
             }
 
             // For cleaner printing
-            //system("CLS");
+            system("CLS");
 
             // Check if all the robots initiated in the beginning has spawned
             if (Spawning)
@@ -230,7 +230,7 @@ int main()
                     // Check so that the compared robot does not have the HideBot immunity
                     if (!RoboMoveCopies[j]->HideBot())
                     {
-                        RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col);
+                        RoboMoveCopies[i]->Look(*RoboMoveCopies[j]->current_row, *RoboMoveCopies[j]->current_col, RoboMoveCopies[j]->GetSignia());
                     }
 
                     // Check for detection
@@ -441,7 +441,7 @@ int main()
                     WaitingBot->GetShells(10);
                     WaitingBot->NewSpawn(battlefield.Grid);
                     RoboMoveCopies.push_back(WaitingBot);
-                    battlefield.delay(1000);
+                    battlefield.delay(700);
                 }
                 turn += 1;
             }
