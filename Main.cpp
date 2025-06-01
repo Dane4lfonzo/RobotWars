@@ -403,7 +403,7 @@ int main()
         }
         
         //Get 3 new alien robots ---------------------------------------------------------------
-        int Gacha = rand() % 3;
+        int Gacha = rand() % 7;
         int oneSpawn = 0;
         if (!Spawning)
         {

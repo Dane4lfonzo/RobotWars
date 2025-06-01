@@ -1,5 +1,9 @@
 Row: 5
+<<<<<<< HEAD
+Col: 10
+=======
 Col: 9
+>>>>>>> main
 Number of Steps: 200
 Number of Robots:4
 Robot Name: Abacus Row: random Col: random
@@ -13,6 +17,18 @@ Remaining Steps: 199
 
 Robot A's Turn
 
+<<<<<<< HEAD
+Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -23,6 +39,7 @@ Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -33,6 +50,18 @@ Remaining Steps: 198
 
 Robot B's Turn
 
+<<<<<<< HEAD
+Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -43,6 +72,7 @@ Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -53,6 +83,18 @@ Remaining Steps: 197
 
 Robot C's Turn
 
+<<<<<<< HEAD
+Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -63,6 +105,7 @@ Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -73,6 +116,18 @@ Remaining Steps: 196
 
 Robot D's Turn
 
+<<<<<<< HEAD
+Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -83,6 +138,7 @@ Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -92,6 +148,23 @@ Remaining Steps: 195
 
 Robot A's Turn
 
+<<<<<<< HEAD
+Detection true at (2,8)
+Robot A detects Robot C
+Shots fired successfully
+A's Shells left: 10
+Robot A has upgraded in Moving Upgrade: JumpBot
+Robot C was shot and is in queue.
+
+Robot A Coordinates: (3, 9) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Detection true at (2,5)
 Robot A detects Robot C
 Robot C was shot successfully
@@ -106,6 +179,7 @@ Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -115,6 +189,16 @@ Remaining Steps: 194
 
 Robot B's Turn
 
+<<<<<<< HEAD
+Robot A Coordinates: (3, 9) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 5) Lives: 3 Shells left: 9
 Robot A Upgrades: SemiAutoBot 
 
@@ -122,6 +206,7 @@ Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -131,6 +216,18 @@ Remaining Steps: 193
 
 Robot D's Turn
 
+<<<<<<< HEAD
+Robot D's Turn
+
+Robot A Coordinates: (3, 9) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (0, 7) Lives: 3 Shells left: 10
+=======
 Robot A Coordinates: (3, 5) Lives: 3 Shells left: 9
 Robot A Upgrades: SemiAutoBot 
 
@@ -138,6 +235,7 @@ Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
@@ -145,10 +243,28 @@ Dead Robots: 0
 Remaining Steps: 192
 
 Robot C is removed from queue.
+<<<<<<< HEAD
+=======
 ---ROUND 8---
+>>>>>>> main
 
 Robot A's Turn
 
+<<<<<<< HEAD
+Robot A's Turn
+
+Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (0, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 3) Lives: 2 Shells left: 10
+=======
 Detection true at (3,3)
 Robot A detects Robot $
 Robot $ was shot successfully
@@ -167,15 +283,2229 @@ Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
 Robot D Upgrades: None 
 
 Robot C Coordinates: (3, 1) Lives: 2 Shells left: 10
+>>>>>>> main
 Robot C Upgrades: None 
 
 Dead Robots: 0
 Remaining Steps: 191
 
----ROUND 9---
+<<<<<<< HEAD
+
+ROUND 9
 
 Robot B's Turn
 
+Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (0, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 190
+
+
+ROUND 10
+=======
+---ROUND 9---
+>>>>>>> main
+
+Robot D's Turn
+
+<<<<<<< HEAD
+Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 189
+
+
+ROUND 11
+
+Robot C's Turn
+
+Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 188
+
+
+ROUND 12
+
+Robot A's Turn
+
+Robot A Coordinates: (1, 4) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 187
+
+
+ROUND 13
+
+Robot B's Turn
+
+Robot A Coordinates: (1, 4) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 186
+
+
+ROUND 14
+
+Robot D's Turn
+
+Robot A Coordinates: (1, 4) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 185
+
+
+ROUND 15
+
+Robot C's Turn
+
+Robot A Coordinates: (1, 4) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot C Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 184
+
+
+ROUND 16
+
+Robot A's Turn
+
+Detection true at (3,3)
+Robot A detects Robot C
+Shots fired successfully
+A's Shells left: 10
+Robot A has upgraded in Seeing Upgrade: ScoutBot
+Robot C was shot and is in queue.
+
+Robot A Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 3 Left
+Robot A sees: Robot B at (3, 0), Robot D at (1, 6),
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 183
+
+
+ROUND 17
+
+Robot B's Turn
+
+Robot A Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 3 Left
+Robot A sees: Robot B at (2, 0), Robot D at (1, 6),
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 182
+
+
+ROUND 18
+
+Robot D's Turn
+
+Robot A Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 3 Left
+Robot A sees: Robot B at (2, 0), Robot D at (1, 7),
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 181
+
+
+ROUND 19
+
+Robot A's Turn
+
+Robot A Coordinates: (3, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 2 Left
+Robot A sees: Robot B at (2, 0), Robot D at (1, 7),
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 180
+
+
+ROUND 20
+
+Robot B's Turn
+
+Robot A Coordinates: (3, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 2 Left
+Robot A sees: Robot B at (1, 0), Robot D at (1, 7),
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (1, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 179
+
+
+ROUND 21
+
+Robot D's Turn
+
+Robot A Coordinates: (3, 2) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot ScoutBot 
+Scout Uses: 2 Left
+Robot A sees: Robot B at (1, 0), Robot D at (2, 6),
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (2, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+Remaining Steps: 178
+
+Robot C is removed from queue.
+
+ROUND 22
+
+Robot A's Turn
+
+Detection true at (2,0)
+Robot A detects Robot C
+Shots fired successfully
+A's Shells left: 10
+Robot A has upgraded in Shooting Upgrade: SemiAutoBot
+Robot C has lost all lives and is removed.
+
+Robot A Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot A Upgrades: JumpBot SemiAutoBot TrackBot 
+Scout Uses: 1 Left
+Robot A sees: Robot B at (1, 0), Robot D at (2, 6),
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (2, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 177
+
+
+ROUND 23
+
+Robot B's Turn
+
+Detection true at (3,1)
+Robot B detects Robot A
+Shots fired successfully
+B's Shells left: 10
+Robot B has upgraded in Seeing Upgrade: TrackBot
+Robot A was shot and is in queue.
+
+Robot B Coordinates: (2, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 176
+
+
+ROUND 24
+
+Robot D's Turn
+
+Robot B Coordinates: (2, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 1
+!!A new AI bot has randomly spawned!!
+Remaining Steps: 175
+
+
+ROUND 25
+
+Robot B's Turn
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 174
+
+
+ROUND 26
+
+Robot D's Turn
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 173
+
+
+ROUND 27
+
+Robot $'s Turn
+
+Robot B Coordinates: (3, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 172
+
+Robot A is removed from queue.
+
+ROUND 28
+
+Robot B's Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (0, 8) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 171
+
+
+ROUND 29
+
+Robot D's Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (0, 8) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 170
+
+
+ROUND 30
+
+Robot $'s Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (0, 8) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 169
+
+
+ROUND 31
+
+Robot A's Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 7) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 168
+
+
+ROUND 32
+
+Robot B's Turn
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 7) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 167
+
+
+ROUND 33
+
+Robot D's Turn
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 7) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 166
+
+
+ROUND 34
+
+Robot $'s Turn
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 7) Lives: 2 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 165
+
+
+ROUND 35
+
+Robot A's Turn
+
+Detection true at (2,5)
+Robot A detects Robot D
+Shots fired successfully
+A's Shells left: 10
+Robot A has upgraded in Shooting Upgrade: SemiAutoBot
+Robot D was shot and is in queue.
+
+Robot B Coordinates: (1, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 6) Lives: 2 Shells left: 10
+Robot A Upgrades: SemiAutoBot 
+
+Dead Robots: 1
+!!A new AI bot has randomly spawned!!
+Remaining Steps: 164
+
+Robot D is removed from queue.
+
+ROUND 36
+
+Robot B's Turn
+
+Robot B Coordinates: (0, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (0, 4) Lives: 3 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot A Coordinates: (1, 6) Lives: 2 Shells left: 10
+Robot A Upgrades: SemiAutoBot 
+
+Robot & Coordinates: (4, 3) Lives: 3 Shells left: 10
+Robot & Upgrades: None 
+
+Robot D Coordinates: (2, 4) Lives: 2 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 163
+
+
+ROUND 37
+
+Robot $'s Turn
+
+Detection true at (1,6)
+Robot $ detects Robot A
+Shots fired successfully
+$'s Shells left: 10
+Robot $ has upgraded in Seeing Upgrade: ScoutBot
+Robot A was shot and is in queue.
+
+Robot B Coordinates: (0, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 3 Left
+Robot $ sees: Robot B at (0, 0), Robot & at (4, 3), Robot D at (2, 4),
+
+Robot & Coordinates: (4, 3) Lives: 3 Shells left: 10
+Robot & Upgrades: None 
+
+Robot D Coordinates: (2, 4) Lives: 2 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 162
+
+
+ROUND 38
+
+Robot &'s Turn
+
+Detection true at (2,4)
+Robot & detects Robot D
+Shots fired successfully
+&'s Shells left: 10
+Robot & has upgraded in Moving Upgrade: JumpBot
+Robot D was shot and is in queue.
+
+Robot B Coordinates: (0, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 3 Left
+Robot $ sees: Robot B at (0, 0), Robot & at (3, 3),
+
+Robot & Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Dead Robots: 1
+Remaining Steps: 161
+
+
+ROUND 39
+
+Robot B's Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (0, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 3 Left
+Robot $ sees: Robot B at (1, 1), Robot & at (3, 3),
+
+Robot & Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Dead Robots: 1
+Remaining Steps: 160
+
+
+ROUND 40
+
+Robot $'s Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 2 Left
+Robot $ sees: Robot B at (1, 1), Robot & at (3, 3),
+
+Robot & Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 3 Left
+
+Dead Robots: 1
+Remaining Steps: 159
+
+
+ROUND 41
+
+Robot &'s Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 2 Left
+Robot $ sees: Robot B at (1, 1), Robot & at (3, 4),
+
+Robot & Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Dead Robots: 1
+!!A new AI bot has randomly spawned!!
+Remaining Steps: 158
+
+Robot A is removed from queue.
+
+ROUND 42
+
+Robot B's Turn
+
+Robot B Coordinates: (1, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 2 Left
+Robot $ sees: Robot B at (1, 2), Robot & at (3, 4), Robot @ at (3, 5), Robot A at (3, 0),
+
+Robot & Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 157
+
+
+ROUND 43
+
+Robot $'s Turn
+
+Robot B Coordinates: (1, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 1 Left
+Robot $ sees: Robot B at (1, 2), Robot & at (3, 4), Robot @ at (3, 5), Robot A at (3, 0),
+
+Robot & Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 2 Left
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 156
+
+
+ROUND 44
+
+Robot &'s Turn
+
+Robot B Coordinates: (1, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 1 Left
+Robot $ sees: Robot B at (1, 2), Robot & at (0, 8), Robot @ at (3, 5), Robot A at (3, 0),
+
+Robot & Coordinates: (0, 8) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 155
+
+
+ROUND 45
+
+Robot @'s Turn
+
+Robot B Coordinates: (1, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 1 Left
+Robot $ sees: Robot B at (1, 2), Robot & at (0, 8), Robot @ at (4, 6), Robot A at (3, 0),
+
+Robot & Coordinates: (0, 8) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 154
+
+
+ROUND 46
+
+Robot A's Turn
+
+Robot B Coordinates: (1, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 1 Left
+Robot $ sees: Robot B at (1, 2), Robot & at (0, 8), Robot @ at (4, 6), Robot A at (3, 1),
+
+Robot & Coordinates: (0, 8) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 153
+
+
+ROUND 47
+
+Robot B's Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (1, 6) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+Scout Uses: 1 Left
+Robot $ sees: Robot B at (1, 1), Robot & at (0, 8), Robot @ at (4, 6), Robot A at (3, 1),
+
+Robot & Coordinates: (0, 8) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 152
+
+
+ROUND 48
+
+Robot $'s Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot $ Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot $ Upgrades: ScoutBot 
+
+Robot & Coordinates: (0, 8) Lives: 3 Shells left: 10
+Robot & Upgrades: JumpBot 
+Jump Uses: 1 Left
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 151
+
+
+ROUND 49
+
+Robot &'s Turn
+
+Detection true at (2,5)
+Robot & detects Robot $
+Shots fired successfully
+&'s Shells left: 10
+Robot & has upgraded in Seeing Upgrade: ScoutBot
+Robot $ was shot and is in queue.
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 6) Lives: 3 Shells left: 10
+Robot & Upgrades: HideBot ScoutBot 
+Scout Uses: 3 Left
+Robot & sees: Robot B at (1, 1), Robot @ at (4, 6), Robot A at (3, 1),
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: None 
+
+Robot A Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 150
+
+
+ROUND 50
+
+Robot @'s Turn
+
+Detection true at (2,6)
+Robot @ detects Robot &
+Shots fired successfully
+@'s Shells left: 10
+Robot @ has upgraded in Shooting Upgrade: SemiAutoBot
+Robot & was shot and is in queue.
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot A Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 149
+
+
+ROUND 51
+
+Robot A's Turn
+
+Robot B Coordinates: (1, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot A Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot A Upgrades: None 
+
+Dead Robots: 1
+Remaining Steps: 148
+
+Robot D is removed from queue.
+
+ROUND 52
+
+Robot B's Turn
+
+Detection true at (3,0)
+Robot B detects Robot A
+Shots fired successfully
+B's Shells left: 10
+Robot B has upgraded in Moving Upgrade: HideBot
+Robot A has lost all lives and is removed.
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 3 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 147
+
+
+ROUND 53
+
+Robot @'s Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 3 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 146
+
+
+ROUND 54
+
+Robot D's Turn
+
+Robot B Coordinates: (2, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 3 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 145
+
+
+ROUND 55
+
+Robot B's Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 2 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 144
+
+
+ROUND 56
+
+Robot @'s Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 2 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 143
+
+
+ROUND 57
+
+Robot D's Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 2 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 142
+
+Robot $ is removed from queue.
+
+ROUND 58
+
+Robot B's Turn
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 141
+
+
+ROUND 59
+
+Robot @'s Turn
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 140
+
+
+ROUND 60
+
+Robot D's Turn
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 139
+
+
+ROUND 61
+
+Robot $'s Turn
+
+Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 138
+
+
+ROUND 62
+
+Robot B's Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 137
+
+
+ROUND 63
+
+Robot @'s Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 136
+
+
+ROUND 64
+
+Robot D's Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 135
+
+
+ROUND 65
+
+Robot $'s Turn
+
+Robot B Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 134
+
+Robot & is removed from queue.
+
+ROUND 66
+
+Robot B's Turn
+
+Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 133
+
+
+ROUND 67
+
+Robot @'s Turn
+
+Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: HideBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot D Upgrades: None 
+
+Robot $ Coordinates: (1, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 132
+
+
+ROUND 68
+
+Robot D's Turn
+
+Detection true at (2,2)
+Robot D detects Robot B
+Shots fired successfully
+D's Shells left: 10
+Robot D has upgraded in Shooting Upgrade: SemiAutoBot
+Robot B was shot and is in queue.
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (1, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 131
+
+
+ROUND 69
+
+Robot $'s Turn
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 130
+
+
+ROUND 70
+
+Robot &'s Turn
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 129
+
+
+ROUND 71
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (1, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 128
+
+
+ROUND 72
+
+Robot D's Turn
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (2, 9) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 127
+
+
+ROUND 73
+
+Robot $'s Turn
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (3, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (4, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 126
+
+
+ROUND 74
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot 
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot $ Coordinates: (3, 8) Lives: 2 Shells left: 10
+Robot $ Upgrades: None 
+
+Robot & Coordinates: (3, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 125
+
+Robot B is removed from queue.
+
+ROUND 75
+
+Robot @'s Turn
+
+Detection true at (3,8)
+Robot @ detects Robot $
+Shots fired successfully
+@'s Shells left: 10
+Robot @ has upgraded in Seeing Upgrade: TrackBot
+Robot $ was shot and is in queue.
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 10
+Robot D Upgrades: SemiAutoBot 
+
+Robot & Coordinates: (3, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Robot B Coordinates: (1, 0) Lives: 2 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 124
+
+
+ROUND 76
+
+Robot D's Turn
+
+Detection true at (1,0)
+Robot D detects Robot B
+Shots missed
+Robot B avoided the shot
+Shots fired successfully
+D's Shells left: 9
+Robot D has upgraded in Moving Upgrade: HideBot
+Robot B was shot and is in queue.
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 3 Left
+
+Robot & Coordinates: (3, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 123
+
+
+ROUND 77
+
+Robot &'s Turn
+
+Robot @ Coordinates: (4, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 3 Left
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 122
+
+
+ROUND 78
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 3 Left
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 121
+
+
+ROUND 79
+
+Robot D's Turn
+
+Robot @ Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 2 Left
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 120
+
+
+ROUND 80
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 2 Left
+
+Robot & Coordinates: (2, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 119
+
+Robot $ is removed from queue.
+
+ROUND 81
+
+Robot @'s Turn
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 2) Lives: 1 Shells left: 9
+Robot D Upgrades: HideBot SemiAutoBot 
+Hide Uses: 2 Left
+
+Robot & Coordinates: (2, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Robot $ Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot $ Upgrades: None 
+
+Dead Robots: 2
+Remaining Steps: 118
+
+
+ROUND 82
+
+Robot D's Turn
+
+Detection true at (1,0)
+Robot D detects Robot $
+Shots fired successfully
+D's Shells left: 9
+Robot D has upgraded in Seeing Upgrade: TrackBot
+Robot $ has lost all lives and is removed.
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (1, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 4) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 117
+
+
+ROUND 83
+
+Robot &'s Turn
+
+Robot @ Coordinates: (4, 6) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (1, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 116
+
+
+ROUND 84
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (1, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 115
+
+
+ROUND 85
+
+Robot D's Turn
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (3, 3) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 114
+
+
+ROUND 86
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 5) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 113
+
+Robot B is removed from queue.
+
+ROUND 87
+
+Robot @'s Turn
+
+Robot @ Coordinates: (4, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 0) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Robot B Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 112
+
+
+ROUND 88
+
+Robot D's Turn
+
+Robot @ Coordinates: (4, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (0, 1) Lives: 1 Shells left: 9
+Robot D Upgrades: JumpBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: None 
+
+Robot B Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 3
+Remaining Steps: 111
+
+
+ROUND 89
+
+Robot &'s Turn
+
+Detection true at (0,1)
+Robot & detects Robot D
+Shots fired successfully
+&'s Shells left: 10
+Robot & has upgraded in Shooting Upgrade: SemiAutoBot
+Robot D has lost all lives and is removed.
+
+Robot @ Coordinates: (4, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 0) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 4
+Remaining Steps: 110
+
+
+ROUND 90
+
+Robot B's Turn
+
+Robot @ Coordinates: (4, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 4
+Remaining Steps: 109
+
+
+ROUND 91
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 4
+Remaining Steps: 108
+
+
+ROUND 92
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 1) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 4
+Remaining Steps: 107
+
+
+ROUND 93
+
+Robot B's Turn
+
+Robot @ Coordinates: (3, 4) Lives: 3 Shells left: 10
+Robot @ Upgrades: SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 2) Lives: 1 Shells left: 10
+Robot B Upgrades: None 
+
+Dead Robots: 4
+Remaining Steps: 106
+
+
+ROUND 94
+
+Robot @'s Turn
+
+Detection true at (3,2)
+Robot @ detects Robot B
+Shots fired successfully
+@'s Shells left: 10
+Robot @ has upgraded in Moving Upgrade: HideBot
+Robot B has lost all lives and is removed.
+
+Robot @ Coordinates: (2, 3) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 3 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 105
+
+
+ROUND 95
+
+Robot &'s Turn
+
+Robot @ Coordinates: (2, 3) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 3 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 104
+
+
+ROUND 96
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 2 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 103
+
+
+ROUND 97
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 2 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 102
+
+
+ROUND 98
+
+Robot @'s Turn
+
+Robot @ Coordinates: (4, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 1) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 101
+
+
+ROUND 99
+
+Robot &'s Turn
+
+Robot @ Coordinates: (4, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Hide Uses: 1 Left
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (2, 2) Lives: 2 Shells left: 10
+Robot & Upgrades: SemiAutoBot 
+
+Dead Robots: 5
+Remaining Steps: 100
+
+
+ROUND 100
+
+Robot @'s Turn
+
+Detection true at (2,2)
+Robot @ detects Robot &
+Shots fired successfully
+@'s Shells left: 10
+Robot & was shot and is in queue.
+
+Robot @ Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Dead Robots: 5
+Remaining Steps: 99
+
+Robot & is removed from queue.
+
+ROUND 101
+
+Robot @'s Turn
+
+Robot @ Coordinates: (4, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 0) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 98
+
+
+ROUND 102
+
+Robot &'s Turn
+
+Robot @ Coordinates: (4, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 97
+
+
+ROUND 103
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 96
+
+
+ROUND 104
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 2) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 95
+
+
+ROUND 105
+
+Robot @'s Turn
+
+Robot @ Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (1, 0) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 94
+
+
+ROUND 106
+
+Robot &'s Turn
+
+Robot @ Coordinates: (3, 1) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 93
+
+
+ROUND 107
+
+Robot @'s Turn
+
+Robot @ Coordinates: (2, 1) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 1) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 92
+
+
+ROUND 108
+
+Robot &'s Turn
+
+Robot @ Coordinates: (2, 1) Lives: 3 Shells left: 10
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot & Coordinates: (0, 0) Lives: 1 Shells left: 10
+Robot & Upgrades: None 
+
+Dead Robots: 5
+Remaining Steps: 91
+
+
+ROUND 109
+
+Robot @'s Turn
+
+Detection true at (0,0)
+Robot @ detects Robot &
+Shots missed
+Robot & avoided the shot
+Shots fired successfully
+@'s Shells left: 9
+Robot & has lost all lives and is removed.
+
+Robot @ Coordinates: (1, 1) Lives: 3 Shells left: 9
+Robot @ Upgrades: HideBot SemiAutoBot TrackBot 
+Trackers: 2 Left
+TrackList: &
+
+
+!!ROBOT @ IS THE WINNER!!
+=======
 Detection true at (3,1)
 Robot B detects Robot C
 Robot C was shot successfully
@@ -196,3 +2526,4 @@ Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
 Robot D Upgrades: None 
 
 Dead Robots: 0
+>>>>>>> main
