@@ -542,10 +542,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         {
             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
             {
-
-                cout << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 //log
-                
                 outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
                 
                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
