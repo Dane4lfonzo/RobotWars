@@ -1,5 +1,9 @@
 Row: 5
+<<<<<<< HEAD
 Col: 10
+=======
+Col: 9
+>>>>>>> main
 Number of Steps: 200
 Number of Robots:4
 Robot Name: Abacus Row: random Col: random
@@ -9,11 +13,11 @@ Robot Name: Dandy Row: random Col: random
 Spawning...
 Remaining Steps: 199
 
-
-ROUND 1
+---ROUND 1---
 
 Robot A's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -24,17 +28,29 @@ Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Spawning...
 Remaining Steps: 198
 
-
-ROUND 2
+---ROUND 2---
 
 Robot B's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -45,17 +61,29 @@ Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Spawning...
 Remaining Steps: 197
 
-
-ROUND 3
+---ROUND 3---
 
 Robot C's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -66,17 +94,29 @@ Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Spawning...
 Remaining Steps: 196
 
-
-ROUND 4
+---ROUND 4---
 
 Robot D's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (3, 8) Lives: 3 Shells left: 10
 Robot A Upgrades: None 
 
@@ -87,16 +127,28 @@ Robot C Coordinates: (2, 8) Lives: 3 Shells left: 10
 Robot C Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 6) Lives: 3 Shells left: 10
+Robot A Upgrades: None 
+
+Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot C Coordinates: (2, 5) Lives: 3 Shells left: 10
+Robot C Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Remaining Steps: 195
 
-
-ROUND 5
+---ROUND 5---
 
 Robot A's Turn
 
+<<<<<<< HEAD
 Detection true at (2,8)
 Robot A detects Robot C
 Shots fired successfully
@@ -112,16 +164,32 @@ Robot B Coordinates: (4, 1) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Detection true at (2,5)
+Robot A detects Robot C
+Robot C was shot successfully
+A's Shells left: 9
+Robot A has upgraded in Shooting Upgrade: SemiAutoBot
+Robot C was shot and is in queue.
+
+Robot A Coordinates: (3, 5) Lives: 3 Shells left: 9
+Robot A Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (3, 3) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Remaining Steps: 194
 
-
-ROUND 6
+---ROUND 6---
 
 Robot B's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (3, 9) Lives: 3 Shells left: 10
 Robot A Upgrades: JumpBot 
 Jump Uses: 3 Left
@@ -130,14 +198,25 @@ Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (0, 8) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 5) Lives: 3 Shells left: 9
+Robot A Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (4, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
 Remaining Steps: 193
 
+---ROUND 7---
 
-ROUND 7
+Robot D's Turn
 
+<<<<<<< HEAD
 Robot D's Turn
 
 Robot A Coordinates: (3, 9) Lives: 3 Shells left: 10
@@ -148,15 +227,30 @@ Robot B Coordinates: (4, 0) Lives: 3 Shells left: 10
 Robot B Upgrades: None 
 
 Robot D Coordinates: (0, 7) Lives: 3 Shells left: 10
+=======
+Robot A Coordinates: (3, 5) Lives: 3 Shells left: 9
+Robot A Upgrades: SemiAutoBot 
+
+Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+>>>>>>> main
 Robot D Upgrades: None 
 
 Dead Robots: 0
+!!A new AI bot has randomly spawned!!
 Remaining Steps: 192
 
 Robot C is removed from queue.
+<<<<<<< HEAD
+=======
+---ROUND 8---
+>>>>>>> main
 
-ROUND 8
+Robot A's Turn
 
+<<<<<<< HEAD
 Robot A's Turn
 
 Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
@@ -170,11 +264,32 @@ Robot D Coordinates: (0, 7) Lives: 3 Shells left: 10
 Robot D Upgrades: None 
 
 Robot C Coordinates: (4, 3) Lives: 2 Shells left: 10
+=======
+Detection true at (3,3)
+Robot A detects Robot $
+Robot $ was shot successfully
+A's Shells left: 8
+Robot A has upgraded in Moving Upgrade: HideBot
+Robot $ was shot and is in queue.
+
+Robot A Coordinates: (3, 4) Lives: 3 Shells left: 8
+Robot A Upgrades: HideBot SemiAutoBot 
+Hide Uses: 3 Left
+
+Robot B Coordinates: (2, 2) Lives: 3 Shells left: 10
+Robot B Upgrades: None 
+
+Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Robot C Coordinates: (3, 1) Lives: 2 Shells left: 10
+>>>>>>> main
 Robot C Upgrades: None 
 
 Dead Robots: 0
 Remaining Steps: 191
 
+<<<<<<< HEAD
 
 ROUND 9
 
@@ -198,9 +313,13 @@ Remaining Steps: 190
 
 
 ROUND 10
+=======
+---ROUND 9---
+>>>>>>> main
 
 Robot D's Turn
 
+<<<<<<< HEAD
 Robot A Coordinates: (2, 5) Lives: 3 Shells left: 10
 Robot A Upgrades: JumpBot 
 Jump Uses: 2 Left
@@ -2386,3 +2505,25 @@ TrackList: &
 
 
 !!ROBOT @ IS THE WINNER!!
+=======
+Detection true at (3,1)
+Robot B detects Robot C
+Robot C was shot successfully
+B's Shells left: 9
+Robot B has upgraded in Seeing Upgrade: TrackBot
+Robot C was shot and is in queue.
+
+Robot A Coordinates: (3, 4) Lives: 3 Shells left: 8
+Robot A Upgrades: HideBot SemiAutoBot 
+Hide Uses: 3 Left
+
+Robot B Coordinates: (2, 1) Lives: 3 Shells left: 9
+Robot B Upgrades: TrackBot 
+Trackers: 3 Left
+TrackList: None
+
+Robot D Coordinates: (3, 7) Lives: 3 Shells left: 10
+Robot D Upgrades: None 
+
+Dead Robots: 0
+>>>>>>> main

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 numrows by numcols: 5 10
+=======
+numrows by numcols: 5 9
+>>>>>>> main
 numofsteps: 200
 numberofRobots: 4
 GenericRobot Abacus random random

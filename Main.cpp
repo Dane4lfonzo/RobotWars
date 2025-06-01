@@ -133,6 +133,7 @@ int main()
         if (numberOfRobots >= (row*col))
         {
            cout << "Number of robots maximizes Battlefield space, no room for simulation. Quitting Simulation..." << endl;
+           outlogfile << "Number of robots maximizes Battlefield space, no room for simulation. Quitting Simulation..." << endl;
            return 1; 
         }
     }
@@ -187,10 +188,10 @@ int main()
             
             // Printings
             Round += 1;
-            cout << endl << "ROUND " << Round << endl;
+            cout << endl << "---ROUND " << Round <<  "---" << endl;
             cout << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
-            outlogfile << endl << "ROUND " << Round << endl << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
+            outlogfile << "---ROUND " << Round << "---" << endl << endl << "Robot " << RoboMoveCopies[i]->GetSignia() << "'s Turn" << endl;
 
             // Set array
             unordered_set<int> Trashbin;
@@ -402,7 +403,7 @@ int main()
         }
         
         //Get 3 new alien robots ---------------------------------------------------------------
-        int Gacha = rand() % 3;
+        int Gacha = rand() % 7;
         int oneSpawn = 0;
         if (!Spawning)
         {

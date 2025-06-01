@@ -956,28 +956,14 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
     {
         if (*shells != 0)
         {
-            *shooting = true;
-            cout << "Shots fired successfully" << endl;
-            //log
-            outfile << "Shots fired successfully" << endl;
-        }
-        else
-        {
-            cout << "Shots missed" << endl;
-            outfile << "Shots missed" << endl;
-            // *addtrackList = true;
-            if (TrackBot())
-            {
-                *shootChances = (rand() % 10) + 1;
-                *shells -= 1;
-            }
-            if (*shootChances <= 7)
+            *shootChances = (rand() % 10) + 1;
+            *shells -= 1;
 
+            if (*shootChances <= 7)
             {
                 *shooting = true;
                 cout << "Robot " << Robotname << " was shot successfully" << endl;
                 outfile << "Robot " << Robotname << " was shot successfully" << endl;
-
             }
             else
             {
@@ -1002,25 +988,10 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
             while(times != 3)
             {
                 *shootChances = (rand() % 10) + 1;
-
-            if (*shootChances <= 7)
-            {
-                *shooting = true;
-                cout << "Shots fired successfully" << endl;
-                outfile << "Shots fired successfully" << endl;
-                break;
-            }
-            else
-            {
-                cout << "Shots missed" << endl;
-                outfile << "Shots missed" << endl;
-                if (TrackBot())
-
-                if (*  shells == 0 || *shooting)
+                if (*shells == 0 || *shooting)
                 {
                     break;
                 }
-
                 *shells -= 1;
 
                 if (*shootChances <= 7)
@@ -1040,13 +1011,14 @@ void ShootingRobot::CheckShot(string Robotname, int numberofRobots)
                         *addtrackList = true;
                     }
                 }
+                
                 times += 1;
-            }
+            }   
         }
         *detection = false;
         *shootFlag = false;
-        }
     }
+
     
     if (TrackBot() && *addtrackList)
     {
