@@ -1,7 +1,7 @@
 numrows by numcols: 5 5
-numofsteps: 50
+numofsteps: 200
 numberofRobots: 4
-GenericRobot Abacus 3 2
-GenericRobot Boiler random 2
-GenericRobot Chokie 1 4
+GenericRobot Abacus random random
+GenericRobot Boiler random random
+GenericRobot Chokie random random
 GenericRobot Dandy random random
