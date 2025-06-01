@@ -156,7 +156,7 @@ int main()
             }
 
             // For cleaner printing
-            system("CLS");
+            //system("CLS");
 
             // Check if all the robots initiated in the beginning has spawned
             if (Spawning)
