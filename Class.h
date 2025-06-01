@@ -199,7 +199,7 @@ class SeeingRobot: public MovingRobot
         SeeingRobot(const SeeingRobot& obj);
         ~SeeingRobot();
         // -------------------------------------------------
-        void Look(int row, int col); // Check each coordinates of the robot and compare to the bounds of the current robot
+        void Look(int row, int col, string roboname); // Check each coordinates of the robot and compare to the bounds of the current robot
         bool RobotDetect(); // return detection
 
 };
