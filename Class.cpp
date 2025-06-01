@@ -511,8 +511,51 @@ SeeingRobot::~SeeingRobot()
     
 }
 
+// // Check each coordinates of the robot and compare to the bounds of the current robot
+// void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
+// {
+//     *detection = false;
+//     *checkrow = Robo_current_row;
+//     *checkcol = Robo_current_col;
+//     ofstream outfile;
+//     outfile.open("Robotoutput.txt", ios::app);
+
+//     if (!LongShotBot())
+//     {
+//         for (int i = 0; i < 8; i++)
+//         {
+//             if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
+//             {
+//                 // log
+//                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+//                 outfile << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
+//                 *detection = true;
+//                 break;
+//             }
+//         }
+//     }
+
+//     if (LongShotBot())
+//     {
+//         for (int j = 0; j < 24; j++)
+//         {
+//             if ((*checkrow == *current_row + upgraded_arraychoice[0][j]) && (*checkcol == *current_col + upgraded_arraychoice[1][j]))
+//             {
+//                 //log
+//                 outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                
+//                 cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+//                 *detection = true;
+//                 break;
+//             }
+//         }
+//     }
+
+// }
+
 // Check each coordinates of the robot and compare to the bounds of the current robot
-void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
+void SeeingRobot::Look(int Robo_current_row, int Robo_current_col, string roboname)
 {
     *detection = false;
     *checkrow = Robo_current_row;
@@ -520,7 +563,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
     ofstream outfile;
     outfile.open("Robotoutput.txt", ios::app);
 
-    if (!LongShotBot())
+    if (!LongShotBot() || (LongShotBot() && !TrackBot()))
     {
         for (int i = 0; i < 8; i++)
         {
@@ -536,7 +579,7 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
         }
     }
 
-    if (LongShotBot())
+    if (LongShotBot() && ScoutBot())
     {
         for (int j = 0; j < 24; j++)
         {
@@ -551,6 +594,45 @@ void SeeingRobot::Look(int Robo_current_row, int Robo_current_col)
             }
         }
     }
+
+    if (LongShotBot() && TrackBot())
+    {
+        
+        for (int i = 0; i < 8; i++)
+        {
+            if ((*checkrow == *current_row + arraychoice[0][i]) && (*checkcol == *current_col + arraychoice[1][i]))
+            {
+                // log
+                cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                outfile << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+
+                *detection = true;
+                break;
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 8; j < 24; j++)
+            {
+                if ((*checkrow == *current_row + upgraded_arraychoice[8][j]) && (*checkcol == *current_col + upgraded_arraychoice[8][j]))
+                {
+                    //log
+                    if (roboname == trackList[i])
+                    {
+                        outfile << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                        cout << endl << "Detection true at (" << *checkrow << "," << *checkcol << ")" << endl;
+                        *detection = true;
+                        break;
+                    }
+
+                }
+            }
+            
+        }
+        
+    }
+
 
 }
 
