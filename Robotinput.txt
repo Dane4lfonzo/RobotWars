@@ -1,7 +1,11 @@
-numrows by numcols: 5 9
-numofsteps: 250
-numberofRobots: 4
-GenericRobot Abacus 3 2
-GenericRobot Boiler random 2
-GenericRobot Chokie 1 4
+numrows by numcols: 5 5
+numofsteps: 200
+numberofRobots: 8
+GenericRobot Abacus random random
+GenericRobot Boiler random random
+GenericRobot Chokie random random
 GenericRobot Dandy random random
+GenericRobot Ebacus random random
+GenericRobot Foiler random random
+GenericRobot Ghokie random random
+GenericRobot Handy random random
