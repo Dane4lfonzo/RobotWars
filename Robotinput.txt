@@ -1,12 +1,11 @@
-<<<<<<< HEAD
 numrows by numcols: 5 5
 numofsteps: 200
-=======
-numrows by numcols: 5 9
-numofsteps: 250
->>>>>>> main
-numberofRobots: 4
+numberofRobots: 8
 GenericRobot Abacus random random
 GenericRobot Boiler random random
 GenericRobot Chokie random random
 GenericRobot Dandy random random
+GenericRobot Ebacus random random
+GenericRobot Foiler random random
+GenericRobot Ghokie random random
+GenericRobot Handy random random
